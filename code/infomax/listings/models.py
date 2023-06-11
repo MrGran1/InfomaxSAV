@@ -21,9 +21,10 @@ class depot(models.Model):
     ref_depot = models.fields.CharField(max_length=50)
     total_a_payer = models.fields.IntegerField()
     numero_depot = models.fields.IntegerField(primary_key=True, default=1000)
-    commentaire = models.CharField(default = '' ,max_length=1000)
+    commentaire = models.fields.CharField(default = '' ,max_length=1000)
     date = models.fields.DateField(validators = [MinValueValidator(2020)],default=2020)
     ordinateur = models.ForeignKey(ordinateur,null = True, on_delete=models.CASCADE)
+#    vendeur = models.ForeignKey(vendeur,null = True, on_delete=models.CASCADE)
 
 class vendeur(models.Model): #Technicien et vendeur
     class type_vendeur(models.TextChoices):
