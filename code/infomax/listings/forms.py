@@ -1,10 +1,16 @@
 from django import forms
 from listings.models import client
+from django.contrib.auth.models import User
 
 class client_form(forms.ModelForm):
     class Meta :
         model = client
         fields = '__all__'
+
+class auth_form(forms.ModelForm):
+    class Meta : 
+        model = User
+        fields = ('username','password')
 
 #     name_client = forms.CharField(max_length=50)
 #     fist_name = forms.CharField(max_length=50)

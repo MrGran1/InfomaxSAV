@@ -16,11 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from listings import views
+from django.contrib.auth import views as auth_views
+from listings.views import login
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('hello/', views.hello),
     path('add/', views.create_client),
-    path("add/bravo/", views.bravo)
-
+    path("bravo/", views.bravo),
+    path('login/', login,name='login'),
 ]
