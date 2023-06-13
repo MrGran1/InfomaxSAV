@@ -39,11 +39,8 @@ def login(request):
             if user is not None:
                 login(request,user)
                 return redirect('/bravo/', views.bravo)
-            
-        else : 
-            return redirect('/bravo/', views.bravo)
         
     else :
         form = auth_form()
 
-        return render(request,'users/login.html',{'form' : form})
+    return render(request,'users/login.html',{'form' : form})
