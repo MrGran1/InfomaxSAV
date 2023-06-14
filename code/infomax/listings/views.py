@@ -4,13 +4,14 @@ from listings.forms import client_form,auth_form
 from listings.models import client
 from listings import views
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm 
 
 # Create your views here.
 @login_required
 def hello(request):
     return HttpResponse("<h1>Hllo</h1>")
+
 
 @login_required()
 def create_client(request):
@@ -39,9 +40,13 @@ def login_view(request):
             user = authenticate(request ,username = username,password = password)
             if user is not None:
                 login(request,user)
-                return redirect('/bravo/', views.bravo)
+                return redirect("/bravo", views.bravo)
         
     else :
         form = AuthenticationForm()
 
     return render(request,'users/login.html',{'form' : form})
+
+def logout_view(request):
+    logout(request)
+    return redirect("/bravo")

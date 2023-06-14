@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from listings import views
 from django.contrib.auth import views as auth_views
-from listings.views import login_view
+from listings.views import login_view 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +25,5 @@ urlpatterns = [
     path('add/', views.create_client),
     path("bravo/", views.bravo),
     path('login/', login_view,name='login'),
+    path('logout/' , views.logout_view)
 ]
