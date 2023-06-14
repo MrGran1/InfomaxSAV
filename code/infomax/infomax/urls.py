@@ -25,5 +25,6 @@ urlpatterns = [
     path('add/', views.create_client),
     path("bravo/", views.bravo),
     path('login/', login_view,name='login'),
-    path('logout/' , views.logout_view)
+    path('logout/' , views.logout_view),
+    path('create_user/', views.create_user)
 ]

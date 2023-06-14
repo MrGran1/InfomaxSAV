@@ -12,6 +12,12 @@ class auth_form(forms.ModelForm):
         model = User
         fields = ('username','password')
 
+
+class user_form(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('username','password')
+
 #     name_client = forms.CharField(max_length=50)
 #     fist_name = forms.CharField(max_length=50)
 #     telephone = forms.CharField(max_length=50)

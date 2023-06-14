@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from listings.forms import client_form,auth_form
+from listings.forms import client_form,auth_form, user_form
 from listings.models import client
 from listings import views
 from django.contrib.auth.decorators import login_required
@@ -19,12 +19,12 @@ def create_client(request):
         form = client_form(request.POST)
         if form.is_valid():
             client = form.save()
-            return redirect('bravo/', views.bravo)
+            return redirect('/bravo/', views.bravo)
         
     else :
         form = client_form()
 
-        return render(request,'listings/client_create.html',{'form' : form})
+    return render(request,'listings/client_create.html',{'form' : form})
 
         
 def bravo(request):
@@ -47,6 +47,21 @@ def login_view(request):
 
     return render(request,'users/login.html',{'form' : form})
 
+
 def logout_view(request):
     logout(request)
     return redirect("/bravo")
+
+@login_required
+def create_user(request):
+    if request.method == 'POST':
+        form = user_form(request.POST)
+        if form.is_valid():
+            user = form.save()
+            return redirect('/bravo/', views.bravo)
+        
+    else :
+        form = client_form()
+
+    return render(request,'listings/client_create.html',{'form' : form})
+
