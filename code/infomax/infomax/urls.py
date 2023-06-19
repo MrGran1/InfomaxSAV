@@ -21,10 +21,9 @@ from listings.views import login_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('hello/', views.hello),
     path('add/', views.create_client),
-    path("bravo/", views.bravo),
     path('login/', login_view,name='login'),
     path('logout/' , views.logout_view),
-    path('create_user/', views.create_user)
+    path('create_user/', views.create_user ),
+    path('home/', views.home )
 ]

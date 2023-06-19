@@ -19,16 +19,15 @@ def create_client(request):
         form = client_form(request.POST)
         if form.is_valid():
             client = form.save()
-            return redirect('/bravo/', views.bravo)
+            return redirect('/home')
         
     else :
         form = client_form()
 
     return render(request,'listings/client_create.html',{'form' : form})
 
-        
-def bravo(request):
-    return HttpResponse("<h1>Bravo</h1>")
+def home(request):
+    return render(request,'listings/home.html')
 
 def login_view(request):
     if request.method == 'POST':
@@ -40,7 +39,7 @@ def login_view(request):
             user = authenticate(request ,username = username,password = password)
             if user is not None:
                 login(request,user)
-                return redirect("/bravo", views.bravo)
+                return redirect("/home")
         
     else :
         form = AuthenticationForm()
@@ -50,7 +49,7 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect("/bravo")
+    return redirect("/home")
 
 @login_required
 def create_user(request):
@@ -58,7 +57,7 @@ def create_user(request):
         form = user_form(request.POST)
         if form.is_valid():
             user = form.save()
-            return redirect('/bravo/', views.bravo)
+            return redirect('/home/', views.home)
         
     else :
         form = client_form()
