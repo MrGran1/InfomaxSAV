@@ -7,16 +7,11 @@ class client_form(forms.ModelForm):
         model = client
         fields = '__all__'
 
-class auth_form(forms.ModelForm):
-    class Meta : 
-        model = User
-        fields = ('username','password')
-
 
 class user_form(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('username','password')
+        fields = ['username','password','first_name','last_name','is_superuser']
 
 #     name_client = forms.CharField(max_length=50)
 #     fist_name = forms.CharField(max_length=50)

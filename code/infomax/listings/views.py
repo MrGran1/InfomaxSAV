@@ -1,11 +1,13 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from listings.forms import client_form,auth_form, user_form
+from listings.forms import client_form, user_form
 from listings.models import client
 from listings import views
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm 
+
+HOME = '/home'
 
 # Create your views here.
 @login_required
@@ -19,7 +21,7 @@ def create_client(request):
         form = client_form(request.POST)
         if form.is_valid():
             client = form.save()
-            return redirect('/home')
+            return redirect(HOME)
         
     else :
         form = client_form()
@@ -49,7 +51,7 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect("/home")
+    return redirect(HOME)
 
 @login_required
 def create_user(request):
@@ -60,7 +62,7 @@ def create_user(request):
             return redirect('/home/', views.home)
         
     else :
-        form = client_form()
+        form = user_form()
 
-    return render(request,'listings/client_create.html',{'form' : form})
+    return render(request,'listings/create_user.html',{'form' : form})
 
