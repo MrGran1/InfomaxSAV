@@ -11,7 +11,7 @@ class client_form(forms.ModelForm):
 class user_form(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['username','password','first_name','last_name','is_superuser']
+        fields = ['password','first_name','last_name','is_superuser']
 
 #     name_client = forms.CharField(max_length=50)
 #     fist_name = forms.CharField(max_length=50)

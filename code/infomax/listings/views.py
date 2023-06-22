@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from listings.forms import client_form, user_form
 from listings.models import client
 from listings import views
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required,user_passes_test
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm 
 
@@ -53,12 +53,25 @@ def logout_view(request):
     logout(request)
     return redirect(HOME)
 
+def check_superuser(user):
+    return user.is_superuser
+
 @login_required
+@user_passes_test(check_superuser)
 def create_user(request):
     if request.method == 'POST':
         form = user_form(request.POST)
         if form.is_valid():
-            user = form.save()
+            password = form.cleaned_data.get('password')
+            # is_super = form.cleaned_data.get('is_superuser')
+            # first_name = form.cleaned_data.get('first_name')
+            # last_name = form.cleaned_data.get('last_name')
+
+            user = form.save(commit = False)
+            user.username = user.first_name + "." + user.last_name
+            user.set_password(password)
+            user.save()
+
             return redirect('/home/', views.home)
         
     else :
