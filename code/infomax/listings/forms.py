@@ -10,9 +10,13 @@ class client_form(forms.ModelForm):
 
 class user_form(forms.ModelForm):
     class Meta:
+        # password = forms.CharField(widget=forms.PasswordInput())
         model = User
-        fields = ['password','first_name','last_name','is_superuser']
-
+        fields = ['first_name','last_name','password','is_superuser']
+        widgets = {
+            # telling Django your password field in the mode is a password input on the template
+            'password': forms.PasswordInput() 
+        }
 #     name_client = forms.CharField(max_length=50)
 #     fist_name = forms.CharField(max_length=50)
 #     telephone = forms.CharField(max_length=50)

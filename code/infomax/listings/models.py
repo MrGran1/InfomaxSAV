@@ -5,7 +5,7 @@ from django.core.validators import MinValueValidator
 class client(models.Model):
     name = models.fields.CharField(max_length=50)
     fist_name = models.fields.CharField(max_length=50)
-    telephone = models.fields.IntegerField(max_length=50)
+    telephone = models.fields.CharField(max_length=50)
     email = models.fields.CharField(max_length=100)
     
 class ordinateur(models.Model):
