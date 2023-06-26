@@ -4,7 +4,7 @@ from listings.models import depot,CustomUser
 class client_form(forms.ModelForm):
     class Meta :
         model = depot
-        exclude = ('numero_depot','first_name_seller','last_name_seller',)
+        exclude = ('numero_depot','first_name_seller','last_name_seller','date',)
 
 
 class user_form(forms.ModelForm):
