@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MinValueValidator
+from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
 class client(models.Model):
@@ -35,3 +36,12 @@ class vendeur(models.Model): #Technicien et vendeur
     fist_name = models.fields.CharField(max_length=50)
     type = models.fields.CharField(choices=type_vendeur.choices,max_length=5)
     id = models.fields.IntegerField(primary_key=True,default=1000)
+
+class CustomUser(AbstractUser):
+    type_vendeur = [
+
+        ("TC" , 'Technicien'),
+        ("CO" , 'Commerciale')
+    ]
+
+    poste = models.fields.CharField(choices = type_vendeur ,max_length=100,null = False ,default = "CO")

@@ -6,6 +6,7 @@
 
 {%else%}
 <a href="/logout"> logout</a>
+<p>{{ user.get_poste_display}}</p>
 {% endif %}
 {% if user.is_superuser %}
     <a href="/create_user"> ajout user</a>

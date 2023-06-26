@@ -1,6 +1,5 @@
 from django import forms
-from listings.models import client
-from django.contrib.auth.models import User
+from listings.models import client,CustomUser
 
 class client_form(forms.ModelForm):
     class Meta :
@@ -11,8 +10,8 @@ class client_form(forms.ModelForm):
 class user_form(forms.ModelForm):
     class Meta:
         # password = forms.CharField(widget=forms.PasswordInput())
-        model = User
-        fields = ['first_name','last_name','password','is_superuser']
+        model = CustomUser
+        fields = ['first_name','last_name','password','is_superuser','poste']
         widgets = {
             # telling Django your password field in the mode is a password input on the template
             'password': forms.PasswordInput() 
