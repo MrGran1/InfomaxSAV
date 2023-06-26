@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from listings.forms import client_form, user_form
-from listings.models import client
+
 from listings import views
 from django.contrib.auth.decorators import login_required,user_passes_test
 from django.contrib.auth import authenticate, login, logout

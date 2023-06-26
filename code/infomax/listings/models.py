@@ -3,39 +3,43 @@ from django.core.validators import MinValueValidator
 from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
-class client(models.Model):
-    name = models.fields.CharField(max_length=50)
-    fist_name = models.fields.CharField(max_length=50)
-    telephone = models.fields.CharField(max_length=50)
-    email = models.fields.CharField(max_length=100)
+class depot(models.Model):
+
+    statut_choix = [
+        ("RC", "Receptionné"),
+        ("TR", "En traitement"),
+        ("TR", "Terminé")
+    ]
+#Relatif au client
+    name = models.fields.CharField(max_length=50,null = True)
+    fist_name = models.fields.CharField(max_length=50,null = True)
+    telephone = models.fields.CharField(max_length=50,null = True)
+    email = models.fields.CharField(max_length=100,null = True)
     
-class ordinateur(models.Model):
-    mdp_windows = models.fields.CharField(max_length=50)
-    probleme = models.fields.CharField(max_length=500)
+### Relatif à l'ordi
+    mdp_windows = models.fields.CharField(max_length=50,null = True)
+    probleme = models.fields.CharField(max_length=500,null = True)
     carton = models.fields.BooleanField(default=False)
     alimentation = models.fields.BooleanField(default=False)
     piece_a_modifier = models.fields.CharField(max_length=100,null=True)
     reinitialisation = models.fields.BooleanField(default=False)
-    proprietaire = models.ForeignKey(client, null = False, on_delete=models.CASCADE)
 
-class depot(models.Model):
+## Relatif au dépot
+
     ref_depot = models.fields.CharField(max_length=50)
-    total_a_payer = models.fields.IntegerField()
+    total_a_payer = models.fields.IntegerField(validators = [MinValueValidator(0)])
     numero_depot = models.fields.IntegerField(primary_key=True, default=1000)
     commentaire = models.fields.CharField(default = '' ,max_length=1000)
     date = models.fields.DateField(validators = [MinValueValidator(2020)],default=2020)
-    ordinateur = models.ForeignKey(ordinateur,null = True, on_delete=models.CASCADE)
-#    vendeur = models.ForeignKey(vendeur,null = True, on_delete=models.CASCADE)
+    statut = models.fields.CharField(choices = statut_choix ,max_length=100,null = False ,default = "RC")
+ 
+ ### Vendeur #########
+    first_name_seller =  models.fields.CharField(max_length=50)
+    last_name_seller =  models.fields.CharField(max_length=50)
 
-class vendeur(models.Model): #Technicien et vendeur
-    class type_vendeur(models.TextChoices):
-        Technicien = 'TC'
-        Commerciale = 'CO'
 
-    name = models.fields.CharField(max_length=50)
-    fist_name = models.fields.CharField(max_length=50)
-    type = models.fields.CharField(choices=type_vendeur.choices,max_length=5)
-    id = models.fields.IntegerField(primary_key=True,default=1000)
+
+
 
 class CustomUser(AbstractUser):
     type_vendeur = [

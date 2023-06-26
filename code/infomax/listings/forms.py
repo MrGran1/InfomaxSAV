@@ -1,10 +1,10 @@
 from django import forms
-from listings.models import client,CustomUser
+from listings.models import depot,CustomUser
 
 class client_form(forms.ModelForm):
     class Meta :
-        model = client
-        fields = '__all__'
+        model = depot
+        exclude = ('numero_depot','first_name_seller','last_name_seller',)
 
 
 class user_form(forms.ModelForm):

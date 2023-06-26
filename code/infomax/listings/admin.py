@@ -4,6 +4,4 @@ from django.contrib import admin
 
 from listings.models import *
 
-admin.site.register(ordinateur)
-admin.site.register(client)
 admin.site.register(depot)
