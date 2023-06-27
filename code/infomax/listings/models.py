@@ -28,10 +28,11 @@ class depot(models.Model):
 
     ref_depot = models.fields.CharField(max_length=50)
     total_a_payer = models.fields.IntegerField(validators = [MinValueValidator(0)])
-    numero_depot = models.fields.IntegerField(primary_key=True, default=1000)
+    numero_depot = models.fields.IntegerField(primary_key=True,validators = [MinValueValidator(2000)])
     commentaire = models.fields.CharField(default = '' ,max_length=1000)
     date = models.fields.DateField(default=2020)
     statut = models.fields.CharField(choices = statut_choix ,max_length=100,null = False ,default = "RC")
+    mail_envoyee = models.fields.CharField(choices = statut_choix ,max_length=100,null = False ,default = "RC")
  
  ### Vendeur #########
     first_name_seller =  models.fields.CharField(max_length=50)

@@ -6,7 +6,7 @@ from listings import views
 from django.contrib.auth.decorators import login_required,user_passes_test
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm 
-
+from datetime import date
 HOME = '/home'
 
 # Create your views here.
@@ -20,7 +20,16 @@ def create_client(request):
     if request.method == 'POST':
         form = client_form(request.POST)
         if form.is_valid():
-            client = form.save()
+            depot = form.save(commit = False)
+            depot.first_name_seller = request.user.first_name
+            depot.last_name_seller = request.user.last_name
+
+
+            today = date.today()    
+            depot.date = today.strftime("%Y-%m-%d")
+            depot.save()
+            "Envoie mail reception"
+            "Print un message comme quoi c'est bien passé"
             return redirect(HOME)
         
     else :
