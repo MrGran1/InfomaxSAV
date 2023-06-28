@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from listings.forms import client_form, user_form
-
+from listings.models import depot
 from listings import views
 from django.contrib.auth.decorators import login_required,user_passes_test
 from django.contrib.auth import authenticate, login, logout
@@ -90,4 +90,8 @@ def create_user(request):
         form = user_form()
 
     return render(request,'listings/create_user.html',{'form' : form})
+
+def afficher_client(request):
+    clients = depot.objects.filter(first_name = 'Tigran')
+    return render(request,"listings/afficher_client.html",{'client' : clients[0]})
 
