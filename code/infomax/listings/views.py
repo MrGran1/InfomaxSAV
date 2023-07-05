@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from listings.forms import client_form, user_form
+from listings.forms import client_form, user_form, afficher_client_form
 from listings.models import depot
 from listings import views
 from django.contrib.auth.decorators import login_required,user_passes_test
@@ -92,6 +92,17 @@ def create_user(request):
     return render(request,'listings/create_user.html',{'form' : form})
 
 def afficher_client(request):
-    clients = depot.objects.filter(first_name = 'Tigran')
-    return render(request,"listings/afficher_client.html",{'client' : clients[0]})
+    if request.method == 'POST':
+        form = afficher_client_form(request.POST)
+        if form.is_valid():
+            ref = form.cleaned_data['ref_depot']
+            clients = depot.objects.filter(ref_depot = ref)
+            if (len(clients)!=0):
+                return render(request,"listings/afficher_client_tout.html",{"form":form,'client':clients[0]})
+            else:
+                return render(request,"listings/afficher_client_erreur.html",{"form":form})
+    else :
+        form = afficher_client_form()
+    
+    return render(request,"listings/afficher_client.html",{"form":form})
 
