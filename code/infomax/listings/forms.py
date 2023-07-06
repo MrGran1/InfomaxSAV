@@ -18,4 +18,6 @@ class user_form(forms.ModelForm):
         }
 
 class afficher_client_form(forms.Form):
-    ref_depot = forms.CharField(max_length=100)
+    ref_depot = forms.CharField(max_length=100,required=False)
+    name = forms.CharField(max_length=100,required=False)
+    first_name = forms.CharField(max_length=100,required=False)

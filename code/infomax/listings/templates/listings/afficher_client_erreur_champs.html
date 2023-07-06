@@ -7,10 +7,9 @@
     {{ form.as_p }}
     <input type = "submit" value="Envoyer">
 
+    <p>Veuillez renseigner un champ</p>
+
 </form>
-{%for client in clients%}
-<p>{{client.name}} {{client.first_name}}</p>
-{% endfor %}
 
 <a href="/home">Home</a>
 <a href="/logout">deconnexion</a>

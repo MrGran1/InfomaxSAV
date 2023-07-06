@@ -42,7 +42,6 @@ def home(request):
 
 def login_view(request):
     if request.method == 'POST':
-        #form = auth_form(request.POST)
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
             username = form.cleaned_data.get('username')
@@ -91,14 +90,25 @@ def create_user(request):
 
     return render(request,'listings/create_user.html',{'form' : form})
 
+### Vue pour chercher des clients######
 def afficher_client(request):
     if request.method == 'POST':
         form = afficher_client_form(request.POST)
         if form.is_valid():
+            critere_recherche =[]
+            name = form.cleaned_data['name']
             ref = form.cleaned_data['ref_depot']
-            clients = depot.objects.filter(ref_depot = ref)
-            if (len(clients)!=0):
-                return render(request,"listings/afficher_client_tout.html",{"form":form,'client':clients[0]})
+            first_name = form.cleaned_data['first_name']
+            clients = depot.objects.filter(ref_depot__icontains = ref,name__contains = name, first_name__contains = first_name)
+        
+        ### Si un champs est renseigné et le client existe ########
+            if (len(clients)!=0 and (len(name)!=0 or len(ref)!=0 or len(first_name)!=0)):
+                return render(request,"listings/afficher_client_tout.html",{"form":form,'clients':clients})
+
+        ### Si aucun champ n'est renseigné ### 
+            elif (len(name)==0 and len(ref)==0 and len(first_name)==0):
+                return render(request,"listings/afficher_client_erreur_champs.html",{"form":form})
+        ### Sinon si le client n'existe pas ###           
             else:
                 return render(request,"listings/afficher_client_erreur.html",{"form":form})
     else :
