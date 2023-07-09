@@ -35,7 +35,7 @@ def create_client(request):
     else :
         form = client_form()
 
-    return render(request,'listings/client_create.html',{'form' : form})
+    return render(request,'listings/create_depot.html',{'form' : form})
 
 def home(request):
     return render(request,'listings/home.html')
@@ -102,17 +102,15 @@ def afficher_client(request):
             clients = depot.objects.filter(ref_depot__icontains = ref,name__contains = name, first_name__contains = first_name)
         
         ### Si un champs est renseigné et le client existe ########
-            if (len(clients)!=0 and (len(name)!=0 or len(ref)!=0 or len(first_name)!=0)):
-                return render(request,"listings/afficher_client_tout.html",{"form":form,'clients':clients})
+            if ((len(name)!=0 or len(ref)!=0 or len(first_name)!=0)):
+                return render(request,"listings/afficher_depot.html",{"form":form,'clients':clients})
 
         ### Si aucun champ n'est renseigné ### 
-            elif (len(name)==0 and len(ref)==0 and len(first_name)==0):
-                return render(request,"listings/afficher_client_erreur_champs.html",{"form":form})
+            else :
+                return render(request,"listings/afficher_depot_erreur_champs.html",{"form":form})
         ### Sinon si le client n'existe pas ###           
-            else:
-                return render(request,"listings/afficher_client_erreur.html",{"form":form})
     else :
         form = afficher_client_form()
     
-    return render(request,"listings/afficher_client.html",{"form":form})
+    return render(request,"listings/afficher_depot_blank.html",{"form":form})
 
