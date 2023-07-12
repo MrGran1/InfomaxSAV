@@ -1,4 +1,4 @@
-{% load static %}
+{% load satatic %}
 <!DOCTYPE html>
 <html lang="fr">
     <header>
@@ -8,15 +8,19 @@
         <title>Création de bons de dépôt</title>
         <link rel="stylesheet" type="text/css" href="{% static 'code/infomax/static/css/style_bd.css' %}"/>
     </header>
-    <h1>Creer un client</h1>
 
-<form action ='' method="post" novalidate>
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type = "submit" value="Envoyer">
+    <body>
+        <h1>Creer un client</h1>
 
-</form>
+        <form action ='' method="post" novalidate>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type = "submit" value="Envoyer">
 
-<a href="/home">Home</a>
-<a href="/logout">deconnexion</a>
+        </form>
+
+        <a href="/home">Home</a>
+        <a href="/logout">deconnexion</a>
+    </body>
+    
 </html>

@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required,user_passes_test
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm 
 from datetime import date
+from django.contrib.auth.models import AbstractUser
 HOME = '/home'
 
 # Create your views here.
