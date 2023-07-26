@@ -98,12 +98,7 @@ def afficher_client(request):
     if request.method == 'POST':
         form = afficher_client_form(request.POST)
         if form.is_valid():
-            subject = 'Test Email'
-            message = 'This is a test email from Django.'
-            from_email = 'alerting@outlook.fr'
-            recipient_list = ['tigran.wattrelos@gmail.com']
-
-            send_mail(subject, message, from_email, recipient_list)
+            
 
             
             name = form.cleaned_data['name']
@@ -124,3 +119,35 @@ def afficher_client(request):
     
     return render(request,"listings/afficher_depot_blank.html",{"form":form})
 
+def modif_depot(request,id):
+    depot_var = depot.objects.get(numero_depot=id)
+    print(depot_var.statut)
+
+    if request.method == 'POST':
+        form = client_form(request.POST,instance=depot_var)
+        if form.is_valid():
+            statut_form = form.cleaned_data['statut']
+            print(statut_form)
+            print(depot_var.mail_envoyee)
+            if  statut_form =='TR' and  depot_var.mail_envoyee == 'RC' :
+                subject = 'Test Email'
+                message = 'Le colis est en traitement par les techniciens'
+                from_email = 'tigran.wattrelos@outlook.fr'
+                recipient_list = [depot_var.email]
+                send_mail(subject, message, from_email, recipient_list)
+                depot_var.mail_envoyee = 'TR'
+
+
+            elif statut_form =='TM' and  (depot_var.mail_envoyee == 'RC' or depot_var.mail_envoyee == 'TR'):
+                subject = 'Test Email'
+                message = 'Le colis est pret à etre récuperer'
+                from_email = 'tigran.wattrelos@outlook.fr'
+                recipient_list = [depot_var.email]
+                send_mail(subject, message, from_email, recipient_list)
+                depot_var.mail_envoyee = 'TM'
+
+            form.save()
+    else:
+        form = client_form(instance=depot_var)
+   
+    return render (request,'listings/create_user.html',{'form':form})

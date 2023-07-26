@@ -8,7 +8,7 @@ class depot(models.Model):
     statut_choix = [
         ("RC", "Receptionné"),
         ("TR", "En traitement"),
-        ("TR", "Terminé")
+        ("TM", "Terminé")
     ]
 #Relatif au client
     name = models.fields.CharField(max_length=50,null = True)

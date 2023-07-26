@@ -10,7 +10,7 @@
 {%if clients|length != 0 %}
     {%for client in clients%}
     
-        <p>{{client.name}} {{client.first_name}}</p>
+        <a href = /depot/{{client.numero_depot}}>{{client.name}} {{client.first_name}}</a></p>
     {% endfor %}
 
 {% else %}

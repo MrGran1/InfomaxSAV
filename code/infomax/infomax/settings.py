@@ -130,9 +130,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'listings.CustomUser'
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'smtp-mail.outlook.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'alertingdigitaltwin.grafana@gmail.com'
-EMAIL_HOST_PASSWORD = 'alerting'
+EMAIL_HOST_USER = 'tigran.wattrelos@outlook.fr'
+EMAIL_HOST_PASSWORD = 'Titijan1'
