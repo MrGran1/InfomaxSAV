@@ -3,16 +3,25 @@
 
 <!DOCTYPE html>
 <html lang="fr">
-    <header>
+    <head>
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta name="description" content="Création de bons de dépôt"/>
-        <link rel="stylesheet" href="{% static 'css/style_bd.css' %}">
+        <link rel="stylesheet" href="{% static 'admin/css/style_bd.css' %}">
         <title>Création de bons de dépôt</title>
-    </header>
-
+    </head>
     <body>
-        <h1>Creer un client</h1>
+        <header>
+                <div class="grid-container" id="bandeau">
+                    <img class="grid-img" id="logo" src="{% static 'admin/img/infomax-logo.jpg' %}" alt="logo infomax"/>
+                    <h1 class="grid-title">gestion interne SAV</h1>
+                    <nav class="grid-nav" id="navbar">
+
+                    </nav>
+                </div>
+        </header>
+        <main class="grid-main">
+            <h2>Creer un client</h2>
 
         <form action ='' method="post" novalidate>
             {% csrf_token %}
@@ -23,6 +32,8 @@
 
         <a href="/home">Home</a>
         <a href="/logout">deconnexion</a>
+        </main>
+        
     </body>
     
 </html>
