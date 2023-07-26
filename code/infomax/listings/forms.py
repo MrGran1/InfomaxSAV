@@ -21,3 +21,8 @@ class afficher_client_form(forms.Form):
     ref_depot = forms.CharField(max_length=100,required=False)
     name = forms.CharField(max_length=100,required=False)
     first_name = forms.CharField(max_length=100,required=False)
+
+class modif_statut_depot(forms.ModelForm):
+    class Meta:
+        model = depot
+        fields = ['statut']

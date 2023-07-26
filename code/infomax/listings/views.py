@@ -8,6 +8,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm 
 from datetime import date
 from django.contrib.auth.models import AbstractUser
+from django.core.mail import send_mail
+
 HOME = '/home'
 
 # Create your views here.
@@ -96,7 +98,14 @@ def afficher_client(request):
     if request.method == 'POST':
         form = afficher_client_form(request.POST)
         if form.is_valid():
-            critere_recherche =[]
+            subject = 'Test Email'
+            message = 'This is a test email from Django.'
+            from_email = 'alerting@outlook.fr'
+            recipient_list = ['tigran.wattrelos@gmail.com']
+
+            send_mail(subject, message, from_email, recipient_list)
+
+            
             name = form.cleaned_data['name']
             ref = form.cleaned_data['ref_depot']
             first_name = form.cleaned_data['first_name']
