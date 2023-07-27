@@ -98,6 +98,7 @@ def create_user(request):
     return render(request,'listings/create_user.html',{'form' : form})
 
 ### Vue pour chercher des clients######
+@login_required
 def afficher_client(request):
     if request.method == 'POST':
         form = afficher_client_form(request.POST)
@@ -122,7 +123,7 @@ def afficher_client(request):
         form = afficher_client_form()
     
     return render(request,"listings/afficher_depot_blank.html",{"form":form})
-
+@login_required
 def modif_depot(request,id):
     depot_var = depot.objects.get(numero_depot=id)
     print(depot_var.statut)
