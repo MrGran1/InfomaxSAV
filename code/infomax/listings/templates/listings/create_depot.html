@@ -20,13 +20,69 @@
                     </nav>
                 </div>
         </header>
-        <main class="grid-main">
-            <h2>Creer un client</h2>
+        <main >
+            <h2>Créer un bon de dépôt</h2>
 
-        <form action ='' method="post" novalidate>
+        <form class="grid-form" action ='' method="post" novalidate>
             {% csrf_token %}
-            {{ form.as_p }}
-            <input type = "submit" value="Envoyer">
+            <div class="form-field nom">
+                <label for="{{ form.name.id_for_label }}" id="Nom">Nom:</label>
+                {{ form.name }}
+            </div>
+            <div class="form-field prenom">
+                <label for="{{ form.first_name.id_for_label }}" id="Prénom">Prénom:</label>
+                {{ form.first_name }}
+            </div>
+            <div class="form-field telephone">
+                <label for=" {{ form.telephone.id_for_label }}" id="Téléphone">Téléphone:</label>
+                {{ form.telephone }}
+            </div>
+            <div class="form-field email">
+                <label for="{{ form.email.id_for_label }}" id="Email">Email:</label>
+                {{ form.email }}
+            </div>
+            <div class="form-field mdp">
+                <label for="{{ form.mdp_windows.id_for_label }}" id="mdp windows">mot de passe Windoows:</label>
+                {{ form.mdp_windows }}
+            </div>
+            <div class="form-field probleme">
+                <label for="{{ form.probleme.id_for_label }}" id="description">description du problème:</label>
+                {{ form.probleme }}
+            </div>
+            
+            <div class="checkbox">
+                <div class="case carton">
+                    <label for="{{ form.carton.id_for_label }}" id="carton">carton ?</label>
+                    {{ form.carton }}
+                </div>
+                <div class="case alimentation">
+                    <label for="{{ form.alimentation.id_for_label }}" id="alimentation">câble d'alimentation ?</label>
+                    {{ form.alimentation }}
+                </div>
+                <div class="case reinitialisation">
+                    <label for="{{ form.reinitialisation.id_for_label }}" id="reinitialisation">réinitialisation ?</label>
+                    {{ form.reinitialisation }}
+                </div>
+            </div>
+            
+            <div class="form-field ref_commande">
+                <label for="{{ form.ref_depot.id_for_label }}" id="ref de commande">référence de commande:</label>
+                {{ form.ref_depot }}
+            </div><div class="form-field num_bd">
+                <label for="{{ form.numero_depot.id_for_label }}" id="numéro bon de depot">numéro de bon de dépôt</label>
+                {{ form.numero_depot }}
+            </div>
+           
+            <div class="form-field designation">
+                <label for="" id="designation">designation:</label>
+                {{ form.designation }}
+            </div>
+            <div class="form-field mode_envoi">
+                <label for="" id="mode d'envoi">mode d'envoi:</label>
+                {{ form.mode_envoi }}
+            </div>
+
+            <input class="valider" type = "submit" value="valider">
 
         </form>
 
