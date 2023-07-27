@@ -27,11 +27,15 @@ def create_client(request):
             depot.first_name_seller = request.user.first_name
             depot.last_name_seller = request.user.last_name
 
-
             today = date.today()    
             depot.date = today.strftime("%Y-%m-%d")
             depot.save()
             "Envoie mail reception"
+            subject = 'Test Email'
+            message = 'Le colis est pris en charge par nos équipes'
+            from_email = 'tigran.wattrelos@outlook.fr'
+            recipient_list = [depot.email]
+            send_mail(subject, message, from_email, recipient_list)
             "Print un message comme quoi c'est bien passé"
             return redirect(HOME)
         
@@ -108,7 +112,7 @@ def afficher_client(request):
         
         ### Si un champs est renseigné et le client existe ########
             if ((len(name)!=0 or len(ref)!=0 or len(first_name)!=0)):
-                return render(request,"listings/afficher_depot.html",{"form":form,'clients':clients})
+                return render(request,"listings/afficher_depot.html",{"form":form,'clients':clients,})
 
         ### Si aucun champ n'est renseigné ### 
             else :
@@ -127,8 +131,8 @@ def modif_depot(request,id):
         form = client_form(request.POST,instance=depot_var)
         if form.is_valid():
             statut_form = form.cleaned_data['statut']
-            print(statut_form)
-            print(depot_var.mail_envoyee)
+
+###Envoi d'email
             if  statut_form =='TR' and  depot_var.mail_envoyee == 'RC' :
                 subject = 'Test Email'
                 message = 'Le colis est en traitement par les techniciens'

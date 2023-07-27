@@ -8,9 +8,12 @@
 
 </form>
 {%if clients|length != 0 %}
-    {%for client in clients%}
-    
-        <a href = /depot/{{client.numero_depot}}>{{client.name}} {{client.first_name}}</a></p>
+    {% for client in clients %}
+        {% if user.poste == 'CO'%}
+        <a href = "{% url 'depot_modif_com' client.numero_depot %}">{{client.name}} {{client.first_name}}</a></p>
+        {% else %}
+        <a href ="{% url 'depot_modif_tec' client.numero_depot %}">{{client.name}} {{client.first_name}}</a></p>
+        {% endif %}
     {% endfor %}
 
 {% else %}

@@ -6,11 +6,41 @@ from django.contrib.auth.models import AbstractUser
 class depot(models.Model):
 
     statut_choix = [
+        ('', '---------'),
         ("RC", "Receptionné"),
         ("TR", "En traitement"),
         ("TM", "Terminé")
     ]
+
+    envoi_choix = [
+        ('', '---------'),
+        ('RE', 'Retrait'),
+        ('EX', 'Expédition')
+        
+    ]
+
+    designation_choix = [
+        ('', '---------'),
+        ('PO', 'Laptop'),
+        ('CO', 'Config'),
+        ('AR', 'Article')
+        
+    ]
+    
+    raison_retour_choix = [
+        ('', '---------'),
+        ('DF', 'Defaut montage'),
+        ('DP', 'Defaut produit'),
+        ('PS', 'Defaut systeme'),
+        ('PU', 'Probleme utilisateur'),
+        ('PT', 'Probleme transport'),
+        ('PC', 'Probleme compatibilite')
+    ]
+
+    ### portable, article, config
+    ### retrait expe
 #Relatif au client
+    ref_depot = models.fields.CharField(max_length=50)
     name = models.fields.CharField(max_length=50,null = True)
     first_name = models.fields.CharField(max_length=50,null = True)
     telephone = models.fields.CharField(max_length=50,null = True)
@@ -21,19 +51,23 @@ class depot(models.Model):
     probleme = models.fields.CharField(max_length=500,blank = True,default = None)
     carton = models.fields.BooleanField(default=False)
     alimentation = models.fields.BooleanField(default=False)
-    piece_a_modifier = models.fields.CharField(max_length=100,blank = True,default = None)
+    piece_a_modifier = models.fields.CharField(max_length=100,blank = True,default = "")
     reinitialisation = models.fields.BooleanField(default=False)
 
 ## Relatif au dépot
 
-    ref_depot = models.fields.CharField(max_length=50)
+   
     total_a_payer = models.fields.IntegerField(validators = [MinValueValidator(0)],default = 0)
-    numero_depot = models.fields.IntegerField(primary_key=True,validators = [MinValueValidator(2000)])
-    commentaire = models.fields.CharField(default = None,blank = True ,max_length=1000,)
+    numero_depot = models.fields.IntegerField(primary_key=True)
     date = models.fields.DateField(default=2020)
     statut = models.fields.CharField(choices = statut_choix ,max_length=100,null = False ,default = "RC")
     mail_envoyee = models.fields.CharField(choices = statut_choix ,max_length=100,null = False ,default = "RC")
- 
+    commentaire = models.fields.CharField(default = "",blank = True ,max_length=1000)
+
+    designation = models.fields.CharField(choices = designation_choix ,max_length=100,null = False ,default = "")
+    mode_envoi = models.fields.CharField(choices = envoi_choix ,max_length=100,null = False ,default = "")
+    raison_retour = models.fields.CharField(choices = raison_retour_choix ,max_length=100,null = False ,default = "")
+
  ### Vendeur #########
     first_name_seller =  models.fields.CharField(max_length=50)
     last_name_seller =  models.fields.CharField(max_length=50)
