@@ -74,12 +74,12 @@
             </div>
            
             <div class="form-field designation">
-                <label for="" id="designation">designation:</label>
-                {{ form.designation }}
+                <label for="{{ form.designation_choix }}" id="designation">designation:</label>
+                {{ form.designation_choix }}
             </div>
             <div class="form-field mode_envoi">
-                <label for="" id="mode d'envoi">mode d'envoi:</label>
-                {{ form.mode_envoi }}
+                <label for="{{ form.envoi_choix.id_for_label }}" id="mode envoi">mode d'envoi:</label>
+                {{ form.envoi_choix }}
             </div>
 
             <input class="valider" type = "submit" value="valider">
