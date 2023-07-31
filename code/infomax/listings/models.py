@@ -40,11 +40,11 @@ class depot(models.Model):
     ### portable, article, config
     ### retrait expe
 #Relatif au client
-    ref_depot = models.fields.CharField(max_length=50, widget=forms.TextInput(attrs={'class':'custom-input'}))
-    name = models.fields.CharField(max_length=50,null = True, widget=forms.TextInput(attrs={'class':'custom-input'}))
-    first_name = models.fields.CharField(max_length=50,null = True, widget=forms.TextInput(attrs={'class':'custom-input'}))
-    telephone = models.fields.CharField(max_length=50,null = True, widget=forms.TextInput(attrs={'class':'custom-input'}))
-    email = models.fields.CharField(max_length=100,null = True, widget=forms.TextInput(attrs={'class':'custom-input'}))
+    ref_depot = models.fields.CharField(max_length=50)
+    name = models.fields.CharField(max_length=50,null = True)
+    first_name = models.fields.CharField(max_length=50,null = True)
+    telephone = models.fields.CharField(max_length=50,null = True)
+    email = models.fields.CharField(max_length=100,null = True)
     
 ### Relatif à l'ordi
     mdp_windows = models.fields.CharField(max_length=50,blank = True, default = None)
