@@ -9,8 +9,24 @@ from django.contrib.auth.forms import AuthenticationForm
 from datetime import date
 from django.contrib.auth.models import AbstractUser
 from django.core.mail import send_mail
+from reportlab.pdfgen import canvas
+import io
+from django.http import FileResponse
 
 HOME = '/home'
+
+@login_required
+def create_pdf(request,id):
+    buffer = io.BytesIO()
+    p = canvas.Canvas(buffer)
+    depot_var = depot.objects.get(numero_depot=id)
+
+    p.drawString(100, 100, depot_var.name)
+    p.showPage()
+    p.save()
+    buffer.seek(0)
+    return FileResponse(buffer, as_attachment=True, filename="hello.pdf")
+
 
 # Create your views here.
 @login_required
@@ -37,7 +53,7 @@ def create_client(request):
             recipient_list = [depot.email]
             send_mail(subject, message, from_email, recipient_list)
             "Print un message comme quoi c'est bien passé"
-            return redirect(HOME)
+            return redirect(f'/pdf/{depot.numero_depot}')
         
     else :
         form = client_form()

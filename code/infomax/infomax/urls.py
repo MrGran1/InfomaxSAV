@@ -28,5 +28,6 @@ urlpatterns = [
     path('home/', views.home ),
     path('afficher/', views.afficher_client),
     path('depot_com/<int:id>', views.modif_depot, name = 'depot_modif_com'),
-    path('depot_tec/<int:id>', views.modif_depot, name = 'depot_modif_comm')
+    path('depot_tec/<int:id>', views.modif_depot, name = 'depot_modif_comm'),
+    path('pdf/<int:id>', views.create_pdf)
 ]
