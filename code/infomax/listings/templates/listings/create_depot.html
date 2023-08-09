@@ -68,18 +68,21 @@
             <div class="form-field ref_commande">
                 <label for="{{ form.ref_depot.id_for_label }}" id="ref de commande">référence de commande:</label>
                 {{ form.ref_depot }}
-            </div><div class="form-field num_bd">
+            </div>
+            <div class="form-field num_bd">
                 <label for="{{ form.numero_depot.id_for_label }}" id="numéro bon de depot">numéro de bon de dépôt</label>
                 {{ form.numero_depot }}
             </div>
            
             <div class="form-field designation">
-                <label for="{{ form.designation_choix }}" id="designation">designation:</label>
+                {% csrf_token %}
+                <label for="{{ form.designation_choix.id_for_label }}" id="designation">designation:</label>
                 {{ form.designation_choix }}
+
             </div>
             <div class="form-field mode_envoi">
                 <label for="{{ form.envoi_choix.id_for_label }}" id="mode envoi">mode d'envoi:</label>
-                {{ form.envoi_choix }}
+                <select for="{{ form.envoi_choix }}"/>
             </div>
 
             <input class="valider" type = "submit" value="valider">

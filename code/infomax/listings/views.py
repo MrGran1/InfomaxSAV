@@ -12,6 +12,7 @@ from django.core.mail import send_mail
 from reportlab.pdfgen import canvas
 import io
 from django.http import FileResponse
+from .forms import form_input
 
 HOME = '/home'
 
@@ -37,7 +38,7 @@ def hello(request):
 @login_required()
 def create_client(request):
     if request.method == 'POST':
-        form = client_form(request.POST)
+        form = form_input(request.POST)
         if form.is_valid():
             depot = form.save(commit = False)
             depot.first_name_seller = request.user.first_name

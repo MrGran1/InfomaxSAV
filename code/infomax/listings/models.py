@@ -19,14 +19,14 @@ class depot(models.Model):
         
     ]
 
-    designation_choix = [
+    choix = [
         ('', '---------'),
         ('PO', 'Laptop'),
         ('CO', 'Config'),
         ('AR', 'Article')
         
     ]
-    
+
     raison_retour_choix = [
         ('', '---------'),
         ('DF', 'Defaut montage'),
@@ -64,7 +64,7 @@ class depot(models.Model):
     mail_envoyee = models.fields.CharField(choices = statut_choix ,max_length=100,null = False ,default = "RC")
     commentaire = models.fields.CharField(default = "",blank = True ,max_length=1000)
 
-    designation = models.fields.CharField(choices = designation_choix ,max_length=100,null = False ,default = "")
+    designation = models.fields.CharField(choices = choix ,max_length=100,null = False ,default = '')
     mode_envoi = models.fields.CharField(choices = envoi_choix ,max_length=100,null = False ,default = "")
     raison_retour = models.fields.CharField(choices = raison_retour_choix ,max_length=100,null = False ,default = "")
 
@@ -84,3 +84,7 @@ class CustomUser(AbstractUser):
     ]
 
     poste = models.fields.CharField(choices = type_vendeur ,max_length=100,null = False ,default = "CO")
+
+
+
+

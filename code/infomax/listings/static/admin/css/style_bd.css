@@ -162,12 +162,11 @@ main{
     width: 200px;
 }
 
-.custom field{
-    border-radius: 3px;
-
-}
-
 .required_field{
     border-color: red;
     
+}
+
+.custom-select{
+    border-color: red;
 }
