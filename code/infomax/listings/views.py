@@ -21,8 +21,12 @@ def create_pdf(request,id):
     buffer = io.BytesIO()
     p = canvas.Canvas(buffer)
     depot_var = depot.objects.get(numero_depot=id)
+    marge = 780
+    p.drawString(250, 800, "Bon de dépot")
+    for field in str(depot_var._meta.get_fields):
+        marge -= 20
+        p.drawString(100, marge, str(field))
 
-    p.drawString(100, 100, depot_var.name)
     p.showPage()
     p.save()
     buffer.seek(0)
