@@ -1,0 +1,4 @@
+{%for user in users%}
+<p>{{user.username}} <a href= "{% url 'supprimer_user' user.username %}">supprimer</a></p>
+{%endfor%}
+<p>fin</p>

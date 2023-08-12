@@ -21,13 +21,15 @@ from listings.views import login_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('add/', views.create_client),
+    path('add/', views.create_client,name ='creation_bon_depot'),
     path('login/', login_view,name='login'),
-    path('logout/' , views.logout_view),
-    path('create_user/', views.create_user ),
+    path('logout/' , views.logout_view,name = 'logout'),
+    path('create_user/', views.create_user,name = "creation_user" ),
     path('home/', views.home ),
-    path('afficher/', views.afficher_client),
+    path('afficher/', views.afficher_client, name = 'afficher'),
     path('depot_com/<int:id>', views.modif_depot, name = 'depot_modif_com'),
     path('depot_tec/<int:id>', views.modif_depot, name = 'depot_modif_comm'),
-    path('pdf/<int:id>', views.create_pdf)
+    path('pdf/<int:id>', views.create_pdf),
+    path('afficher_users/', views.afficher_user),
+    path('supprimer_user/<str:username>', views.supprimer_user, name = 'supprimer_user')
 ]

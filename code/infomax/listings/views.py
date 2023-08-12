@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from listings.forms import client_form, user_form, afficher_client_form
-from listings.models import depot
+from listings.models import depot,CustomUser
 from listings import views
 from django.contrib.auth.decorators import login_required,user_passes_test
 from django.contrib.auth import authenticate, login, logout
@@ -147,7 +147,6 @@ def afficher_client(request):
 @login_required
 def modif_depot(request,id):
     depot_var = depot.objects.get(numero_depot=id)
-    print(depot_var.statut)
 
     if request.method == 'POST':
         form = client_form(request.POST,instance=depot_var)
@@ -177,3 +176,22 @@ def modif_depot(request,id):
         form = client_form(instance=depot_var)
    
     return render (request,'listings/create_user.html',{'form':form})
+
+def afficher_user(request):
+    users = CustomUser.objects.all()
+    print(users)
+    return render(request,"listings/afficher_users.html",{"users" : users})
+
+def supprimer_user(request, username):
+    user_to_del = CustomUser.objects.get(username = username)
+    if request.method == 'POST':
+        # supprimer le user de la base de données
+        user_to_del.delete()
+        # rediriger vers le home
+        return redirect('/home')
+
+    # pas besoin de « else » ici. Si c'est une demande GET, continuez simplement
+
+    return render(request,
+                    'listings/delete_user.html',
+                    {'user': user_to_del})

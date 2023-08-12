@@ -1,0 +1,10 @@
+<!--Page de confirmation de suppression d'un utilisateur--> 
+
+<h1>Supprimer l'user</h1>
+
+<p>Etes-vous sûr de vouloir supprimer le user : {{ user.username }} ?</p>
+
+<form action="" method="post">
+{% csrf_token %}
+<input type="submit" value="Supprimer">
+</form>
