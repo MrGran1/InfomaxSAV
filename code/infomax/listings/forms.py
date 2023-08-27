@@ -12,15 +12,34 @@ class form_input(forms.TextInput):
             super().__init__(*args, **kwargs)
 
 
-choix = [
+designation_choix = [
         ('', '---------'),
         ('PO', 'Laptop'),
         ('CO', 'Config'),
         ('AR', 'Article')
         
     ]
+
+envoi_choix = [
+        ('', '---------'),
+        ('RE', 'Retrait'),
+        ('EX', 'Expédition')
+        
+    ]
+
+
+
 class form_input(forms.Form):
-    designation_choix= forms.MultipleChoiceField(choices=choix, widget=forms.SelectMultiple(attrs={'class':'custom-select'}))
+    mode_envoi= forms.MultipleChoiceField(choices=envoi_choix, widget=forms.SelectMultiple(attrs={'class':'custom-select'}))
+    designation= forms.MultipleChoiceField(choices=designation_choix, widget=forms.SelectMultiple(attrs={'class':'custom-select'}))
+    name= forms.CharField(max_length=50)
+    first_name= forms.CharField(max_length=50)
+    telephone= forms.CharField(max_length=50)
+    email= forms.EmailField(max_length=50)
+    mdp_windows= forms.CharField(max_length=50)
+    probleme= forms.CharField(max_length=500)
+    ref_commande= forms.CharField(max_length=50)
+
 
 
 class client_form(forms.ModelForm):
@@ -28,10 +47,7 @@ class client_form(forms.ModelForm):
     class Meta(forms.ModelForm):
         model = depot
         exclude = ('numero_depot','first_name_seller','last_name_seller','date','mail_envoyee','commentaire','piece_a_modifier','statut')
-        nom= forms.CharField(
-            label='Nom',
-            widget=form_input()
-        )
+
         
 
 class user_form(forms.ModelForm):
