@@ -61,7 +61,7 @@ def create_client(request):
             return redirect(f'/pdf/{depot.numero_depot}')
         
     else :
-        form = client_form()
+        form = form_input()
 
     return render(request,'listings/create_depot.html',{'form' : form})
 
