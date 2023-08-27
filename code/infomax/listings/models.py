@@ -40,7 +40,7 @@ class depot(models.Model):
     ### portable, article, config
     ### retrait expe
 #Relatif au client
-    ref_depot = models.fields.CharField(max_length=50)
+    ref_commande = models.fields.CharField(max_length=50)
     name = models.fields.CharField(max_length=50,null = True)
     first_name = models.fields.CharField(max_length=50,null = True)
     telephone = models.fields.CharField(max_length=50,null = True)
