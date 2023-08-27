@@ -15,8 +15,12 @@
                 <div class="grid-container" id="bandeau">
                     <img class="grid-img" id="logo" src="{% static 'admin/img/infomax-logo.jpg' %}" alt="logo infomax"/>
                     <h1 class="grid-title">gestion interne SAV</h1>
+                
                     <nav class="grid-nav" id="navbar">
-
+                        <ul class="menu">
+                            <li><a href="/home" id="home">Home</a></li>
+                            <li><a href="/logout">deconnexion</a></li>
+                        </ul>
                     </nav>
                 </div>
         </header>
@@ -42,7 +46,7 @@
                 {{ form.email }}
             </div>
             <div class="form-field mdp">
-                <label for="{{ form.mdp_windows.id_for_label }}" id="mdp windows">mot de passe Windoows:</label>
+                <label for="{{ form.mdp_windows.id_for_label }}" id="mdp windows">mot de passe Windows:</label>
                 {{ form.mdp_windows }}
             </div>
             <div class="form-field probleme">
@@ -53,44 +57,49 @@
             <div class="checkbox">
                 <div class="case carton">
                     <label for="{{ form.carton.id_for_label }}" id="carton">carton ?</label>
-                    {{ form.carton }}
+                    <input type="checkbox" name="{{ form.carton.name }}" />
                 </div>
                 <div class="case alimentation">
                     <label for="{{ form.alimentation.id_for_label }}" id="alimentation">câble d'alimentation ?</label>
-                    {{ form.alimentation }}
+                    <input type="checkbox" name="{{ form.alimentation.name }}" />
                 </div>
                 <div class="case reinitialisation">
                     <label for="{{ form.reinitialisation.id_for_label }}" id="reinitialisation">réinitialisation ?</label>
-                    {{ form.reinitialisation }}
+                    <input type="checkbox" name="{{ form.reinitialisation.name }}"/>
                 </div>
             </div>
             
             <div class="form-field ref_commande">
-                <label for="{{ form.ref_depot.id_for_label }}" id="ref de commande">référence de commande:</label>
-                {{ form.ref_depot }}
-            </div>
-            <div class="form-field num_bd">
-                <label for="{{ form.numero_depot.id_for_label }}" id="numéro bon de depot">numéro de bon de dépôt</label>
-                {{ form.numero_depot }}
+                <label for="{{ form.ref_commande.id_for_label }}" id="ref de commande">référence de commande:</label>
+                <input type="text" name="{{ form.ref_commande.name }}" placeholder="référence presta et CDC"/>
             </div>
            
+           
             <div class="form-field designation">
-                {% csrf_token %}
-                <label for="{{ form.designation_choix.id_for_label }}" id="designation">designation:</label>
-                {{ form.designation_choix }}
+                <label for="{{ form.designation.id_for_label }}" id="designation">designation:</label>
+                <select for="{{ form.designation_choix.id_for_label }}"  name="{{ form.designation_choix.name }}" >
 
+                    {% for value, label in form.designation.field.choices %}
+            <option value="{{ value }}" {% if form.designation.value == value %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+                </select>
             </div>
+
             <div class="form-field mode_envoi">
-                <label for="{{ form.envoi_choix.id_for_label }}" id="mode envoi">mode d'envoi:</label>
-                <select for="{{ form.envoi_choix }}"/>
+                <label for="{{ form.mode_envoi.id_for_label }}" id="mode envoi">mode d'envoi:</label>
+                <select for="{{ form.mode_envoi.id_for_label }}"  name="{{ form.designation_choix.name }}" >
+
+                    {% for value, label in form.mode_envoi.field.choices %}
+            <option value="{{ value }}" {% if form.mode_envoi.value == value %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+                </select>
             </div>
 
             <input class="valider" type = "submit" value="valider">
 
         </form>
 
-        <a href="/home">Home</a>
-        <a href="/logout">deconnexion</a>
+        
         </main>
         
     </body>
