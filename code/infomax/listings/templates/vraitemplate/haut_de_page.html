@@ -1,0 +1,16 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fr">
+    <div class="grid-container" id="bandeau">
+        <img class="grid-img" id="logo" src="{% static 'admin/img/infomax-logo.jpg' %}" alt="logo infomax"/>
+        <h1 class="grid-title">gestion interne SAV</h1>
+    
+        <nav class="grid-nav" id="navbar">
+            <ul class="menu">
+                <li><a href="/home" id="home">Home</a></li>
+                <li><a href="/logout" id="deconnexion">deconnexion</a></li>
+            </ul>
+        </nav>
+    </div>
+</html>
