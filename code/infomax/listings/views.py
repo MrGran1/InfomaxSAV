@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from listings.forms import client_form, user_form, afficher_client_form
+from listings.forms import client_form, user_form, afficher_client_form,modif_client_form_tec
 from listings.models import depot,CustomUser
 from listings import views
 from django.contrib.auth.decorators import login_required,user_passes_test
@@ -44,6 +44,7 @@ def create_client(request):
     if request.method == 'POST':
         form = form_input(request.POST)
         if form.is_valid():
+            print("oui")
             depot = form.save(commit = False)
             depot.first_name_seller = request.user.first_name
             depot.last_name_seller = request.user.last_name
@@ -59,7 +60,9 @@ def create_client(request):
             send_mail(subject, message, from_email, recipient_list)
             "Print un message comme quoi c'est bien passé"
             return redirect(f'/pdf/{depot.numero_depot}')
-        
+        else : 
+            print(form.errors)
+
     else :
         form = form_input()
 
@@ -128,9 +131,9 @@ def afficher_client(request):
 
             
             name = form.cleaned_data['name']
-            ref = form.cleaned_data['ref_depot']
+            ref = form.cleaned_data['ref_commande']
             first_name = form.cleaned_data['first_name']
-            clients = depot.objects.filter(ref_depot__icontains = ref,name__contains = name, first_name__contains = first_name)
+            clients = depot.objects.filter(ref_commande__contains = ref,name__contains = name, first_name__contains = first_name)
         
         ### Si un champs est renseigné et le client existe ########
             if ((len(name)!=0 or len(ref)!=0 or len(first_name)!=0)):
@@ -176,6 +179,19 @@ def modif_depot(request,id):
         form = client_form(instance=depot_var)
    
     return render (request,'listings/create_user.html',{'form':form})
+
+
+def modif_depot_tec(request,id):
+    depot_var = depot.objects.get(numero_depot=id)
+    if request.method == 'POST':
+        form = modif_client_form_tec(request.POST,instance=depot_var)    
+        form.save()
+
+    else:
+        form = modif_client_form_tec(instance=depot_var)
+
+    return render (request,'listings/create_user.html',{'form':form})
+
 
 def afficher_user(request):
     users = CustomUser.objects.all()

@@ -35,7 +35,7 @@ class form_input(forms.Form):
     name= forms.CharField(max_length=50)
     first_name= forms.CharField(max_length=50)
     telephone= forms.CharField(max_length=50)
-    email= forms.EmailField(max_length=50)
+    email= forms.EmailField(max_length=100)
     mdp_windows= forms.CharField(max_length=50)
     probleme= forms.CharField(max_length=500)
     ref_commande= forms.CharField(max_length=50)
@@ -48,7 +48,12 @@ class client_form(forms.ModelForm):
         model = depot
         exclude = ('numero_depot','first_name_seller','last_name_seller','date','mail_envoyee','commentaire','piece_a_modifier','statut')
 
-        
+
+class modif_client_form_tec(forms.ModelForm):
+    
+    class Meta(forms.ModelForm):
+        model = depot
+        fields = ('commentaire','piece_a_modifier','statut')    
 
 class user_form(forms.ModelForm):
     class Meta:
@@ -61,7 +66,7 @@ class user_form(forms.ModelForm):
         }
 
 class afficher_client_form(forms.Form):
-    ref_depot = forms.CharField(max_length=100,required=False)
+    ref_commande = forms.CharField(max_length=100,required=False)
     name = forms.CharField(max_length=100,required=False)
     first_name = forms.CharField(max_length=100,required=False)
 
