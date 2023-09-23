@@ -1,4 +1,21 @@
-<h1>Home</h1>
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta name="description" content="Accueil"/>
+        <link rel="stylesheet" href="{% static 'admin/css/style_home.css' %}"/>
+        <link rel="stylesheet" href="{% static 'admin/css/haut_de_page.css' %}"/>
+        <title>Accueil</title>
+    </head>
+    <header>
+        {% include "vraitemplate/haut_de_page.html" %}
+    </header>
+    <body>
+        <main>
+            <h2>Home</h2>
 
 
 {% if not user.is_authenticated %}
@@ -14,3 +31,6 @@
 {% endif %}
 <a href="/add"> création bon de dépot</a>
 <a href="/afficher"> Recherche dans la BD</a>
+        </main>
+    </body>
+</html>

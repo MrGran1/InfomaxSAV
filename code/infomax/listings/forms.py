@@ -49,11 +49,11 @@ class client_form(forms.ModelForm):
         exclude = ('numero_depot','first_name_seller','last_name_seller','date','mail_envoyee','commentaire','piece_a_modifier','statut')
 
 
-class modif_client_form_tec(forms.ModelForm):
+class form_modif_tech(forms.ModelForm):
     
     class Meta(forms.ModelForm):
         model = depot
-        fields = ('commentaire','piece_a_modifier','statut')    
+        fields = ('commentaire','piece_a_modifier','statut','mdp_windows')    
 
 class user_form(forms.ModelForm):
     class Meta:

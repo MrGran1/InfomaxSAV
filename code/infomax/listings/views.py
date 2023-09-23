@@ -181,7 +181,7 @@ def modif_depot(request,id):
     return render (request,'listings/create_user.html',{'form':form})
 
 
-def modif_depot_tec(request,id):
+def depot_tech(request,id):
     depot_var = depot.objects.get(numero_depot=id)
     if request.method == 'POST':
         form = modif_client_form_tec(request.POST,instance=depot_var)    
@@ -190,7 +190,7 @@ def modif_depot_tec(request,id):
     else:
         form = modif_client_form_tec(instance=depot_var)
 
-    return render (request,'listings/create_user.html',{'form':form})
+    return render (request,'listings/interface_tech.html',{'form':form})
 
 
 def afficher_user(request):

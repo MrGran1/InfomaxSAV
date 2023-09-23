@@ -9,20 +9,12 @@
         <meta name="description" content="Création de bons de dépôt"/>
         <link rel="stylesheet" href="{% static 'admin/css/style_bd.css' %}">
         <title>Création de bons de dépôt</title>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
     <body>
         <header>
-                <div class="grid-container" id="bandeau">
-                    <img class="grid-img" id="logo" src="{% static 'admin/img/infomax-logo.jpg' %}" alt="logo infomax"/>
-                    <h1 class="grid-title">gestion interne SAV</h1>
-                
-                    <nav class="grid-nav" id="navbar">
-                        <ul class="menu">
-                            <li><a href="/home" id="home">Home</a></li>
-                            <li><a href="/logout">deconnexion</a></li>
-                        </ul>
-                    </nav>
-                </div>
+                {% include "vraitemplate/haut_de_page.html" %}
         </header>
         <main >
             <h2>Créer un bon de dépôt</h2>
