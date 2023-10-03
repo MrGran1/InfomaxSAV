@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from listings.forms import client_form, user_form, afficher_client_form,modif_client_form_tec
+from listings.forms import client_form, user_form, afficher_client_form,form_modif_tech
 from listings.models import depot,CustomUser
 from listings import views
 from django.contrib.auth.decorators import login_required,user_passes_test
@@ -146,7 +146,7 @@ def afficher_client(request):
     else :
         form = afficher_client_form()
     
-    return render(request,"listings/afficher_depot_blank.html",{"form":form})
+    return render(request,"listings/recherche_depot.html",{"form":form})
 @login_required
 def modif_depot(request,id):
     depot_var = depot.objects.get(numero_depot=id)

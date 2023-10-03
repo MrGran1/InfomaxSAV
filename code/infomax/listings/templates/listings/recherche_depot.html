@@ -1,24 +1,64 @@
+{% load static %}
 
-<h1>Rechercher un dépot</h1>
+<!DOCTYPE html>
 
-<form action ='' method="post" novalidate>
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type = "submit" value="Envoyer">
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta name="description" content="Recherche depot"/>
+        <link rel="stylesheet" href="{% static 'admin/css/style_bd.css' %}">
+        <title>rechercher un bon de dépôt</title>
+    </head>
 
-</form>
-{%if clients|length != 0 %}
-    {% for client in clients %}
-        {% if user.poste == 'CO'%}
-        <a href = "{% url 'depot_modif_com' client.numero_depot %}">{{client.name}} {{client.first_name}}</a></p>
+    <body>
+        <header>
+            {% include "vraitemplate/haut_de_page.html" %}
+        </header>
+        <main>
+            <h1>Rechercher un dépot</h1>
+            <div>
+                <label for="{{client.name.id_for_label}}">Nom du client:</label>
+                <input {{ client.name }}>
+            </div>
+
+            <div>
+                <label for="{{client.first_name.id_for_label}}">prénom du client:</label>
+                <input {{ client.first_name}}>
+            </div>
+
+            <div>
+                <label for="{{client.numero_depot.id_for_label}}">numéro de bon de dépôt:</label>
+                <input {{ client.numero_depot}}>
+            </div>
+
+            <div>
+                <label for="{{client.telephone.id_for_label}}">numéro de téléphone:</label>
+                <input {{ client.telephone}}>
+            </div>
+
+
+        <form action ='' method="post" novalidate>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type = "submit" value="Envoyer">
+
+        </form>
+        {%if clients|length != 0 %}
+            {% for client in clients %}
+                {% if user.poste == 'CO'%}
+                <a href = "{% url 'depot_modif_com' client.numero_depot %}">{{client.name}} {{client.first_name}}</a></p>
+                {% else %}
+                <a href ="{% url 'depot_modif_tec' client.numero_depot %}">{{client.name}} {{client.first_name}}</a></p>
+                {% endif %}
+            {% endfor %}
+
         {% else %}
-        <a href ="{% url 'depot_modif_tec' client.numero_depot %}">{{client.name}} {{client.first_name}}</a></p>
-        {% endif %}
-    {% endfor %}
+            <p>Aucun dépot avec ce nom existe</p>
+        {%endif%}
+        </main>
+        
 
-{% else %}
-    <p>Aucun dépot avec ce nom existe</p>
-{%endif%}
+    </body>
 
-<a href="/home">Home</a>
-<a href="/logout">deconnexion</a>
+</html>
