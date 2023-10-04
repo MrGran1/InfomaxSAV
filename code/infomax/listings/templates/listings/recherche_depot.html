@@ -9,6 +9,7 @@
         <meta name="description" content="Recherche depot"/>
         <link rel="stylesheet" href="{% static 'admin/css/style_bd.css' %}">
         <title>rechercher un bon de dépôt</title>
+        
     </head>
 
     <body>
@@ -17,8 +18,12 @@
         </header>
         <main>
             <h1>Rechercher un dépot</h1>
-            <div>
-                <label for="{{client.name.id_for_label}}">Nom du client:</label>
+            <div>          
+            <form action ='' method="post" novalidate>
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <label for="{{client.name.id_for_label}}">Nom du client:</label>
                 <input {{ client.name }}>
             </div>
 
@@ -37,14 +42,21 @@
                 <input {{ client.telephone}}>
             </div>
 
+            <div>
+                <label for="{{client.email.id_for_label}}">email:</label>
+                <input {{ client.telephone}}>
+            </div>
 
-        <form action ='' method="post" novalidate>
-            {% csrf_token %}
-            {{ form.as_p }}
-            <input type = "submit" value="Envoyer">
-
+            <button id="btnVerifier">Rechercher</button>
+            <script>
+                document.getElementById('btnVerifier').addEventListener('click', function() {
+                    var resultatsDiv = document.getElementById('resultats');
+                    resultatsDiv.style.display = 'block'; // Afficher la section de résultats
+                });
+            </script>
         </form>
-        {%if clients|length != 0 %}
+        <div id="resultats" style="display: none">
+            {%if clients|length != 0 %}
             {% for client in clients %}
                 {% if user.poste == 'CO'%}
                 <a href = "{% url 'depot_modif_com' client.numero_depot %}">{{client.name}} {{client.first_name}}</a></p>
@@ -56,9 +68,12 @@
         {% else %}
             <p>Aucun dépot avec ce nom existe</p>
         {%endif%}
+        </div>
+        
         </main>
         
-
+        
+        
     </body>
 
 </html>
