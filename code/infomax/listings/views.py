@@ -184,11 +184,11 @@ def modif_depot(request,id):
 def depot_tech(request,id):
     depot_var = depot.objects.get(numero_depot=id)
     if request.method == 'POST':
-        form = modif_client_form_tec(request.POST,instance=depot_var)    
+        form = depot_tech(request.POST,instance=depot_var)    
         form.save()
 
     else:
-        form = modif_client_form_tec(instance=depot_var)
+        form = depot_tech(instance=depot_var)
 
     return render (request,'listings/interface_tech.html',{'form':form})
 

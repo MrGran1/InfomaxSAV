@@ -23,30 +23,6 @@
             {% csrf_token %}
             {{ form.as_p }}
 
-            <label for="{{client.name.id_for_label}}">Nom du client:</label>
-                <input {{ client.name }}>
-            </div>
-
-            <div>
-                <label for="{{client.first_name.id_for_label}}">prénom du client:</label>
-                <input {{ client.first_name}}>
-            </div>
-
-            <div>
-                <label for="{{client.numero_depot.id_for_label}}">numéro de bon de dépôt:</label>
-                <input {{ client.numero_depot}}>
-            </div>
-
-            <div>
-                <label for="{{client.telephone.id_for_label}}">numéro de téléphone:</label>
-                <input {{ client.telephone}}>
-            </div>
-
-            <div>
-                <label for="{{client.email.id_for_label}}">email:</label>
-                <input {{ client.telephone}}>
-            </div>
-
             <button id="btnVerifier">Rechercher</button>
             <script>
                 document.getElementById('btnVerifier').addEventListener('click', function() {
@@ -59,9 +35,9 @@
             {%if clients|length != 0 %}
             {% for client in clients %}
                 {% if user.poste == 'CO'%}
-                <a href = "{% url 'depot_modif_com' client.numero_depot %}">{{client.name}} {{client.first_name}}</a></p>
+                <a href = "{% url 'depot_modif_com' client.numero_depot %}">{{client.name}} {{client.first_name}} {{ client.numero_depot}} {{ client.telephone}} {{ client.email}}</a></p>
                 {% else %}
-                <a href ="{% url 'depot_modif_tec' client.numero_depot %}">{{client.name}} {{client.first_name}}</a></p>
+                <a href ="{% url 'depot_modif_tec' client.numero_depot %}">{{client.name}} {{client.first_name}} {{ client.numero_depot}} {{ client.telephone}} {{ client.email}}</a></p>
                 {% endif %}
             {% endfor %}
 

@@ -11,7 +11,27 @@
         <title>Création de bons de dépôt</title>
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    </head>
+        <script>
+            $(document).ready(function() {
+                // Cacher toutes les options sauf l'option vide au chargement de la page
+                $('.mode_envoi option:not(:first)').hide();
+        
+                // Lorsque l'utilisateur clique sur le menu déroulant
+                $('.mode_envoi').on('click', function() {
+                    // Afficher toutes les options
+                    $(this).find('option').show();
+                });
+        
+                // Lorsque l'utilisateur sélectionne une option
+                $('.mode_envoi').on('change', function() {
+                    // Si l'option vide est sélectionnée, masquer toutes les autres options
+                    if ($(this).val() == '') {
+                        $(this).find('option:not(:first)').hide();
+                    }
+                });
+            });
+        </script>
+            </head>
     <body>
         <header>
                 {% include "vraitemplate/haut_de_page.html" %}
@@ -21,7 +41,9 @@
 
         <form class="grid-form" action ='' method="post" novalidate>
             {% csrf_token %}
-            <div class="form-field nom">
+            {{ form.as_p }}
+ <!--
+<div class="form-field nom">
                 <label for="{{ form.name.id_for_label }}" id="Nom">Nom:</label>
                 {{ form.name }}
             </div>
@@ -86,6 +108,7 @@
         {% endfor %}
                 </select>
             </div>
+ -->           
 
             <input class="valider" type = "submit" value="valider">
 

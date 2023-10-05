@@ -30,15 +30,15 @@ envoi_choix = [
 
 
 class form_input(forms.Form):
-    mode_envoi= forms.MultipleChoiceField(choices=envoi_choix, widget=forms.SelectMultiple(attrs={'class':'custom-select'}))
-    designation= forms.MultipleChoiceField(choices=designation_choix, widget=forms.SelectMultiple(attrs={'class':'custom-select'}))
-    name= forms.CharField(max_length=50)
-    first_name= forms.CharField(max_length=50)
-    telephone= forms.CharField(max_length=50)
-    email= forms.EmailField(max_length=100)
-    mdp_windows= forms.CharField(max_length=50)
-    probleme= forms.CharField(max_length=500)
-    ref_commande= forms.CharField(max_length=50)
+    mode_envoi= forms.MultipleChoiceField(choices=envoi_choix, widget=forms.SelectMultiple(attrs={'class':'mode_envoi'}))
+    designation= forms.MultipleChoiceField(choices=designation_choix, widget=forms.SelectMultiple(attrs={'class':'designation'}))
+    nom= forms.CharField(max_length=50, widget=forms.TextInput (attrs={'class':'nom''form-field'}))
+    first_name= forms.CharField(max_length=50, widget=forms.TextInput (attrs={'class':'prenom'}))
+    telephone= forms.CharField(max_length=50, widget=forms.TextInput (attrs={'class':'telephone'}))
+    email= forms.EmailField(max_length=100, widget=forms.TextInput (attrs={'class':'email'}))
+    mdp_windows= forms.CharField(max_length=50, widget=forms.TextInput (attrs={'class':'mdp'}))
+    probleme= forms.CharField(max_length=500, widget=forms.TextInput (attrs={'class':'probleme'}))
+    ref_commande= forms.CharField(max_length=50, widget=forms.TextInput (attrs={'class':'nomref_commande'}))
 
 
 
@@ -66,9 +66,12 @@ class user_form(forms.ModelForm):
         }
 
 class afficher_client_form(forms.Form):
-    ref_commande = forms.CharField(max_length=100,required=False)
-    name = forms.CharField(max_length=100,required=False)
-    first_name = forms.CharField(max_length=100,required=False)
+    ref_commande = forms.CharField(max_length=100,required=True)
+    name = forms.CharField(max_length=100,required=True)
+    first_name = forms.CharField(max_length=100,required=True)
+    telephone = forms.CharField(max_length=100, required=True)
+    email = forms.CharField(max_length=100, required=True)
+    numero_depot = forms.CharField(max_length=100, required=True)
 
 
 
