@@ -39,6 +39,9 @@ class form_input(forms.Form):
     mdp_windows= forms.CharField(max_length=50, widget=forms.TextInput (attrs={'class':'mdp'}))
     probleme= forms.CharField(max_length=500, widget=forms.TextInput (attrs={'class':'probleme'}))
     ref_commande= forms.CharField(max_length=50, widget=forms.TextInput (attrs={'class':'nomref_commande'}))
+    carton= forms.BooleanField (widget = forms.CheckboxInput)
+    cable=  forms.BooleanField (widget = forms.CheckboxInput)
+    reinitialisation=  forms.BooleanField (widget = forms.CheckboxInput)
 
 
 
