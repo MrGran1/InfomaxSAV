@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from listings.forms import client_form, user_form, afficher_client_form,form_modif_tech
+from listings.forms import client_form, user_form, afficher_client_form,form_modif_tech,form_input
 from listings.models import depot,CustomUser
 from listings import views
 from django.contrib.auth.decorators import login_required,user_passes_test
@@ -12,15 +12,15 @@ from django.core.mail import send_mail
 from reportlab.pdfgen import canvas
 import io
 from django.http import FileResponse
-from .forms import form_input
+#from .forms import form_input
 
 HOME = '/home'
 
 @login_required
-def create_pdf(request,id):
+def create_pdf(request,ref):
     buffer = io.BytesIO()
     p = canvas.Canvas(buffer)
-    depot_var = depot.objects.get(numero_depot=id)
+    depot_var = depot.objects.get(ref_commande=ref)
     marge = 780
     p.drawString(250, 800, "Bon de dépot")
     for field in str(depot_var._meta.get_fields):
@@ -30,13 +30,7 @@ def create_pdf(request,id):
     p.showPage()
     p.save()
     buffer.seek(0)
-    return FileResponse(buffer, as_attachment=True, filename="hello.pdf")
-
-
-# Create your views here.
-@login_required
-def hello(request):
-    return HttpResponse("<h1>Hllo</h1>")
+    return FileResponse(buffer, as_attachment=True, filename=f"{ref}.pdf")
 
 
 @login_required()
@@ -44,22 +38,43 @@ def create_client(request):
     if request.method == 'POST':
         form = form_input(request.POST)
         if form.is_valid():
-            print("oui")
-            depot = form.save(commit = False)
-            depot.first_name_seller = request.user.first_name
-            depot.last_name_seller = request.user.last_name
+            client = depot(
+            mode_envoi=form.cleaned_data['mode_envoi'],
+            designation=form.cleaned_data['designation'],
+            name=form.cleaned_data['nom'],
+            first_name=form.cleaned_data['first_name'],
+            telephone=form.cleaned_data['telephone'],
+            email=form.cleaned_data['email'],
+            mdp_windows=form.cleaned_data['mdp_windows'],
+            probleme=form.cleaned_data['probleme'],
+            ref_commande=form.cleaned_data['ref_commande'],
+            carton = form.cleaned_data['carton'],
+            alimentation = form.cleaned_data['alimentation'],
+            reinitialisation = form.cleaned_data['reinitialisation']
+            )
+            print(client.mode_envoi)
+            client.first_name_seller = request.user.first_name
+            client.last_name_seller = request.user.last_name
 
             today = date.today()    
-            depot.date = today.strftime("%Y-%m-%d")
-            depot.save()
+            client.date = today.strftime("%Y-%m-%d")
+            client.save()
+            #depot_var = depot.objects.get(ref_commande=client.ref_commande)
+
+            #Si ily a deja un client avec cette ref de commande alors on enregistre pas
+            # if len(depot_var)==0:
+            #     client.save()
+            # else:
+            #     pass
+
             "Envoie mail reception"
             subject = 'Test Email'
             message = 'Le colis est pris en charge par nos équipes'
             from_email = 'tigran.wattrelos@outlook.fr'
-            recipient_list = [depot.email]
+            recipient_list = [client.email]
             send_mail(subject, message, from_email, recipient_list)
             "Print un message comme quoi c'est bien passé"
-            return redirect(f'/pdf/{depot.numero_depot}')
+            return redirect(f'/pdf/{client.ref_commande}')
         else : 
             print(form.errors)
 
@@ -127,9 +142,6 @@ def afficher_client(request):
     if request.method == 'POST':
         form = afficher_client_form(request.POST)
         if form.is_valid():
-            
-
-            
             name = form.cleaned_data['name']
             ref = form.cleaned_data['ref_commande']
             first_name = form.cleaned_data['first_name']
@@ -137,16 +149,18 @@ def afficher_client(request):
         
         ### Si un champs est renseigné et le client existe ########
             if ((len(name)!=0 or len(ref)!=0 or len(first_name)!=0)):
-                return render(request,"listings/afficher_depot.html",{"form":form,'clients':clients,})
+                return render(request,"listings/recherche_depot.html",{"form":form,'clients':clients,})
 
         ### Si aucun champ n'est renseigné ### 
             else :
-                return render(request,"listings/afficher_depot_erreur_champs.html",{"form":form})
+                return render(request,"listings/recherche_depot_erreur_champs.html",{"form":form})
         ### Sinon si le client n'existe pas ###           
     else :
+        clients = depot.objects.all()
         form = afficher_client_form()
+        print(len(clients))
     
-    return render(request,"listings/recherche_depot.html",{"form":form})
+        return render(request,"listings/recherche_depot.html",{"form":form,'clients':clients,})
 @login_required
 def modif_depot(request,id):
     depot_var = depot.objects.get(numero_depot=id)

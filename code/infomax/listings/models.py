@@ -52,7 +52,7 @@ class depot(models.Model):
     carton = models.fields.BooleanField(default=False)
     alimentation = models.fields.BooleanField(default=False)
     piece_a_modifier = models.fields.CharField(max_length=100,blank = True,default = "")
-    reinitialisation = models.fields.BooleanField(default=False)
+    reinitialisation = models.fields.BooleanField(default=False,blank=True)
 
 ## Relatif au dépot
 
