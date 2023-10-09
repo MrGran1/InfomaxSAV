@@ -69,12 +69,12 @@ class user_form(forms.ModelForm):
         }
 
 class afficher_client_form(forms.Form):
-    ref_commande = forms.CharField(max_length=100,required=True)
-    name = forms.CharField(max_length=100,required=True)
-    first_name = forms.CharField(max_length=100,required=True)
-    telephone = forms.CharField(max_length=100, required=True)
-    email = forms.CharField(max_length=100, required=True)
-    numero_depot = forms.CharField(max_length=100, required=True)
+    ref_commande = forms.CharField(max_length=100,required=False)
+    name = forms.CharField(max_length=100,required=False)
+    first_name = forms.CharField(max_length=100,required=False)
+    telephone = forms.CharField(max_length=100, required=False)
+    email = forms.CharField(max_length=100, required=False)
+    numero_depot = forms.CharField(max_length=100, required=False)
 
 
 

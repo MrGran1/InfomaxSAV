@@ -18,6 +18,7 @@ HOME = '/home'
 
 @login_required
 def create_pdf(request,ref):
+    """Cree le pdf quand on cree un depot en utilisant la ref_de _commande associé"""
     buffer = io.BytesIO()
     p = canvas.Canvas(buffer)
     depot_var = depot.objects.get(ref_commande=ref)
@@ -52,13 +53,17 @@ def create_client(request):
             alimentation = form.cleaned_data['alimentation'],
             reinitialisation = form.cleaned_data['reinitialisation']
             )
+
             print(client.mode_envoi)
             client.first_name_seller = request.user.first_name
             client.last_name_seller = request.user.last_name
 
             today = date.today()    
             client.date = today.strftime("%Y-%m-%d")
-            client.save()
+
+            """ Refaire bie nce quil y a apres"""
+            if not client.DoesNotExist :
+                client.save()
             #depot_var = depot.objects.get(ref_commande=client.ref_commande)
 
             #Si ily a deja un client avec cette ref de commande alors on enregistre pas
@@ -139,28 +144,28 @@ def create_user(request):
 ### Vue pour chercher des clients######
 @login_required
 def afficher_client(request):
+    """ Recherche les depots dans la base de données en fonction des champs renseigné par l'utilisateur, si aucun champs n'est renseigné, cela renvoie tout les clients"""
     if request.method == 'POST':
         form = afficher_client_form(request.POST)
+        
         if form.is_valid():
+            #On renseigne tout les champs du formulaire
             name = form.cleaned_data['name']
             ref = form.cleaned_data['ref_commande']
             first_name = form.cleaned_data['first_name']
-            clients = depot.objects.filter(ref_commande__contains = ref,name__contains = name, first_name__contains = first_name)
-        
-        ### Si un champs est renseigné et le client existe ########
-            if ((len(name)!=0 or len(ref)!=0 or len(first_name)!=0)):
-                return render(request,"listings/recherche_depot.html",{"form":form,'clients':clients,})
+            telephone = form.cleaned_data['telephone']
+            email = form.cleaned_data['email']
+            numero_depot = form.cleaned_data['numero_depot']
 
-        ### Si aucun champ n'est renseigné ### 
-            else :
-                return render(request,"listings/recherche_depot_erreur_champs.html",{"form":form})
-        ### Sinon si le client n'existe pas ###           
-    else :
+            clients = depot.objects.filter(ref_commande__contains = ref,name__contains = name, first_name__contains = first_name,telephone__contains = telephone, email__contains = email, numero_depot__contains = numero_depot)
+        
+        ### Si aucun clients n'est trouvé alors cela retourne toute la BD###           
+    else:
         clients = depot.objects.all()
         form = afficher_client_form()
-        print(len(clients))
     
-        return render(request,"listings/recherche_depot.html",{"form":form,'clients':clients,})
+    return render(request,"listings/recherche_depot.html",{"form":form,'clients':clients,})
+
 @login_required
 def modif_depot(request,id):
     depot_var = depot.objects.get(numero_depot=id)
