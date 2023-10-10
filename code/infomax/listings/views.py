@@ -17,11 +17,11 @@ from django.http import FileResponse
 HOME = '/home'
 
 @login_required
-def create_pdf(request,ref):
+def create_pdf(request,id):
     """Cree le pdf quand on cree un depot en utilisant la ref_de _commande associé"""
     buffer = io.BytesIO()
     p = canvas.Canvas(buffer)
-    depot_var = depot.objects.get(ref_commande=ref)
+    depot_var = depot.objects.get(numero_depot=id)
     marge = 780
     p.drawString(250, 800, "Bon de dépot")
     for field in str(depot_var._meta.get_fields):
@@ -31,7 +31,7 @@ def create_pdf(request,ref):
     p.showPage()
     p.save()
     buffer.seek(0)
-    return FileResponse(buffer, as_attachment=True, filename=f"{ref}.pdf")
+    return FileResponse(buffer, as_attachment=True, filename=f"{id}.pdf")
 
 
 @login_required()
@@ -40,8 +40,8 @@ def create_client(request):
         form = form_input(request.POST)
         if form.is_valid():
             client = depot(
-            mode_envoi=form.cleaned_data['mode_envoi'],
-            designation=form.cleaned_data['designation'],
+            mode_envoi=form.cleaned_data['mode_envoi'][0],
+            designation=form.cleaned_data['designation'][0],
             name=form.cleaned_data['nom'],
             first_name=form.cleaned_data['first_name'],
             telephone=form.cleaned_data['telephone'],
@@ -54,34 +54,26 @@ def create_client(request):
             reinitialisation = form.cleaned_data['reinitialisation']
             )
 
-            print(client.mode_envoi)
+            print(client.mode_envoi[0])
             client.first_name_seller = request.user.first_name
             client.last_name_seller = request.user.last_name
 
             today = date.today()    
             client.date = today.strftime("%Y-%m-%d")
 
-            """ Refaire bie nce quil y a apres"""
-            if not client.DoesNotExist :
-                client.save()
-            #depot_var = depot.objects.get(ref_commande=client.ref_commande)
+            client.save()
 
-            #Si ily a deja un client avec cette ref de commande alors on enregistre pas
-            # if len(depot_var)==0:
-            #     client.save()
-            # else:
-            #     pass
+            """ Refaire bien ce qu'il y a apres"""
 
             "Envoie mail reception"
             subject = 'Test Email'
             message = 'Le colis est pris en charge par nos équipes'
-            from_email = 'tigran.wattrelos@outlook.fr'
+            from_email = 'tigran.wattrelos@outlook.fr'  # Mettre le mail dans une variable d'environement
             recipient_list = [client.email]
             send_mail(subject, message, from_email, recipient_list)
-            "Print un message comme quoi c'est bien passé"
-            return redirect(f'/pdf/{client.ref_commande}')
-        else : 
-            print(form.errors)
+            "Print un message comme quoi ça c'est bien passé"
+
+            return redirect(f'/pdf/{client.numero_depot}') #Renvoie le pdf, mais après le pdf faudrait qu'il cleane la page de creation de depot
 
     else :
         form = form_input()
