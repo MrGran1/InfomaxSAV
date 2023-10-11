@@ -15,6 +15,12 @@ from django.http import FileResponse
 #from .forms import form_input
 
 HOME = '/home'
+def envoi_mail(liste_destinataire, subject, message):
+    """ Envoie un mail à tout les destinataires avec l'objet et le message suivant """
+
+    from_email = 'tigran.wattrelos@outlook.fr'  # Mettre le mail dans une variable d'environement
+    recipient_list = liste_destinataire
+    send_mail(subject, message, from_email, recipient_list)
 
 @login_required
 def create_pdf(request,id):
@@ -63,14 +69,12 @@ def create_client(request):
 
             client.save()
 
-            """ Refaire bien ce qu'il y a apres"""
+            # Envoie d'un mail
+            objet_mail = "Pris en charge de votre ordinateur par nos équipe"
+            message_mail = "Votre PC à bien été pris en charge par nos équipes."
 
-            "Envoie mail reception"
-            subject = 'Test Email'
-            message = 'Le colis est pris en charge par nos équipes'
-            from_email = 'tigran.wattrelos@outlook.fr'  # Mettre le mail dans une variable d'environement
-            recipient_list = [client.email]
-            send_mail(subject, message, from_email, recipient_list)
+            envoie_mail([client.email],objet_mail, message_mail )
+
             "Print un message comme quoi ça c'est bien passé"
 
             return redirect(f'/pdf/{client.numero_depot}') #Renvoie le pdf, mais après le pdf faudrait qu'il cleane la page de creation de depot
@@ -167,7 +171,7 @@ def modif_depot(request,id):
         if form.is_valid():
             statut_form = form.cleaned_data['statut']
 
-###Envoi d'email
+            ###Envoi d'email
             if  statut_form =='TR' and  depot_var.mail_envoyee == 'RC' :
                 subject = 'Test Email'
                 message = 'Le colis est en traitement par les techniciens'
