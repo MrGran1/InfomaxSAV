@@ -30,18 +30,18 @@ envoi_choix = [
 
 
 class form_input(forms.Form):
-    mode_envoi= forms.MultipleChoiceField(choices=envoi_choix, widget=forms.SelectMultiple(attrs={'class':'mode_envoi'}))
-    designation= forms.MultipleChoiceField(choices=designation_choix, widget=forms.SelectMultiple(attrs={'class':'designation'}))
+    mode_envoi= forms.ChoiceField(choices=envoi_choix, widget=forms.Select(attrs={'class':'mode_envoi''form-field'}))
+    designation= forms.ChoiceField(choices=designation_choix, widget=forms.Select(attrs={'class':'designation''form-field'}))
     nom= forms.CharField(max_length=50, widget=forms.TextInput (attrs={'class':'nom''form-field'}))
-    first_name= forms.CharField(max_length=50, widget=forms.TextInput (attrs={'class':'prenom'}))
-    telephone= forms.CharField(max_length=50, widget=forms.TextInput (attrs={'class':'telephone'}))
-    email= forms.EmailField(max_length=100, widget=forms.TextInput (attrs={'class':'email'}))
-    mdp_windows= forms.CharField(max_length=50, widget=forms.TextInput (attrs={'class':'mdp'}))
-    probleme= forms.CharField(max_length=500, widget=forms.TextInput (attrs={'class':'probleme'}))
-    ref_commande= forms.CharField(max_length=50, widget=forms.TextInput (attrs={'class':'nomref_commande'}))
-    carton= forms.BooleanField (widget = forms.CheckboxInput)
-    alimentation=  forms.BooleanField (widget = forms.CheckboxInput)
-    reinitialisation=  forms.BooleanField (widget = forms.CheckboxInput)
+    first_name= forms.CharField(max_length=50, widget=forms.TextInput (attrs={'class':'prenom''form-field'}))
+    telephone= forms.CharField(max_length=50, widget=forms.TextInput (attrs={'class':'telephone''form-field'}))
+    email= forms.EmailField(max_length=100, widget=forms.TextInput (attrs={'class':'email''form-field'}))
+    mdp_windows= forms.CharField(max_length=50, widget=forms.TextInput (attrs={'class':'mdp''form-field'}))
+    probleme= forms.CharField(max_length=500, widget=forms.Textarea (attrs={'class':'probleme''form-field', 'rows':'4'}))
+    ref_commande= forms.CharField(max_length=50, widget=forms.TextInput (attrs={'class':'ref_commande''form-field'}))
+    carton= forms.BooleanField (widget = forms.CheckboxInput (attrs={'class':'carton' 'form-field'}))
+    alimentation=  forms.BooleanField (widget = forms.CheckboxInput (attrs={'class':'alimentation' 'form-field'}))
+    reinitialisation=  forms.BooleanField (widget = forms.CheckboxInput (attrs={'class':'reinitialisation' 'form-field'}))
 
 
 

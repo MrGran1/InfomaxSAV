@@ -10,7 +10,8 @@
         <link rel="stylesheet" href="{% static 'admin/css/style_bd.css' %}">
         <title>Création de bons de dépôt</title>
 
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ 
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
             $(document).ready(function() {
                 // Cacher toutes les options sauf l'option vide au chargement de la page
@@ -31,6 +32,7 @@
                 });
             });
         </script>
+      
             </head>
     <body>
         <header>
@@ -39,7 +41,7 @@
         <main >
             <h2>Créer un bon de dépôt</h2>
 
-        <form class="grid-form" action ='' method="post" novalidate>
+        <form class="grid-form"  method="post" novalidate>
             {% csrf_token %}
             {{ form.as_p }}
  <!--

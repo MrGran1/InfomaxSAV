@@ -14,25 +14,19 @@ form{
 
 
 .grid-form{
-    display: grid ;
-    grid-template-columns: repeat(4,250px);
-    grid-column-gap: 1px;
-    grid-template-rows: repeat(2 ,50px) repeat(3,20px) 150px 40px;
-    grid-row-gap: 20px;
-}
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
 /* -----contenu----- */
 
-.form-field{
-    display: grid;
-    grid-template-rows: auto 1fr;
-}
+
 
 .nom{
     grid-row: 1;
     grid-column: 1;
     width: 200px;
-    color: red;
-    
+    padding: 0px 30px;
 }
 
 .prenom{ 

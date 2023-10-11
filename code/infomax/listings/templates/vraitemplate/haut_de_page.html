@@ -4,17 +4,48 @@
 <html lang="fr">
     <head>
         <link rel="stylesheet" href="{% static 'admin/css/haut_de_page.css' %}">
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+    const dropdownBtn = document.getElementById("dropdown-btn");
+    const dropdownContent = document.getElementById("dropdown-content");
+
+    dropdownBtn.addEventListener("click", function () {
+        if (dropdownContent.style.display === "block") {
+            dropdownContent.style.display = "none";
+        } else {
+            dropdownContent.style.display = "block";
+        }
+    });
+
+    // Masquer le menu déroulant lorsque l'utilisateur clique en dehors de celui-ci
+    window.addEventListener("click", function (event) {
+        if (!event.target.matches("#dropdown-btn")) {
+            dropdownContent.style.display = "none";
+        }
+    });
+});
+        </script>
     </head>
     <div class="grid-container" id="bandeau">
         <img class="grid-img" id="logo" src="{% static 'admin/img/infomax-logo.jpg' %}" alt="logo infomax"/>
         <h1 class="grid-title">gestion interne SAV</h1>
         <nav class="grid-nav" id="navbar">
+            <div class="dropdown-menu">
+                <button id="dropdown-btn">Plus</button>
+                <ul id="dropdown-content">
+                    <li><a href="/logout" id="deconnexion">deconnexion</a></li>
+                    <li><a href="#">Option 2</a></li>
+                    <li><a href="#">Option 3</a></li>
+                </ul>
+            </div>
             <ul class="menu">
                 <li><a href="/home" id="home">Home</a></li>
                 <li><a href="/add" id="creation_BD">création dépôt</a></li>
                 <li><a href="/afficher" id="interface_tech">rechercher un bon de dépôt</a></li>
-                <li><a href="/logout" id="deconnexion">deconnexion</a></li>
+
+                
             </ul>
+            
         </nav>
     </div>
 </html> 
