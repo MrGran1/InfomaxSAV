@@ -30,18 +30,42 @@ envoi_choix = [
 
 
 class form_input(forms.Form):
-    mode_envoi= forms.ChoiceField(choices=envoi_choix, widget=forms.Select(attrs={'class':'mode_envoi''form-field'}))
-    designation= forms.ChoiceField(choices=designation_choix, widget=forms.Select(attrs={'class':'designation''form-field'}))
-    nom= forms.CharField(max_length=50, widget=forms.TextInput (attrs={'class':'nom''form-field'}))
-    first_name= forms.CharField(max_length=50, widget=forms.TextInput (attrs={'class':'prenom''form-field'}))
-    telephone= forms.CharField(max_length=50, widget=forms.TextInput (attrs={'class':'telephone''form-field'}))
-    email= forms.EmailField(max_length=100, widget=forms.TextInput (attrs={'class':'email''form-field'}))
-    mdp_windows= forms.CharField(max_length=50, widget=forms.TextInput (attrs={'class':'mdp''form-field'}))
-    probleme= forms.CharField(max_length=500, widget=forms.Textarea (attrs={'class':'probleme''form-field', 'rows':'4'}))
-    ref_commande= forms.CharField(max_length=50, widget=forms.TextInput (attrs={'class':'ref_commande''form-field'}))
-    carton= forms.BooleanField (widget = forms.CheckboxInput (attrs={'class':'carton' 'form-field'}))
-    alimentation=  forms.BooleanField (widget = forms.CheckboxInput (attrs={'class':'alimentation' 'form-field'}))
-    reinitialisation=  forms.BooleanField (widget = forms.CheckboxInput (attrs={'class':'reinitialisation' 'form-field'}))
+    mode_envoi= forms.ChoiceField(choices=envoi_choix, widget=forms.Select(
+        attrs={'class':'mode_envoi''form-field', 'style':'width : 100% ; height : 40px;'}))
+        
+    designation= forms.ChoiceField(choices=designation_choix, widget=forms.Select(
+        attrs={'class':'designation''form-field', 'style':'width : 100% ; height : 40px;'}))
+        
+    nom= forms.CharField(max_length=50, widget=forms.TextInput (
+        attrs={'class':'nom''form-field', 'style':'width : 100% ; height : 40px;'}))
+        
+    first_name= forms.CharField(max_length=50, widget=forms.TextInput (
+        attrs={'class':'prenom''form-field', 'style':'width : 100% ; height : 40px;'}))
+        
+    telephone= forms.CharField(max_length=50, widget=forms.TextInput (
+        attrs={'class':'telephone''form-field', 'style':'width : 100% ; height : 40px;'}))
+        
+    email= forms.EmailField(max_length=100, widget=forms.TextInput (
+        attrs={'class':'email''form-field', 'style':'width : 100% ; height : 40px;'}))
+        
+    mdp_windows= forms.CharField(max_length=50, widget=forms.TextInput (
+        attrs={'class':'mdp''form-field', 'style':'width : 100% ; height : 40px;'}))
+        
+    probleme= forms.CharField(max_length=500, widget=forms.Textarea (
+        attrs={'class':'probleme''form-field', 'rows':'4'}))
+        
+    ref_commande= forms.CharField(max_length=50, widget=forms.TextInput (
+        attrs={'class':'ref_commande''form-field', 'style':'width : 100% ; height : 40px;'}))
+        
+    carton= forms.BooleanField (widget = forms.CheckboxInput (
+        attrs={'class':'carton' 'form-field'}))
+        
+    alimentation=  forms.BooleanField (widget = forms.CheckboxInput (
+        attrs={'class':'alimentation' 'form-field'}))
+        
+    reinitialisation=  forms.BooleanField (widget = forms.CheckboxInput (
+        attrs={'class':'reinitialisation' 'form-field'}))
+        
 
 
 
