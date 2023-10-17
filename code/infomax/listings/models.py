@@ -38,7 +38,7 @@ class depot(models.Model):
     ]
 
     ### portable, article, config
-    ### retrait expe
+    ### retrait expema
 #Relatif au client
     ref_commande = models.fields.CharField(max_length=50)
     name = models.fields.CharField(max_length=50,null = True)
@@ -47,11 +47,11 @@ class depot(models.Model):
     email = models.fields.CharField(max_length=100,null = True)
     
 ### Relatif à l'ordi
-    mdp_windows = models.fields.CharField(max_length=50,blank = True, default = None)
+    mdp_windows = models.fields.CharField(max_length=50,blank = True, null = True, default = None)
     probleme = models.fields.CharField(max_length=500,blank = True,default = None)
-    carton = models.fields.BooleanField(default=False)
-    alimentation = models.fields.BooleanField(default=False)
-    piece_a_modifier = models.fields.CharField(max_length=100,blank = True,default = "")
+    carton = models.fields.BooleanField(default=False, null =True)
+    alimentation = models.fields.BooleanField(default=False, null=True)
+    piece_a_modifier = models.fields.CharField(max_length=100,null = True,default = "")
     reinitialisation = models.fields.BooleanField(default=False,blank=True)
 
 ## Relatif au dépot

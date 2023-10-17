@@ -49,7 +49,7 @@ class form_input(forms.Form):
         attrs={'class':'email'}))
         
     mdp_windows= forms.CharField(max_length=50, widget=forms.TextInput (
-        attrs={'class':'mdp'}))
+        attrs={'class':'mdp'}),required=False)
         
     probleme= forms.CharField(max_length=500, widget=forms.Textarea (
         attrs={'class':'probleme', 'rows':'8'}))
@@ -58,13 +58,13 @@ class form_input(forms.Form):
         attrs={'class':'ref_commande'}))
         
     carton= forms.BooleanField (widget = forms.CheckboxInput (
-        attrs={'class':'carton'}))
+        attrs={'class':'carton'}),required=False)
         
     alimentation=  forms.BooleanField (widget = forms.CheckboxInput (
-        attrs={'class':'alimentation'}))
+        attrs={'class':'alimentation'}),required=False)
         
     reinitialisation=  forms.BooleanField (widget = forms.CheckboxInput (
-        attrs={'class':'reinitialisation' }))
+        attrs={'class':'reinitialisation' }),required=False)
         
 
 

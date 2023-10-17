@@ -73,12 +73,14 @@ def create_client(request):
             objet_mail = "Pris en charge de votre ordinateur par nos équipe"
             message_mail = "Votre PC à bien été pris en charge par nos équipes."
 
-            envoie_mail([client.email],objet_mail, message_mail )
+            envoi_mail([client.email],objet_mail, message_mail )
 
             "Print un message comme quoi ça c'est bien passé"
 
             return redirect(f'/pdf/{client.numero_depot}') #Renvoie le pdf, mais après le pdf faudrait qu'il cleane la page de creation de depot
 
+        else:
+            print (form.errors)
     else :
         form = form_input()
 
