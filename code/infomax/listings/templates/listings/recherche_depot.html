@@ -22,7 +22,6 @@
             <form action ='' method="post" novalidate>
             {% csrf_token %}
             {{ form.as_p }}
-
             <button id="btnVerifier">Rechercher</button>
             <script>
                 document.getElementById('btnVerifier').addEventListener('click', function() {
@@ -31,7 +30,7 @@
                 });
             </script>
         </form>
-        <div id="resultats" style="display: none">
+        <div id="resultats" style="">
             {%if clients|length != 0 %}
             {% for client in clients %}
                 {% if user.poste == 'CO'%}

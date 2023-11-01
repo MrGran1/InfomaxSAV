@@ -9,30 +9,6 @@
         <meta name="description" content="Création de bons de dépôt"/>
         <link rel="stylesheet" href="{% static 'admin/css/style_bd.css' %}">
         <title>Création de bons de dépôt</title>
-
- 
- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                // Cacher toutes les options sauf l'option vide au chargement de la page
-                $('.mode_envoi option:not(:first)').hide();
-        
-                // Lorsque l'utilisateur clique sur le menu déroulant
-                $('.mode_envoi').on('click', function() {
-                    // Afficher toutes les options
-                    $(this).find('option').show();
-                });
-        
-                // Lorsque l'utilisateur sélectionne une option
-                $('.mode_envoi').on('change', function() {
-                    // Si l'option vide est sélectionnée, masquer toutes les autres options
-                    if ($(this).val() == '') {
-                        $(this).find('option:not(:first)').hide();
-                    }
-                });
-            });
-        </script>
-      
             </head>
     <body>
         <header>
@@ -86,25 +62,30 @@
             
             <div class="ref_commande">
                 <label for="{{ form.ref_commande.id_for_label }}" id="ref de commande">référence de commande:</label>
-                <input type="text" name="{{ form.ref_commande.name }}" placeholder="référence presta et CDC"/>
+                <input class="ref_commande" type="text" name="{{ form.ref_commande.name }}" placeholder="référence presta et CDC"/>
             </div>
            
            
             <div class="designation">
                 <label for="{{ form.designation.id_for_label }}" id="designation">designation:</label>
-                <select for="{{ form.designation_choix.id_for_label }}"  name="{{ form.designation_choix.name }}" >
-
-                    {% for value, label in form.designation.field.choices %}
+                <select  class="designation" for="{{ form.designation_choix.id_for_label }}"  name="{{ form.designation_choix.name }}" >
+                    <option value=''>---------</option>
+                    <option value='PO'>Laptop</option>
+                    <option value='CO'>Config</option>
+                    <option value='AR'>Article</option>
+                    {% for value, label in form.designation.choices %}
             <option value="{{ value }}" {% if form.designation.value == value %}selected{% endif %}>{{ label }}</option>
         {% endfor %}
                 </select>
             </div>
 
-            <div class="form-field mode_envoi">
+            <div class="mode_envoi">
                 <label for="{{ form.mode_envoi.id_for_label }}" id="mode envoi">mode d'envoi:</label>
-                <select for="{{ form.mode_envoi.id_for_label }}"  name="{{ form.designation_choix.name }}" >
-
-                    {% for value, label in form.mode_envoi.field.choices %}
+                <select class=" mode_envoi" for="{{ form.mode_envoi.id_for_label }}"  name="{{ form.designation_choix.name }}" >
+                    <option value=''>---------</option>
+                    <option value='PO'>Retrait</option>
+                    <option value='CO'>Expédition</option>
+                    {% for value, label in form.mode_envoi.choices %}
             <option value="{{ value }}" {% if form.mode_envoi.value == value %}selected{% endif %}>{{ label }}</option>
         {% endfor %}
                 </select>
