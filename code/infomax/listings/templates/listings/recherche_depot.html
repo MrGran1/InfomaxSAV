@@ -7,7 +7,7 @@
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta name="description" content="Recherche depot"/>
-        <link rel="stylesheet" href="{% static 'admin/css/style_bd.css' %}">
+        <link rel="stylesheet" href="{% static 'admin/css/recherche_depot.css' %}">
         <title>rechercher un bon de dépôt</title>
         
     </head>
@@ -17,32 +17,91 @@
             {% include "vraitemplate/haut_de_page.html" %}
         </header>
         <main>
-            <h1>Rechercher un dépot</h1>
-            <div>          
-            <form action ='' method="post" novalidate>
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button id="btnVerifier">Rechercher</button>
-            <script>
-                document.getElementById('btnVerifier').addEventListener('click', function() {
-                    var resultatsDiv = document.getElementById('resultats');
-                    resultatsDiv.style.display = 'block'; // Afficher la section de résultats
-                });
-            </script>
+            <h2>Rechercher un dépot</h2>         
+            <form class="grid-form" method="post" novalidate>
+                {% csrf_token %}
+            
+                <div class="field-form nom" id="form-field">
+                    <label for="{{ form.nom.id_for_label }}" id="nom">nom:</label>
+                    {{ form.name }}
+                </div>
+                
+                <div class="form-field prenom" id="form-field">
+                    <label for="{{ form.prenom.id_for_label }}" id="prénom">prénom:</label>
+                    {{ form.first_name }}
+                </div>
+
+                <div class="form-field ref_commande" id="form-field">
+                    <label for="{{ form.ref_commande.id_for_label }}" id="ref_commande">référence de commande:</label>
+                    {{ form.ref_commande }}
+                </div>
+
+                <div class="form-field email" id="form-field">
+                    <label for="{{ form.email.id_for_label }}" id="email">email:</label>
+                    {{ form.email }}
+                </div>
+                <div class="form-field telephone" id="form-field">
+                    <label for="{{ form.telephone.id_for_label }}" id="téléphone">téléphone:</label>
+                    {{ form.telephone }}
+                </div>
+                <div class="form-field depot" id="form-field">
+                    <label for="{{ form.numero_depot.id_for_label }}" id="numero_depot">numéro de dépôt:</label>
+                    {{ form.numero_depot}}
+                </div>
+                <button id="btnVerifier">Rechercher</button>
+                <script>
+                    document.getElementById('btnVerifier').addEventListener('click', function() {
+                        var resultatsDiv = document.getElementById('resultats');
+                        resultatsDiv.style.display = 'block'; // Afficher la section de résultats
+                    });
+                </script>
         </form>
-        <div id="resultats" style="">
-            {%if clients|length != 0 %}
+
+        <table>
+            
+            <thead>
+                <tr>
+                    <th>N° Dépot:   </th>
+                    <th>nom:</th>
+                    <th>prénom:</th>
+                    <th>téléphone:</th>
+                    <th>email:</th>
+                    <th>référence de commande:</th>
+                    <th>problème:</th>
+                    <th>mot de passe Windows</th>
+                    <th>état du SAV</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%if clients|length != 0 %}
             {% for client in clients %}
-                {% if user.poste == 'CO'%}
-                <a href = "{% url 'depot_modif_com' client.numero_depot %}">{{client.name}} {{client.first_name}} {{ client.numero_depot}} {{ client.telephone}} {{ client.email}}</a></p>
-                {% else %}
-                <a href ="{% url 'depot_modif_tec' client.numero_depot %}">{{client.name}} {{client.first_name}} {{ client.numero_depot}} {{ client.telephone}} {{ client.email}}</a></p>
+            {% if user.poste == 'CO'%}
+                <tr>
+                        <td><a href = "{% url 'depot_modif_com' client.numero_depot %}">{{client.numero_depot}}</a></td>
+                        <td><a href = "{% url 'depot_modif_com' client.numero_depot %}">{{client.name}}</a></td>
+                        <td><a href = "{% url 'depot_modif_com' client.numero_depot %}">{{client.first_name}}</a></td>
+                        <td><a href = "{% url 'depot_modif_com' client.numero_depot %}">{{client.telephone}}</a></td>
+                        <td><a href = "{% url 'depot_modif_com' client.numero_depot %}">{{client.email}}</a></td>
+                        <td><a href = "{% url 'depot_modif_com' client.numero_depot %}">{{client.ref_commande}}</a></td>
+                        <td><a href = "{% url 'depot_modif_com' client.numero_depot %}">{{client.probleme}}</a></td>
+                        <td><a href = "{% url 'depot_modif_com' client.numero_depot %}">{{client.mdp_windows}}</a></td>
+                        <td><a href = "{% url 'depot_modif_com' client.numero_depot %}">{{client.}}</a></td>
+                    {% else %}
+                    <a href ="{% url 'depot_modif_tec' client.numero_depot %}">{{client.name}} {{client.first_name}} {{ client.numero_depot}} {{ client.telephone}} {{ client.email}}</a></p>
                 {% endif %}
             {% endfor %}
 
         {% else %}
             <p>Aucun dépot avec ce nom existe</p>
         {%endif%}
+                </tr>
+            </tbody>
+        </table>
+        <div id="resultats">
+            
+                
+               
+                
         </div>
         
         </main>
