@@ -67,8 +67,6 @@ class form_input(forms.Form):
         attrs={'class':'reinitialisation' }),required=False)
         
 
-
-
 class client_form(forms.ModelForm):
         
     nom= forms.CharField(max_length=50, widget=forms.TextInput (
@@ -88,11 +86,11 @@ class client_form(forms.ModelForm):
     ref_commande= forms.CharField(max_length=50, widget=forms.TextInput (
             attrs={'class':'ref_commande'}))
 
-    class form_modif_tech(forms.ModelForm):
-    
-        class Meta(forms.ModelForm):
-            model = depot
-            fields = ('commentaire','piece_a_modifier','statut','mdp_windows')    
+class form_modif_tech(forms.ModelForm):
+    class Meta(forms.ModelForm):
+        model = depot
+        fields = ('commentaire','piece_a_modifier','statut','mdp_windows')    
+
 
 class user_form(forms.ModelForm):
     class Meta:

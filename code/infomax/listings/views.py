@@ -15,6 +15,7 @@ from django.http import FileResponse
 #from .forms import form_input
 
 HOME = '/home'
+config = open("/home/theophile/Bureau/InfomaxSAV/code/infomax/listings/configuration.yaml","r")
 def envoi_mail(liste_destinataire, subject, message):
     """ Envoie un mail à tout les destinataires avec l'objet et le message suivant """
 
@@ -203,7 +204,7 @@ def modif_depot(request,id):
 def depot_tech(request,id):
     depot_var = depot.objects.get(numero_depot=id)
     if request.method == 'POST':
-        form = depot_tech(request.POST,instance=depot_var)    
+        form = form_modif_tech(request.POST,instance=depot_var)    
         form.save()
 
     else:

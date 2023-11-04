@@ -40,7 +40,7 @@ class depot(models.Model):
     ### portable, article, config
     ### retrait expema
 #Relatif au client
-    ref_commande = models.fields.CharField(max_length=50)
+    ref_depot = models.fields.CharField(max_length=50)
     name = models.fields.CharField(max_length=50,null = True)
     first_name = models.fields.CharField(max_length=50,null = True)
     telephone = models.fields.CharField(max_length=50,null = True)
@@ -58,7 +58,7 @@ class depot(models.Model):
 
    
     total_a_payer = models.fields.IntegerField(validators = [MinValueValidator(0)],default = 0)
-    numero_depot = models.fields.IntegerField(primary_key=True)
+    ref_depot = models.fields.IntegerField(primary_key=True)
     date = models.fields.DateField(default=2020)
     statut = models.fields.CharField(choices = statut_choix ,max_length=100,null = False ,default = "RC")
     mail_envoyee = models.fields.CharField(choices = statut_choix ,max_length=100,null = False ,default = "RC")
