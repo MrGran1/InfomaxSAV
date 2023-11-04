@@ -1,0 +1,115 @@
+
+/* -----éléments généraux----- */
+
+form{
+    margin: auto;
+}
+/* -----configurations des grid----- */
+
+.grid-container{
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    grid-template-rows: 90px 30px;
+}
+
+
+.grid-form{
+    display: grid ;
+    grid-template-columns: repeat(4,250px);
+    grid-column-gap: 1px;
+    grid-template-rows: repeat(2 ,50px) repeat(3,20px) 150px 40px;
+    grid-row-gap: 20px;
+}
+/* -----contenu----- */
+
+.form-field{
+    display: grid;
+    grid-template-rows: auto 1fr;
+}
+
+.nom{
+    grid-row: 1;
+    grid-column: 1;
+    width: 200px;
+}
+
+.prenom{ 
+    grid-row: 1;
+    grid-column: 2;
+    width: 200px;
+}
+
+.telephone{
+    grid-row: 1;
+    grid-column: 3;
+    width: 200px;
+}
+
+.email{
+    grid-row: 1;
+    grid-column: 4;
+    width: 200px;
+}
+
+.mdp{
+    grid-row: 2;
+    grid-column: 1;
+    width: 200px;
+}
+
+.ref_commande{
+    grid-row: 2;
+    grid-column: 2;
+    width: 200px;
+}
+
+.designation{
+    grid-row: 2;
+    grid-column: 3;
+    width: 200px;
+}
+
+.mode_envoi{
+    grid-row: 2;
+    grid-column: 4;
+    width: 200px;
+}
+
+.reinitialisation{
+    grid-row: 3;
+    grid-column: 1;
+    display: flex;
+    justify-content: space-between;
+}
+
+.alimentation{
+    grid-row: 4;
+    grid-column: 1;
+    display: flex;
+    justify-content: space-between;
+    vertical-align: middle;
+}
+
+.carton{
+    grid-column: 1;
+    grid-row: 5;
+    display: flex;
+    justify-content: space-between;
+    vertical-align: middle;
+}
+
+.probleme{
+    grid-row: 6;
+    grid-column: 1 /span 3;
+    margin-top: 40px;
+}
+
+.valider{
+    grid-row: 7;
+    grid-column: 1;
+}
+
+.checkbox{
+    margin-top: 40px;
+    width: 200px;
+}

@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from listings.forms import client_form, user_form, afficher_client_form,form_modif_tech
+from listings.forms import client_form, user_form, afficher_client_form,form_modif_tech,form_input
 from listings.models import depot,CustomUser
 from listings import views
 from django.contrib.auth.decorators import login_required,user_passes_test
@@ -12,13 +12,19 @@ from django.core.mail import send_mail
 from reportlab.pdfgen import canvas
 import io
 from django.http import FileResponse
-from .forms import form_input
+#from .forms import form_input
 
 HOME = '/home'
-config = open("/home/tigran/Documents/InfomaxSAV/code/infomax/listings/configuration.yaml",'r')
+def envoi_mail(liste_destinataire, subject, message):
+    """ Envoie un mail à tout les destinataires avec l'objet et le message suivant """
+
+    from_email = 'tigran.wattrelos@outlook.fr'  # Mettre le mail dans une variable d'environement
+    recipient_list = liste_destinataire
+    send_mail(subject, message, from_email, recipient_list)
 
 @login_required
 def create_pdf(request,id):
+    """Cree le pdf quand on cree un depot en utilisant la ref_de _commande associé"""
     buffer = io.BytesIO()
     p = canvas.Canvas(buffer)
     depot_var = depot.objects.get(numero_depot=id)
@@ -31,31 +37,50 @@ def create_pdf(request,id):
     p.showPage()
     p.save()
     buffer.seek(0)
-    return FileResponse(buffer, as_attachment=True, filename="hello.pdf")
+    return FileResponse(buffer, as_attachment=True, filename=f"{id}.pdf")
+
 
 @login_required()
 def create_client(request):
     if request.method == 'POST':
         form = form_input(request.POST)
         if form.is_valid():
-            depot = form.save(commit = False)
-            depot.first_name_seller = request.user.first_name
-            depot.last_name_seller = request.user.last_name
+            client = depot(
+            mode_envoi=form.cleaned_data['mode_envoi'][0],
+            designation=form.cleaned_data['designation'][0],
+            name=form.cleaned_data['nom'],
+            first_name=form.cleaned_data['first_name'],
+            telephone=form.cleaned_data['telephone'],
+            email=form.cleaned_data['email'],
+            mdp_windows=form.cleaned_data['mdp_windows'],
+            probleme=form.cleaned_data['probleme'],
+            ref_commande=form.cleaned_data['ref_commande'],
+            carton = form.cleaned_data['carton'],
+            alimentation = form.cleaned_data['alimentation'],
+            reinitialisation = form.cleaned_data['reinitialisation']
+            )
+
+            print(client.mode_envoi[0])
+            client.first_name_seller = request.user.first_name
+            client.last_name_seller = request.user.last_name
 
             today = date.today()    
-            depot.date = today.strftime("%Y-%m-%d")
-            depot.save()
-            "Envoie mail reception"
-            subject = 'Test Email'
-            message = config['email']['message_prise_en_charge']
-            from_email = config['email']['adresse_email']
-            recipient_list = [depot.email]
-            send_mail(subject, message, from_email, recipient_list)
-            "Print un message comme quoi c'est bien passé"
-            return redirect(f'/pdf/{depot.numero_depot}')
-        else : 
-            print(form.errors)
+            client.date = today.strftime("%Y-%m-%d")
 
+            client.save()
+
+            # Envoie d'un mail
+            objet_mail = "Pris en charge de votre ordinateur par nos équipe"
+            message_mail = "Votre PC à bien été pris en charge par nos équipes."
+
+            envoi_mail([client.email],objet_mail, message_mail )
+
+            "Print un message comme quoi ça c'est bien passé"
+
+            return redirect(f'/pdf/{client.numero_depot}') #Renvoie le pdf, mais après le pdf faudrait qu'il cleane la page de creation de depot
+
+        else:
+            print (form.errors)
     else :
         form = form_input()
 
@@ -117,19 +142,28 @@ def create_user(request):
 ### Vue pour chercher des clients######
 @login_required
 def afficher_client(request):
+    """ Recherche les depots dans la base de données en fonction des champs renseigné par l'utilisateur, si aucun champs n'est renseigné, cela renvoie tout les clients"""
     if request.method == 'POST':
         form = afficher_client_form(request.POST)
+        
         if form.is_valid():
 
+            clients = depot.objects.all()
+                    #On renseigne tout les champs du formulaire
             name = form.cleaned_data['name']
             ref = form.cleaned_data['ref_commande']
             first_name = form.cleaned_data['first_name']
-            clients = depot.objects.filter(ref_commande__contains = ref,name__contains = name, first_name__contains = first_name)
-         
-    else :
-        form = afficher_client_form()
+            telephone = form.cleaned_data['telephone']
+            email = form.cleaned_data['email']
+            numero_depot = form.cleaned_data['numero_depot']
 
-    clients = depot.objects.all()
+            clients = depot.objects.filter(ref_commande__contains = ref,name__contains = name, first_name__contains = first_name,telephone__contains = telephone, email__contains = email, numero_depot__contains = numero_depot)
+        
+        ### Si aucun clients n'est trouvé alors cela retourne toute la BD###           
+    else:
+        clients = depot.objects.all()
+        form = afficher_client_form()
+    
     return render(request,"listings/recherche_depot.html",{"form":form,'clients':clients,})
 
 @login_required
@@ -141,7 +175,7 @@ def modif_depot(request,id):
         if form.is_valid():
             statut_form = depot_var.statut
 
-###Envoi d'email
+            ###Envoi d'email
             if  statut_form =='TR' and  depot_var.mail_envoyee == 'RC' :
                 subject = 'Test Email'
                 message = config['email']['message_en_traitement']
@@ -169,11 +203,11 @@ def modif_depot(request,id):
 def depot_tech(request,id):
     depot_var = depot.objects.get(numero_depot=id)
     if request.method == 'POST':
-        form = form_modif_tech(request.POST,instance=depot_var)    
+        form = depot_tech(request.POST,instance=depot_var)    
         form.save()
 
     else:
-        form = form_modif_tech(instance=depot_var)
+        form = depot_tech(instance=depot_var)
 
     return render (request,'listings/interface_tech.html',{'form':form})
 

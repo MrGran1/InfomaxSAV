@@ -9,9 +9,7 @@
         <meta name="description" content="Création de bons de dépôt"/>
         <link rel="stylesheet" href="{% static 'admin/css/style_bd.css' %}">
         <title>Création de bons de dépôt</title>
-
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    </head>
+            </head>
     <body>
         <header>
                 {% include "vraitemplate/haut_de_page.html" %}
@@ -19,73 +17,80 @@
         <main >
             <h2>Créer un bon de dépôt</h2>
 
-        <form class="grid-form" action ='' method="post" novalidate>
+        <form class="grid-form"  method="post" novalidate>
             {% csrf_token %}
-            <div class="form-field nom">
-                <label for="{{ form.name.id_for_label }}" id="Nom">Nom:</label>
-                {{ form.name }}
+
+            <div class="nom">
+                <label for="{{ form.nom.id_for_label }}" id="Nom">Nom:</label>
+                {{ form.nom }}
             </div>
-            <div class="form-field prenom">
+            <div class="prenom">
                 <label for="{{ form.first_name.id_for_label }}" id="Prénom">Prénom:</label>
                 {{ form.first_name }}
             </div>
-            <div class="form-field telephone">
+            <div class="telephone">
                 <label for=" {{ form.telephone.id_for_label }}" id="Téléphone">Téléphone:</label>
                 {{ form.telephone }}
             </div>
-            <div class="form-field email">
+            <div class="email">
                 <label for="{{ form.email.id_for_label }}" id="Email">Email:</label>
                 {{ form.email }}
             </div>
-            <div class="form-field mdp">
+            <div class="mdp">
                 <label for="{{ form.mdp_windows.id_for_label }}" id="mdp windows">mot de passe Windows:</label>
                 {{ form.mdp_windows }}
             </div>
-            <div class="form-field probleme">
+            <div class="probleme">
                 <label for="{{ form.probleme.id_for_label }}" id="description">description du problème:</label>
                 {{ form.probleme }}
             </div>
             
             <div class="checkbox">
-                <div class="case carton">
+                <div class=" carton">
                     <label for="{{ form.carton.id_for_label }}" id="carton">carton ?</label>
                     <input type="checkbox" name="{{ form.carton.name }}" />
                 </div>
-                <div class="case alimentation">
+                <div class="alimentation">
                     <label for="{{ form.alimentation.id_for_label }}" id="alimentation">câble d'alimentation ?</label>
                     <input type="checkbox" name="{{ form.alimentation.name }}" />
                 </div>
-                <div class="case reinitialisation">
+                <div class="reinitialisation">
                     <label for="{{ form.reinitialisation.id_for_label }}" id="reinitialisation">réinitialisation ?</label>
                     <input type="checkbox" name="{{ form.reinitialisation.name }}"/>
                 </div>
             </div>
             
-            <div class="form-field ref_commande">
+            <div class="ref_commande">
                 <label for="{{ form.ref_commande.id_for_label }}" id="ref de commande">référence de commande:</label>
-                <input type="text" name="{{ form.ref_commande.name }}" placeholder="référence presta et CDC"/>
+                <input class="ref_commande" type="text" name="{{ form.ref_commande.name }}" placeholder="référence presta et CDC"/>
             </div>
            
            
-            <div class="form-field designation">
+            <div class="designation">
                 <label for="{{ form.designation.id_for_label }}" id="designation">designation:</label>
-                <select for="{{ form.designation_choix.id_for_label }}"  name="{{ form.designation_choix.name }}" >
-
-                    {% for value, label in form.designation.field.choices %}
+                <select  class="designation" for="{{ form.designation_choix.id_for_label }}"  name="{{ form.designation_choix.name }}" >
+                    <option value=''>---------</option>
+                    <option value='PO'>Laptop</option>
+                    <option value='CO'>Config</option>
+                    <option value='AR'>Article</option>
+                    {% for value, label in form.designation.choices %}
             <option value="{{ value }}" {% if form.designation.value == value %}selected{% endif %}>{{ label }}</option>
         {% endfor %}
                 </select>
             </div>
 
-            <div class="form-field mode_envoi">
+            <div class="mode_envoi">
                 <label for="{{ form.mode_envoi.id_for_label }}" id="mode envoi">mode d'envoi:</label>
-                <select for="{{ form.mode_envoi.id_for_label }}"  name="{{ form.designation_choix.name }}" >
-
-                    {% for value, label in form.mode_envoi.field.choices %}
+                <select class=" mode_envoi" for="{{ form.mode_envoi.id_for_label }}"  name="{{ form.designation_choix.name }}" >
+                    <option value=''>---------</option>
+                    <option value='PO'>Retrait</option>
+                    <option value='CO'>Expédition</option>
+                    {% for value, label in form.mode_envoi.choices %}
             <option value="{{ value }}" {% if form.mode_envoi.value == value %}selected{% endif %}>{{ label }}</option>
         {% endfor %}
                 </select>
             </div>
+          
 
             <input class="valider" type = "submit" value="valider">
 

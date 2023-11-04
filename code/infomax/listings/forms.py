@@ -30,15 +30,42 @@ envoi_choix = [
 
 
 class form_input(forms.Form):
-    mode_envoi= forms.MultipleChoiceField(choices=envoi_choix, widget=forms.SelectMultiple(attrs={'class':'custom-select'}))
-    designation= forms.MultipleChoiceField(choices=designation_choix, widget=forms.SelectMultiple(attrs={'class':'custom-select'}))
-    name= forms.CharField(max_length=50)
-    first_name= forms.CharField(max_length=50)
-    telephone= forms.CharField(max_length=50)
-    email= forms.EmailField(max_length=100)
-    mdp_windows= forms.CharField(max_length=50)
-    probleme= forms.CharField(max_length=500)
-    ref_commande= forms.CharField(max_length=50)
+    mode_envoi= forms.ChoiceField(choices=envoi_choix, widget=forms.Select(
+        attrs={'class':'mode_envoi'}))
+        
+    designation= forms.ChoiceField(choices=designation_choix, widget=forms.Select(
+        attrs={'class':'designation'}))
+        
+    nom= forms.CharField(max_length=50, widget=forms.TextInput (
+        attrs={'class':'nom'}))
+        
+    first_name= forms.CharField(max_length=50, widget=forms.TextInput (
+        attrs={'class':'prenom'}))
+        
+    telephone= forms.CharField(max_length=50, widget=forms.TextInput (
+        attrs={'class':'telephone'}))
+        
+    email= forms.EmailField(max_length=100, widget=forms.EmailInput (
+        attrs={'class':'email'}))
+        
+    mdp_windows= forms.CharField(max_length=50, widget=forms.TextInput (
+        attrs={'class':'mdp'}),required=False)
+        
+    probleme= forms.CharField(max_length=500, widget=forms.Textarea (
+        attrs={'class':'probleme', 'rows':'8'}))
+        
+    ref_commande= forms.CharField(max_length=50, widget=forms.TextInput (
+        attrs={'class':'ref_commande'}))
+        
+    carton= forms.BooleanField (widget = forms.CheckboxInput (
+        attrs={'class':'carton'}),required=False)
+        
+    alimentation=  forms.BooleanField (widget = forms.CheckboxInput (
+        attrs={'class':'alimentation'}),required=False)
+        
+    reinitialisation=  forms.BooleanField (widget = forms.CheckboxInput (
+        attrs={'class':'reinitialisation' }),required=False)
+        
 
 
 
@@ -69,6 +96,9 @@ class afficher_client_form(forms.Form):
     ref_commande = forms.CharField(max_length=100,required=False)
     name = forms.CharField(max_length=100,required=False)
     first_name = forms.CharField(max_length=100,required=False)
+    telephone = forms.CharField(max_length=100, required=False)
+    email = forms.CharField(max_length=100, required=False)
+    numero_depot = forms.CharField(max_length=100, required=False)
 
 
 
