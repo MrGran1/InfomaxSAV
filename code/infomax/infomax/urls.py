@@ -26,7 +26,7 @@ urlpatterns = [
     path('logout/' , views.logout_view,name = 'logout'),
     path('create_user/', views.create_user,name = "creation_user" ),
     path('home/', views.home ),
-    path('afficher/', views.afficher_client, name = 'afficher'),
+    path('afficher_depot/', views.afficher_client, name = 'afficher'),
     path('depot_com/<int:id>', views.modif_depot, name = 'depot_modif_com'),
     path('depot_tech/<int:id>', views.depot_tech, name = 'depot_modif_tec'),
     path('pdf/<int:id>', views.create_pdf),

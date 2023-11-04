@@ -33,19 +33,11 @@ def create_pdf(request,id):
     buffer.seek(0)
     return FileResponse(buffer, as_attachment=True, filename="hello.pdf")
 
-
-# Create your views here.
-@login_required
-def hello(request):
-    return HttpResponse("<h1>Hllo</h1>")
-
-
 @login_required()
 def create_client(request):
     if request.method == 'POST':
         form = form_input(request.POST)
         if form.is_valid():
-            print("oui")
             depot = form.save(commit = False)
             depot.first_name_seller = request.user.first_name
             depot.last_name_seller = request.user.last_name
@@ -147,7 +139,7 @@ def modif_depot(request,id):
     if request.method == 'POST':
         form = client_form(request.POST,instance=depot_var)
         if form.is_valid():
-            statut_form = form.cleaned_data['statut']
+            statut_form = depot_var.statut
 
 ###Envoi d'email
             if  statut_form =='TR' and  depot_var.mail_envoyee == 'RC' :
@@ -200,7 +192,6 @@ def supprimer_user(request, username):
         return redirect('/home')
 
     # pas besoin de « else » ici. Si c'est une demande GET, continuez simplement
-
     return render(request,
                     'listings/delete_user.html',
                     {'user': user_to_del})
