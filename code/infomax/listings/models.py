@@ -49,10 +49,10 @@ class depot(models.Model):
 ### Relatif à l'ordi
     mdp_windows = models.fields.CharField(max_length=50,blank = True, null = True, default = None)
     probleme = models.fields.TextField(max_length=500,blank = True,default = None)
-    carton = models.fields.BooleanField(default=False, null =True)
-    alimentation = models.fields.BooleanField(default=False, null=True)
-    piece_a_modifier = models.fields.CharField(max_length=100,null = True,default = "")
+    carton = models.fields.BooleanField(default=False,blank =True)
+    alimentation = models.fields.BooleanField(default=False,blank=True)
     reinitialisation = models.fields.BooleanField(default=False,blank=True)
+    piece_a_modifier = models.fields.CharField(max_length=100,null = True,default = "")
 
 ## Relatif au dépot
 

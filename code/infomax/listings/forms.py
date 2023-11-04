@@ -31,7 +31,7 @@ envoi_choix = [
 
 class form_input(forms.Form):
     mode_envoi= forms.ChoiceField(choices=envoi_choix, widget=forms.Select(
-        attrs={'class':'mode_envoi'}))
+        attrs={}))
         
     designation= forms.ChoiceField(choices=designation_choix, widget=forms.Select(
         attrs={'class':'designation'}))
@@ -70,17 +70,29 @@ class form_input(forms.Form):
 
 
 class client_form(forms.ModelForm):
-    
-    class Meta(forms.ModelForm):
-        model = depot
-        exclude = ('numero_depot','first_name_seller','last_name_seller','date','mail_envoyee','commentaire','piece_a_modifier','statut')
+        
+    nom= forms.CharField(max_length=50, widget=forms.TextInput (
+            attrs={'class':'nom'}))
+            
+    first_name= forms.CharField(max_length=50, widget=forms.TextInput (
+            attrs={'class':'prenom'}))
+            
+    telephone= forms.CharField(max_length=50, widget=forms.TextInput (
+            attrs={'class':'telephone'}))
+            
+    email= forms.EmailField(max_length=100, widget=forms.EmailInput (
+            attrs={'class':'email'}))
+    probleme= forms.CharField(max_length=500, widget=forms.Textarea (
+            attrs={'class':'probleme', 'rows':'8'}))
+            
+    ref_commande= forms.CharField(max_length=50, widget=forms.TextInput (
+            attrs={'class':'ref_commande'}))
 
-
-class form_modif_tech(forms.ModelForm):
+    class form_modif_tech(forms.ModelForm):
     
-    class Meta(forms.ModelForm):
-        model = depot
-        fields = ('commentaire','piece_a_modifier','statut','mdp_windows')    
+        class Meta(forms.ModelForm):
+            model = depot
+            fields = ('commentaire','piece_a_modifier','statut','mdp_windows')    
 
 class user_form(forms.ModelForm):
     class Meta:
