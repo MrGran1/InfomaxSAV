@@ -1,0 +1,5 @@
+mail :
+  adresse_email : tigran.wattrelos@outlook.fr
+  message_prise_en_charge : "Votre colis à bien été pris en charge"
+  message_en_traitement : "Votre colis est en cours de traitement par nos techniciens"
+  message_recuperation : "Votre colis est prêt à être récupérer."

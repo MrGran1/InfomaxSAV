@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from listings.forms import client_form, user_form, afficher_client_form,modif_client_form_tec
+from listings.forms import client_form, user_form, afficher_client_form,form_modif_tech
 from listings.models import depot,CustomUser
 from listings import views
 from django.contrib.auth.decorators import login_required,user_passes_test
@@ -15,6 +15,7 @@ from django.http import FileResponse
 from .forms import form_input
 
 HOME = '/home'
+config = open("/home/tigran/Documents/InfomaxSAV/code/infomax/listings/configuration.yaml",'r')
 
 @login_required
 def create_pdf(request,id):
@@ -54,8 +55,8 @@ def create_client(request):
             depot.save()
             "Envoie mail reception"
             subject = 'Test Email'
-            message = 'Le colis est pris en charge par nos équipes'
-            from_email = 'tigran.wattrelos@outlook.fr'
+            message = config['email']['message_prise_en_charge']
+            from_email = config['email']['adresse_email']
             recipient_list = [depot.email]
             send_mail(subject, message, from_email, recipient_list)
             "Print un message comme quoi c'est bien passé"
@@ -127,26 +128,18 @@ def afficher_client(request):
     if request.method == 'POST':
         form = afficher_client_form(request.POST)
         if form.is_valid():
-            
 
-            
             name = form.cleaned_data['name']
             ref = form.cleaned_data['ref_commande']
             first_name = form.cleaned_data['first_name']
             clients = depot.objects.filter(ref_commande__contains = ref,name__contains = name, first_name__contains = first_name)
-        
-        ### Si un champs est renseigné et le client existe ########
-            if ((len(name)!=0 or len(ref)!=0 or len(first_name)!=0)):
-                return render(request,"listings/afficher_depot.html",{"form":form,'clients':clients,})
-
-        ### Si aucun champ n'est renseigné ### 
-            else :
-                return render(request,"listings/afficher_depot_erreur_champs.html",{"form":form})
-        ### Sinon si le client n'existe pas ###           
+         
     else :
         form = afficher_client_form()
-    
-    return render(request,"listings/afficher_depot_blank.html",{"form":form})
+
+    clients = depot.objects.all()
+    return render(request,"listings/recherche_depot.html",{"form":form,'clients':clients,})
+
 @login_required
 def modif_depot(request,id):
     depot_var = depot.objects.get(numero_depot=id)
@@ -159,8 +152,8 @@ def modif_depot(request,id):
 ###Envoi d'email
             if  statut_form =='TR' and  depot_var.mail_envoyee == 'RC' :
                 subject = 'Test Email'
-                message = 'Le colis est en traitement par les techniciens'
-                from_email = 'tigran.wattrelos@outlook.fr'
+                message = config['email']['message_en_traitement']
+                from_email = config['email']
                 recipient_list = [depot_var.email]
                 send_mail(subject, message, from_email, recipient_list)
                 depot_var.mail_envoyee = 'TR'
@@ -168,8 +161,8 @@ def modif_depot(request,id):
 
             elif statut_form =='TM' and  (depot_var.mail_envoyee == 'RC' or depot_var.mail_envoyee == 'TR'):
                 subject = 'Test Email'
-                message = 'Le colis est pret à etre récuperer'
-                from_email = 'tigran.wattrelos@outlook.fr'
+                message = config['mail']['message_recuperation']
+                from_email = config['mail']['adresse_email']
                 recipient_list = [depot_var.email]
                 send_mail(subject, message, from_email, recipient_list)
                 depot_var.mail_envoyee = 'TM'
@@ -184,11 +177,11 @@ def modif_depot(request,id):
 def depot_tech(request,id):
     depot_var = depot.objects.get(numero_depot=id)
     if request.method == 'POST':
-        form = modif_client_form_tec(request.POST,instance=depot_var)    
+        form = form_modif_tech(request.POST,instance=depot_var)    
         form.save()
 
     else:
-        form = modif_client_form_tec(instance=depot_var)
+        form = form_modif_tech(instance=depot_var)
 
     return render (request,'listings/interface_tech.html',{'form':form})
 
