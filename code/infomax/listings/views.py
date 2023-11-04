@@ -15,7 +15,7 @@ from django.http import FileResponse
 #from .forms import form_input
 
 HOME = '/home'
-config = open("/home/theophile/Bureau/InfomaxSAV/code/infomax/listings/configuration.yaml","r")
+config = open("./listings/configuration.yaml","r")
 def envoi_mail(liste_destinataire, subject, message):
     """ Envoie un mail à tout les destinataires avec l'objet et le message suivant """
 
