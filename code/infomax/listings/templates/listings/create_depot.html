@@ -68,26 +68,20 @@
            
             <div class="designation">
                 <label for="{{ form.designation.id_for_label }}" id="designation">designation:</label>
-                <select  class="designation" for="{{ form.designation_choix.id_for_label }}"  name="{{ form.designation_choix.name }}" >
+                <select  class="designation" for="{{ form.designation.id_for_label }}"  name="{{ form.designation.name }}" >
                     <option value=''>---------</option>
                     <option value='PO'>Laptop</option>
                     <option value='CO'>Config</option>
                     <option value='AR'>Article</option>
-                    {% for value, label in form.designation.choices %}
-            <option value="{{ value }}" {% if form.designation.value == value %}selected{% endif %}>{{ label }}</option>
-        {% endfor %}
                 </select>
             </div>
 
             <div class="mode_envoi">
                 <label for="{{ form.mode_envoi.id_for_label }}" id="mode envoi">mode d'envoi:</label>
-                <select class=" mode_envoi" for="{{ form.mode_envoi.id_for_label }}"  name="{{ form.designation_choix.name }}" >
+                <select class="mode_envoi" for="{{ form.mode_envoi.id_for_label }}"  name="{{ form.mode_envoi.name }}" >
                     <option value=''>---------</option>
-                    <option value='PO'>Retrait</option>
-                    <option value='CO'>Expédition</option>
-                    {% for value, label in form.mode_envoi.choices %}
-            <option value="{{ value }}" {% if form.mode_envoi.value == value %}selected{% endif %}>{{ label }}</option>
-        {% endfor %}
+                    <option value='RE'>Retrait</option>
+                    <option value='EX'>Expédition</option>
                 </select>
             </div>
           
