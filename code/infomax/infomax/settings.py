@@ -57,7 +57,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'code', 'infomax', 'listings', 'templates', 'vraitemplate' )
+            os.path.join(BASE_DIR, 'code/infomax/listings/templates/vraitemplate' )
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -122,7 +122,11 @@ LOGIN_URL = 'login'
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join (BASE_DIR, 'static')
+STATIC_ROOT = os.path.join (BASE_DIR, 
+                            'code/infomax/static/admin/css/style_bd.css'
+                            'code/infomax/static/admin/css/haut_de_page.css'
+                            'code/infomax/static/admin/css/recherche_depot.css')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

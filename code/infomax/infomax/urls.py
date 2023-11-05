@@ -18,6 +18,9 @@ from django.urls import path
 from listings import views
 from django.contrib.auth import views as auth_views
 from listings.views import login_view 
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
