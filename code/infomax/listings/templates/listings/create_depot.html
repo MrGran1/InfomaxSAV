@@ -20,28 +20,28 @@
         <form class="grid-form"  method="post" novalidate>
             {% csrf_token %}
 
-            <div class="nom">
-                <label for="{{ form.nom.id_for_label }}" id="Nom">Nom:</label>
+            <div class="nom field-style">
+                <label for="{{ form.nom.id_for_label }}" id="Nom">Nom:</label><br>
                 {{ form.nom }}
             </div>
-            <div class="prenom">
-                <label for="{{ form.first_name.id_for_label }}" id="Prénom">Prénom:</label>
+            <div class="prenom field-style">
+                <label for="{{ form.first_name.id_for_label }}" id="Prénom">Prénom:</label><br>
                 {{ form.first_name }}
             </div>
-            <div class="telephone">
-                <label for=" {{ form.telephone.id_for_label }}" id="Téléphone">Téléphone:</label>
+            <div class="telephone field-style">
+                <label for=" {{ form.telephone.id_for_label }}" id="Téléphone">Téléphone:</label><br>
                 {{ form.telephone }}
             </div>
-            <div class="email">
-                <label for="{{ form.email.id_for_label }}" id="Email">Email:</label>
+            <div class="email field-style">
+                <label for="{{ form.email.id_for_label }}" id="Email">Email:</label><br>
                 {{ form.email }}
             </div>
-            <div class="mdp">
-                <label for="{{ form.mdp_windows.id_for_label }}" id="mdp windows">mot de passe Windows:</label>
+            <div class="mdp field-style">
+                <label for="{{ form.mdp_windows.id_for_label }}" id="mdp windows">mot de passe Windows:</label><br>
                 {{ form.mdp_windows }}
             </div>
-            <div class="probleme">
-                <label for="{{ form.probleme.id_for_label }}" id="description">description du problème:</label>
+            <div class="probleme big-field-style">
+                <label for="{{ form.probleme.id_for_label }}" id="description">description du problème:</label><br>
                 {{ form.probleme }}
             </div>
             
@@ -60,14 +60,14 @@
                 </div>
             </div>
             
-            <div class="ref_commande">
-                <label for="{{ form.ref_commande.id_for_label }}" id="ref de commande">référence de commande:</label>
+            <div class="ref_commande field-style">
+                <label for="{{ form.ref_commande.id_for_label }}" id="ref de commande">référence de commande:</label><br>
                 <input class="ref_commande" type="text" name="{{ form.ref_commande.name }}" placeholder="référence presta et CDC"/>
             </div>
            
            
-            <div class="designation">
-                <label for="{{ form.designation.id_for_label }}" id="designation">designation:</label>
+            <div class="designation field-style">
+                <label for="{{ form.designation.id_for_label }}" id="designation">designation:</label><br>
                 <select  class="designation" for="{{ form.designation.id_for_label }}"  name="{{ form.designation.name }}" >
                     <option value=''>---------</option>
                     <option value='PO'>Laptop</option>
@@ -76,8 +76,8 @@
                 </select>
             </div>
 
-            <div class="mode_envoi">
-                <label for="{{ form.mode_envoi.id_for_label }}" id="mode envoi">mode d'envoi:</label>
+            <div class="mode_envoi field-style">
+                <label for="{{ form.mode_envoi.id_for_label }}" id="mode envoi">mode d'envoi:</label><br>
                 <select class="mode_envoi" for="{{ form.mode_envoi.id_for_label }}"  name="{{ form.mode_envoi.name }}" >
                     <option value=''>---------</option>
                     <option value='RE'>Retrait</option>

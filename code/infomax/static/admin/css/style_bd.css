@@ -17,22 +17,39 @@ form{
     display: grid ;
     grid-template-columns: repeat(4,250px);
     grid-column-gap: 1px;
-    grid-template-rows: repeat(2 ,50px) repeat(3,20px) 150px 40px;
-    grid-row-gap: 20px;
+    grid-template-rows: repeat(2 ,50px) repeat(3,10px) 150px ;
+    grid-row-gap: 45px;
 }
 /* -----contenu----- */
 
-.form-field{
-    display: grid;
-    grid-template-rows: auto 1fr;
-}
 
-.nom{
+.nom input{
     grid-row: 1;
     grid-column: 1;
+}
+
+.styled-field {
+    display: flex;
+    flex-direction: column;
     width: 200px;
 }
 
+.field-style input select{
+    width: 200px;
+    height: 40px;
+    border-radius: 7px;
+    border-style: hidden;
+    background-color: red;
+    margin-top:10px;
+}
+
+.field-style label{
+    width: 300px;
+}
+
+.big-field-style input{
+    width: 800px;
+}
 .prenom{ 
     grid-row: 1;
     grid-column: 2;
@@ -100,12 +117,13 @@ form{
 
 .probleme{
     grid-row: 6;
-    grid-column: 1 /span 3;
-    margin-top: 40px;
+    grid-column-start: 1;
+    grid-column-end:3;
+    margin-top: 10px;
 }
 
 .valider{
-    grid-row: 7;
+    grid-row: 6;
     grid-column: 4;
 }
 
