@@ -37,7 +37,7 @@ class form_input(forms.Form):
         attrs={'class':'designation'}))
         
     nom= forms.CharField(max_length=50, widget=forms.TextInput (
-        attrs={'class':'nom''styled-field'}))
+        attrs={'class':'nom'}))
         
     first_name= forms.CharField(max_length=50, widget=forms.TextInput (
         attrs={'class':'prenom'}))
@@ -52,7 +52,7 @@ class form_input(forms.Form):
         attrs={'class':'mdp'}),required=False)
         
     probleme= forms.CharField(widget=forms.Textarea (
-        attrs={'class':'probleme', 'rows':'8', 'cols':'100'}))
+        attrs={'class':'probleme big-field-style', 'rows':'8', 'cols':'100'}))
         
     ref_commande= forms.CharField(max_length=50, widget=forms.TextInput (
         attrs={'class':'ref_commande'}))

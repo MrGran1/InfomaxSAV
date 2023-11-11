@@ -16,40 +16,67 @@ form{
 .grid-form{
     display: grid ;
     grid-template-columns: repeat(4,250px);
-    grid-column-gap: 1px;
+    grid-column-gap: 35px;
     grid-template-rows: repeat(2 ,50px) repeat(3,10px) 150px ;
     grid-row-gap: 45px;
 }
 /* -----contenu----- */
 
 
-.nom input{
-    grid-row: 1;
-    grid-column: 1;
-}
 
-.styled-field {
+.field-style {
     display: flex;
     flex-direction: column;
     width: 200px;
+    height: 70px;
 }
 
-.field-style input select{
+.field-style input {
     width: 200px;
-    height: 40px;
+    height: 70px;
     border-radius: 7px;
     border-style: hidden;
-    background-color: red;
+    background-color: #e6e6ff;
     margin-top:10px;
+    padding: 10px;
+    box-shadow: inset 0 0 1em whitesmoke,
+    0 0 2em white;
+}
+
+.field-style select{
+    width: 110%;
+    height: 70px;
+    border-radius: 7px;
+    border-style: hidden;
+    background-color: #e6e6ff;
+    margin-top:10px;
+    box-shadow: inset 0 0 1em whitesmoke,
+    0 0 2em white;
 }
 
 .field-style label{
     width: 300px;
 }
 
-.big-field-style input{
-    width: 800px;
+.big-field-style {
+    border-radius: 7px;
+    border-style: hidden;
 }
+
+.big-field-style textarea{
+    background-color: #e6e6ff;
+    box-shadow: inset 0 0 1em whitesmoke,
+    0 0 2em white;
+    padding: 10px;
+    width: 100%;
+}
+
+
+.nom {
+    grid-row: 1;
+    grid-column: 1;
+}
+
 .prenom{ 
     grid-row: 1;
     grid-column: 2;
@@ -118,13 +145,29 @@ form{
 .probleme{
     grid-row: 6;
     grid-column-start: 1;
-    grid-column-end:3;
-    margin-top: 10px;
+    grid-column-end:4;
 }
 
 .valider{
     grid-row: 6;
     grid-column: 4;
+    width: 150px;
+    height: 90px;
+    margin: auto;
+    box-shadow: inset 0 0 1em whitesmoke,
+    0 0 2em white;
+    background-color: limegreen;
+    border-style: hidden;
+    border-radius: 12px;
+    transition: 0.8s;
+}
+
+.valider:hover{
+    background-color: rgb(11, 147, 11);
+    color: whitesmoke;
+    height: 60px;
+    width: 200px;
+    cursor: pointer;
 }
 
 .checkbox{
