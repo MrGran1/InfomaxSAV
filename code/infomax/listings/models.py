@@ -58,7 +58,7 @@ class depot(models.Model):
 
    
     total_a_payer = models.fields.IntegerField(validators = [MinValueValidator(0)],default = 0)
-    numero_depot = models.fields.IntegerField(primary_key=True)
+    numero_depot = models.fields.AutoField(primary_key=True)
     date = models.fields.DateField(default=2020)
     statut = models.fields.CharField(choices = statut_choix ,max_length=100,null = False ,default = "RC")
     mail_envoyee = models.fields.CharField(choices = statut_choix ,max_length=100,null = False ,default = "RC")

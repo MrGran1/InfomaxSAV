@@ -26,23 +26,6 @@ def envoi_mail(liste_destinataire, subject, message):
     recipient_list = liste_destinataire
     send_mail(subject, message, from_email, recipient_list)
 
-@login_required
-def create_pdf(request,id):
-    """Cree le pdf quand on cree un depot en utilisant la ref_de _commande associé"""
-    buffer = io.BytesIO()
-    p = canvas.Canvas(buffer)
-    depot_var = depot.objects.get(numero_depot=id)
-    marge = 780
-    p.drawString(250, 800, "Bon de dépot")
-    for field in str(depot_var._meta.get_fields):
-        marge -= 20
-        p.drawString(100, marge, str(field))
-
-    p.showPage()
-    p.save()
-    buffer.seek(0)
-    return FileResponse(buffer, as_attachment=True, filename=f"{id}.pdf")
-
 class PDF(LoginRequiredMixin, PDFView):
     """Generate labels for some Shipments.
 
@@ -93,11 +76,8 @@ def create_client(request):
             message_mail = "Votre PC à bien été pris en charge par nos équipes."
 
             envoi_mail([client.email],objet_mail, message_mail )
-
-            "Print un message comme quoi ça c'est bien passé"
-
-            #return redirect(f'/pdf/{client.numero_depot}') #Renvoie le pdf, mais après le pdf faudrait qu'il cleane la page de creation de depot
-            return redirect(f'/pdf/{client.id}')
+            print("num : ",client.numero_depot)
+            return redirect(f'/pdf/{client.numero_depot}')
         else:
             print (form.errors)
     else :
