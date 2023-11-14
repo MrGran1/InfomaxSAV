@@ -32,7 +32,7 @@ urlpatterns = [
     path('afficher_depot/', views.afficher_client, name = 'afficher'),
     path('depot_com/<int:id>', views.modif_depot, name = 'depot_modif_com'),
     path('depot_tech/<int:id>', views.depot_tech, name = 'depot_modif_tec'),
-    path('pdf/', views.create_pdf2),
+    path('pdf/<int:id>', views.PDF.as_view()),
     path('afficher_users/', views.afficher_user),
     path('supprimer_user/<str:username>', views.supprimer_user, name = 'supprimer_user')
 ]

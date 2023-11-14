@@ -12,8 +12,8 @@ from django.core.mail import send_mail
 from reportlab.pdfgen import canvas
 import io
 from django.http import FileResponse
-import pdfkit 
-
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django_renderpdf.views import PDFView
 #from .forms import form_input
 
 HOME = '/home'
@@ -43,8 +43,21 @@ def create_pdf(request,id):
     buffer.seek(0)
     return FileResponse(buffer, as_attachment=True, filename=f"{id}.pdf")
 
-def create_pdf2(request):
-    pdfkit.from_url('http://127.0.0.1:8000/add/','out.pdf')
+class PDF(LoginRequiredMixin, PDFView):
+    """Generate labels for some Shipments.
+
+    A PDFView behaves pretty much like a TemplateView, so you can treat it as such.
+    """
+    template_name = 'listings/pdf.html'
+
+    def get_context_data(self, *args, **kwargs):
+        """Pass some extra context to the template."""
+        context = super().get_context_data(*args, **kwargs)
+        depot_var = depot.objects.get(numero_depot=kwargs['id'])
+        print(depot_var)
+        context['depot'] = depot_var
+
+        return context
                     
 @login_required()
 def create_client(request):

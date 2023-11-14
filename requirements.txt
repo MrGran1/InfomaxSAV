@@ -1,0 +1,22 @@
+asgiref==3.7.2
+Brotli==1.1.0
+cffi==1.16.0
+cssselect2==0.7.0
+Django==4.2.7
+django-renderpdf==4.0.0
+fonttools==4.44.0
+html5lib==1.1
+pdfkit==1.0.0
+Pillow @ file:///croot/pillow_1696580024257/work
+pycparser==2.21
+pydyf==0.8.0
+pyphen==0.14.0
+PyYAML==6.0.1
+reportlab @ file:///work/ci_py311/reportlab_1676861813669/work
+six==1.16.0
+sqlparse @ file:///croot/sqlparse_1690901927333/work
+tinycss2==1.2.1
+weasyprint==60.1
+webencodings==0.5.1
+wkhtmltopdf==0.2
+zopfli==0.2.3
