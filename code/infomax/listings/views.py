@@ -12,10 +12,13 @@ from django.core.mail import send_mail
 from reportlab.pdfgen import canvas
 import io
 from django.http import FileResponse
+import pdfkit 
+
 #from .forms import form_input
 
 HOME = '/home'
 config = open("./listings/configuration.yaml","r")
+
 def envoi_mail(liste_destinataire, subject, message):
     """ Envoie un mail à tout les destinataires avec l'objet et le message suivant """
 
@@ -40,7 +43,9 @@ def create_pdf(request,id):
     buffer.seek(0)
     return FileResponse(buffer, as_attachment=True, filename=f"{id}.pdf")
 
-
+def create_pdf2(request):
+    pdfkit.from_url('http://127.0.0.1:8000/add/','out.pdf')
+                    
 @login_required()
 def create_client(request):
     if request.method == 'POST':
@@ -78,8 +83,8 @@ def create_client(request):
 
             "Print un message comme quoi ça c'est bien passé"
 
-            return redirect(f'/pdf/{client.numero_depot}') #Renvoie le pdf, mais après le pdf faudrait qu'il cleane la page de creation de depot
-
+            #return redirect(f'/pdf/{client.numero_depot}') #Renvoie le pdf, mais après le pdf faudrait qu'il cleane la page de creation de depot
+            return redirect(f'/pdf/{client.id}')
         else:
             print (form.errors)
     else :
@@ -208,9 +213,9 @@ def depot_tech(request,id):
         form.save()
 
     else:
-        form = depot_tech(instance=depot_var)
+        form = form_modif_tech(instance=depot_var)
 
-    return render (request,'listings/interface_tech.html',{'form':form})
+    return render (request,'listings/modif_tech.html',{'form':form})
 
 
 def afficher_user(request):

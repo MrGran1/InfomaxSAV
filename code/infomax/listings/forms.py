@@ -68,7 +68,9 @@ class form_input(forms.Form):
         
 
 class client_form(forms.ModelForm):
-        
+    class Meta:
+         model = depot
+         fields = ["name","first_name","telephone","email","probleme","ref_commande"]
     nom= forms.CharField(max_length=50, widget=forms.TextInput (
             attrs={'class':'nom'}))
             
@@ -86,11 +88,21 @@ class client_form(forms.ModelForm):
     ref_commande= forms.CharField(max_length=50, widget=forms.TextInput (
             attrs={'class':'ref_commande'}))
 
-class form_modif_tech(forms.ModelForm):
-    class Meta(forms.ModelForm):
-        model = depot
-        fields = ('commentaire','piece_a_modifier','statut','mdp_windows')    
-
+class form_modif_tech(forms.ModelForm):  
+    class Meta:
+         model = depot
+         fields = ["commentaire","piece_a_modifier","statut","mdp_windows"]
+    commentaire= forms.CharField(max_length=50, widget=forms.TextInput (
+            attrs={'class':'commentaire'}))
+            
+    piece_a_modifier= forms.CharField(max_length=50, widget=forms.TextInput (
+            attrs={'class':'piece_a_modifier'}))
+            
+    statut= forms.CharField(max_length=50, widget=forms.TextInput (
+            attrs={'class':'statut'}))
+            
+    mdp_windows= forms.CharField(max_length=100, widget=forms.EmailInput (
+            attrs={'class':'mdp_windows'}))
 
 class user_form(forms.ModelForm):
     class Meta:
