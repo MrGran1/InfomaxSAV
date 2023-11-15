@@ -32,7 +32,7 @@ form{
 }
 
 .field-style input {
-    width: 200px;
+    width: 230px;
     height: 70px;
     border-radius: 7px;
     border-style: hidden;
@@ -44,7 +44,7 @@ form{
 }
 
 .field-style select{
-    width: 110%;
+    width: 250px;
     height: 70px;
     border-radius: 7px;
     border-style: hidden;
@@ -159,14 +159,12 @@ form{
     background-color: limegreen;
     border-style: hidden;
     border-radius: 12px;
-    transition: 0.8s;
+    transition: 0.3s;
 }
 
 .valider:hover{
     background-color: rgb(11, 147, 11);
     color: whitesmoke;
-    height: 60px;
-    width: 200px;
     cursor: pointer;
 }
 

@@ -1,68 +1,58 @@
 /* -----éléments généraux----- */
 
 form{
-    margin-left: 5%;
-    margin-right: 5%;
+    margin: auto;
 
 
 }
 /* -----configurations des grid----- */
 
-
-
-
 .grid-form{
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-column-gap: 50px;
-    grid-row-gap: 250px;
-    grid-template-rows: repeat(2, 80px) 90px;
+    grid-template-columns: repeat(4, 250px);
+    grid-column-gap: 35px;
+    grid-row-gap: 45px;
+    grid-template-rows: repeat(2, 50px) 90px;
 }
 /* -----contenu----- */
 
-#form-field{
-    margin-top: 10px;
-    border-radius: 20px;
-    width: 200px;
-    width : 100% ; 
-    height : 80px;
+.field-style {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 70px;
+}
+
+.field-style input {
+    width: 230px;
+    height: 70px;
+    border-radius: 7px;
+    border-style: hidden;
+    background-color: #F7ECE1;
+    margin-top:10px;
+    padding: 10px;
+    box-shadow: inset 0 0 1em whitesmoke,
+    0 0 2em white;
 }
 
 .nom{
     grid-row: 1;
     grid-column: 1 ;
-    width: 200px;
-    height: 50px;
 }
 
-.prenom{
+.prenom {
     grid-row: 1 ;
     grid-column:2 ;
-    margin-top: 10px;
-    border-radius: 20px;
-    width: 200px;
-    width : 100% ; 
-    height : 40px;
 }
 
 .ref_commande{
     grid-row:1 ;
     grid-column:3 ;
-    margin-top: 10px;
-    border-radius: 20px;
-    width: 200px;
-    width : 100% ; 
-    height : 40px;
 }
 
 .depot{
     grid-row:1 ;
     grid-column:4 ;
-    margin-top: 10px;
-    border-radius: 20px;
-    width: 200px;
-    width : 100% ; 
-    height : 40px;
 }
 
 .telephone{
@@ -70,7 +60,107 @@ form{
     grid-column:1 ;
 }
 
-.emal{
-    grid-row:3 ;
+.email{
+    grid-row:2 ;
     grid-column:2 ;
+}
+
+.rechercher{
+    grid-row: 2;
+    grid-column: 4;
+    margin-top: 20px;
+    width: 250px;
+    height: 50px;
+    box-shadow: inset 0 0 1em whitesmoke,
+    0 0 2em white;
+    background-color: #d1d1f4;
+    border-style: hidden;
+    border-radius: 12px;
+    transition: 0.3s;
+}
+
+.rechercher:hover{
+    background-color: rgb(88, 170, 88);
+    color: whitesmoke;
+    cursor: pointer;
+}
+
+
+/* -----configuiration table----- */
+
+
+table{
+    table-layout: fixed;
+    width: 1105px;
+    height: 400px;
+    border-collapse: collapse;
+    border: 2px solid black;
+}
+
+th{
+    border-bottom: 2px solid black;
+    background-color: #9067C6;
+    color: whitesmoke;
+}
+th, td {
+    border-right: 1px solid black;
+    height: 20px;
+    text-align: center;
+}
+
+td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: red;
+}
+
+td:hover {
+    overflow: visible;
+    white-space: normal;        
+    text-overflow: unset;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #CAC4CE;
+  }
+  
+  tbody tr:nth-child(even) {
+    background-color: #F7ECE1;
+  }
+
+/* -----N° depot----- */
+thead th:nth-child(1) {
+    width: 5%;
+}
+/* -----Nom----- */
+thead th:nth-child(2) {
+    width: 10%;
+}
+/* -----Prénom----- */
+thead th:nth-child(3) {
+    width: 10%;
+}
+/* -----Téléphone----- */
+thead th:nth-child(4) {
+    width: 8%;
+}
+/* -----Email----- */
+thead th:nth-child(5) {
+    width: 20%;
+}
+/* -----Référence de commande----- */
+thead th:nth-child(6) {
+    width: 7%;
+}
+/* -----problème----- */
+thead th:nth-child(7) {
+    width: 20%;
+}
+/* -----mot de passe windows----- */
+thead th:nth-child(8) {
+    width: 10%;
+}
+/* -----Etat du SAV----- */
+thead th:nth-child(9) {
+    width: 10%;
 }

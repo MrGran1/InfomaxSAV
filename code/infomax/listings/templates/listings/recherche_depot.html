@@ -21,36 +21,36 @@
             <form class="grid-form" method="post" novalidate>
                 {% csrf_token %}
             
-                <div class="field-form nom" id="form-field">
+                <div class="nom field-style" id="form-field">
                     <label for="{{ form.nom.id_for_label }}" id="nom">nom:</label>
                     {{ form.name }}
                 </div>
                 
-                <div class="form-field prenom" id="form-field">
+                <div class="field-style prenom" id="form-field">
                     <label for="{{ form.prenom.id_for_label }}" id="prénom">prénom:</label>
                     {{ form.first_name }}
                 </div>
 
-                <div class="form-field ref_commande" id="form-field">
+                <div class="field-style ref_commande" id="form-field">
                     <label for="{{ form.ref_commande.id_for_label }}" id="ref_commande">référence de commande:</label>
                     {{ form.ref_commande }}
                 </div>
 
-                <div class="form-field email" id="form-field">
+                <div class="field-style email" id="form-field">
                     <label for="{{ form.email.id_for_label }}" id="email">email:</label>
                     {{ form.email }}
                 </div>
-                <div class="form-field telephone" id="form-field">
+                <div class="field-style telephone" id="form-field">
                     <label for="{{ form.telephone.id_for_label }}" id="téléphone">téléphone:</label>
                     {{ form.telephone }}
                 </div>
-                <div class="form-field depot" id="form-field">
+                <div class="field-style depot" id="form-field">
                     <label for="{{ form.numero_depot.id_for_label }}" id="numero_depot">numéro de dépôt:</label>
                     {{ form.numero_depot}}
                 </div>
-                <button id="btnVerifier">Rechercher</button>
+                <button class="rechercher" id="btnRechercher">Rechercher</button>
                 <script>
-                    document.getElementById('btnVerifier').addEventListener('click', function() {
+                    document.getElementById('btnRechercher').addEventListener('click', function() {
                         var resultatsDiv = document.getElementById('resultats');
                         resultatsDiv.style.display = 'block'; // Afficher la section de résultats
                     });
@@ -68,7 +68,7 @@
                     <th>email:</th>
                     <th>référence de commande:</th>
                     <th>problème:</th>
-                    <th>mot de passe Windows</th>
+                    <th>mot de passe</th>
                     <th>état du SAV</th>
                 </tr>
             </thead>
