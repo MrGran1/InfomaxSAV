@@ -1,0 +1,14 @@
+:root{
+    --entete: #17043c;
+    --main_background: #f6f3ed;
+    --secondary_background: #f2f2f2;
+
+    --input_field1: #F7ECE1;
+    --input_field2: #CAC4CE;
+
+    --text_light:#ffffe6;
+    --text_dark:#333300;
+
+    --button_before: #d1d1f4;
+    --button_after: rgb(88, 170, 88);
+}

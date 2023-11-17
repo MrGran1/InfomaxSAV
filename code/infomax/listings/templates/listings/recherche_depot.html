@@ -56,47 +56,49 @@
                     });
                 </script>
         </form>
-
-        <table>
+        <div class="table-container">
+            <table>
             
-            <thead>
-                <tr>
-                    <th>N° Dépot:   </th>
-                    <th>nom:</th>
-                    <th>prénom:</th>
-                    <th>téléphone:</th>
-                    <th>email:</th>
-                    <th>référence de commande:</th>
-                    <th>problème:</th>
-                    <th>mot de passe</th>
-                    <th>état du SAV</th>
-                </tr>
-            </thead>
-            <tbody>
-                {%if clients|length != 0 %}
-            {% for client in clients %}
-            {% if user.poste == 'CO'%}
-                <tr>
-                        <td><a href = "{% url 'depot_modif_com' client.numero_depot %}">{{client.numero_depot}}</a></td>
-                        <td><a href = "{% url 'depot_modif_com' client.numero_depot %}">{{client.name}}</a></td>
-                        <td><a href = "{% url 'depot_modif_com' client.numero_depot %}">{{client.first_name}}</a></td>
-                        <td><a href = "{% url 'depot_modif_com' client.numero_depot %}">{{client.telephone}}</a></td>
-                        <td><a href = "{% url 'depot_modif_com' client.numero_depot %}">{{client.email}}</a></td>
-                        <td><a href = "{% url 'depot_modif_com' client.numero_depot %}">{{client.ref_commande}}</a></td>
-                        <td><a href = "{% url 'depot_modif_com' client.numero_depot %}">{{client.probleme}}</a></td>
-                        <td><a href = "{% url 'depot_modif_com' client.numero_depot %}">{{client.mdp_windows}}</a></td>
-                        <td><a href = "{% url 'depot_modif_com' client.numero_depot %}">{{client.}}</a></td>
-                    {% else %}
-                    <a href ="{% url 'depot_modif_tec' client.numero_depot %}">{{client.name}} {{client.first_name}} {{ client.numero_depot}} {{ client.telephone}} {{ client.email}}</a></p>
-                {% endif %}
-            {% endfor %}
-
-        {% else %}
-            <p>Aucun dépot avec ce nom existe</p>
-        {%endif%}
-                </tr>
-            </tbody>
-        </table>
+                <thead>
+                    <tr>
+                        <th>N° Dépot:   </th>
+                        <th>nom:</th>
+                        <th>prénom:</th>
+                        <th>téléphone:</th>
+                        <th>email:</th>
+                        <th>référence de commande:</th>
+                        <th>problème:</th>
+                        <th>mot de passe</th>
+                        <th>état du SAV</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%if clients|length != 0 %}
+                {% for client in clients %}
+                {% if user.poste == 'CO'%}
+                    <tr>
+                            <td><a href = "{% url 'depot_modif_com' client.numero_depot %}">{{client.numero_depot}}</a></td>
+                            <td><a href = "{% url 'depot_modif_com' client.numero_depot %}">{{client.name}}</a></td>
+                            <td><a href = "{% url 'depot_modif_com' client.numero_depot %}">{{client.first_name}}</a></td>
+                            <td><a href = "{% url 'depot_modif_com' client.numero_depot %}">{{client.telephone}}</a></td>
+                            <td><a href = "{% url 'depot_modif_com' client.numero_depot %}">{{client.email}}</a></td>
+                            <td><a href = "{% url 'depot_modif_com' client.numero_depot %}">{{client.ref_commande}}</a></td>
+                            <td><a href = "{% url 'depot_modif_com' client.numero_depot %}">{{client.probleme}}</a></td>
+                            <td><a href = "{% url 'depot_modif_com' client.numero_depot %}">{{client.mdp_windows}}</a></td>
+                            <td><a href = "{% url 'depot_modif_com' client.numero_depot %}">{{client.}}</a></td>
+                        {% else %}
+                        <a href ="{% url 'depot_modif_tec' client.numero_depot %}">{{client.name}} {{client.first_name}} {{ client.numero_depot}} {{ client.telephone}} {{ client.email}}</a></p>
+                    {% endif %}
+                {% endfor %}
+    
+            {% else %}
+                <p class="error-message">Aucun dépot avec ce nom existe</p>
+            {%endif%}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
         <div id="resultats">
             
                 

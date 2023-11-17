@@ -1,11 +1,13 @@
+@import 'variables.css';
+
 body{
-    background-color: whitesmoke;
+    background-color: var(--main_background);
     font-family: monospace;
     width: 100%;
 }
 
 header {
-    background-color: white;
+    background-color: var(--secondary_background);
     width: 100%;
     height: 90px;
     display: block;
@@ -14,15 +16,7 @@ header {
     left: 0;
 }
 
-#logo {
-    display: flex;
-    padding-top: 0px;
-    margin-top: 0px;
-    height: 90px;
-    width: max(400px);
-    grid-column: 1;
-    grid-row: 1;
-}
+
 .grid-nav{
     grid-row: 2;
     grid-column: 1/ -1;
@@ -37,9 +31,10 @@ header {
 .grid-title{
     color: #0d0d0d;
     font-size: 2.8em;
-    grid-column: 2;
+    font-weight: bold;
+    grid-column: 1;
     grid-row: 1;
-    margin-left: 100px;
+    margin-left: 30px;
     padding-top: 0;
 }
 
@@ -63,14 +58,14 @@ header {
 }
 
 .menu li a {
-    color: white;
+    color: #ffffe6;
     text-decoration: none;
 
 }
 
 .grid-container{
     display: grid;
-    grid-template-columns: 400px 1fr;
+    grid-template-columns: 600px 1fr;
     grid-template-rows: 90px 30px;
 }
 
