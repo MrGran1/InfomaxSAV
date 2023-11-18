@@ -46,6 +46,7 @@ class PDF(LoginRequiredMixin, PDFView):
 def create_client(request):
     if request.method == 'POST':
         form = form_input(request.POST)
+        print(form.errors)
         if form.is_valid():
             client = depot(
             mode_envoi=form.cleaned_data['mode_envoi'][0],
