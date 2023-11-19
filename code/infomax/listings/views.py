@@ -197,7 +197,7 @@ def modif_depot(request,id):
     else:
         form = client_form(instance=depot_var)
    
-    return render (request,'listings/modif_depot.html',{'form':form})
+    return render (request,'listings/modif_depot.html',{'form':form, 'depot':depot_var})
 
 
 def depot_tech(request,id):
@@ -209,7 +209,7 @@ def depot_tech(request,id):
     else:
         form = form_modif_tech(instance=depot_var)
 
-    return render (request,'listings/modif_tech.html',{'form':form})
+    return render (request,'listings/modif_tech.html',{'form':form, 'depot':depot_var})
 
 
 def afficher_user(request):
