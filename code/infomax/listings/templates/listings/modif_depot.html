@@ -1,0 +1,94 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta name="description" content="Création de bons de dépôt"/>
+        <link rel="stylesheet" href="{% static 'admin/css/consultation.css' %}">
+        <title>Consultation de dépôt</title>
+    </head>
+
+</html>
+
+<body>
+    <header>
+        {% include "vraitemplate/haut_de_page.html" %}
+    </header>
+    <main>
+        <h1>Consultation de dépôt</h1>
+
+<form class="grid-form" action ='' method="post" novalidate>
+    {% csrf_token %}
+
+    <div class="nom field-style">
+        <label for="{{ form.name.id_for_label }}" id="Nom">Nom:</label><br>
+        {{ form.name }}
+    </div>
+    <div class="prenom field-style">
+        <label for="{{ form.first_name.id_for_label }}" id="Prénom">Prénom:</label><br>
+        {{ form.first_name }}
+    </div>
+    <div class="telephone field-style">
+        <label for=" {{ form.telephone.id_for_label }}" id="Téléphone">Téléphone:</label><br>
+        {{ form.telephone }}
+    </div>
+    <div class="email field-style">
+        <label for="{{ form.email.id_for_label }}" id="Email">Email:</label><br>
+        {{ form.email }}
+    </div>
+    <div class="mdp field-style">
+        <label for="{{ form.mdp_windows.id_for_label }}" id="mdp windows">mot de passe Windows:</label><br>
+        {{ depot.mdp_windows }}
+    </div>
+    <div class="probleme big-field-style">
+        <label for="{{ form.probleme.id_for_label }}" id="description">description du problème:</label><br>
+        {{ form.probleme }}
+    </div>
+    
+        <div class=" carton">
+            <label for="{{ form.carton.id_for_label }}" id="carton">carton :</label>
+            {{ depot.carton }}
+        </div>
+        <div class="alimentation">
+            <label for="{{ form.alimentation.id_for_label }}" id="alimentation">câble d'alimentation :</label>
+           {{ depot.alimentation }}
+        </div>
+        <div class="reinitialisation">
+            <label for="{{ form.reinitialisation.id_for_label }}" id="reinitialisation">réinitialisation :</label>
+            {{ depot.reinitialisation}}
+        </div>
+    </div>
+    
+    <div class="ref_commande field-style">
+        <label for="{{ form.ref_commande.id_for_label }}" id="ref de commande">référence de commande:</label><br>
+        {{ depot.ref_commande }}
+    </div>
+   
+   
+    <div class="designation field-style">
+        <label for="{{ form.designation.id_for_label }}" id="designation">designation:</label><br>
+        {% for key, value in form.designation.field.choices %}
+            {% if key == form.designation.value %}
+                {{ value }}
+            {% endif %}
+        {% endfor %}
+    </div>
+    
+
+    <div class="mode_envoi field-style">
+        <label for="{{ form.mode_envoi.id_for_label }}" id="mode envoi">mode d'envoi:</label><br>
+        {{ depot.mode_envoi }}
+    </div>
+
+    <input class="valider" type = "submit" value="valider">
+
+</form>
+
+    <script>
+    </script>
+    </main>
+</body>
+
+

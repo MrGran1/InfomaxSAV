@@ -26,6 +26,7 @@ header {
     display: flex;
     align-items: center;
     padding-bottom: 8px;
+    color: var(--text_dark);
 }
 
 .grid-title{
@@ -58,9 +59,9 @@ header {
 }
 
 .menu li a {
-    color: #ffffe6;
     text-decoration: none;
-
+    color: var(--text_light);
+    font-weight:bold;
 }
 
 .grid-container{

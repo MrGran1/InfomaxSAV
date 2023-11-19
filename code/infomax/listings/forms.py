@@ -27,6 +27,15 @@ envoi_choix = [
         
     ]
 
+raison_retour_choix = [
+        ('', '---------'),
+        ('DF', 'Defaut montage'),
+        ('DP', 'Defaut produit'),
+        ('PS', 'Defaut systeme'),
+        ('PU', 'Probleme utilisateur'),
+        ('PT', 'Probleme transport'),
+        ('PC', 'Probleme compatibilite')
+    ]
 
 
 class form_input(forms.Form):
@@ -103,6 +112,9 @@ class form_modif_tech(forms.ModelForm):
             
     mdp_windows= forms.CharField(max_length=100, widget=forms.EmailInput (
             attrs={'class':'mdp_windows'}))
+    
+    raison_retour= forms.ChoiceField(choices=raison_retour_choix, widget=forms.Select (
+        attrs={}))
 
 class user_form(forms.ModelForm):
     class Meta:
