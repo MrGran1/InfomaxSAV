@@ -71,8 +71,10 @@ class depot(models.Model):
  ### Vendeur #########
     first_name_seller =  models.fields.CharField(max_length=50)
     last_name_seller =  models.fields.CharField(max_length=50)
-
-
+    
+### Technicien ####
+    first_name_tech =  models.fields.CharField(max_length=50,blank=True)
+    last_name_tech =  models.fields.CharField(max_length=50,blank=True)
 
 
 

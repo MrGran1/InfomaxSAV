@@ -80,7 +80,7 @@ class client_form(forms.ModelForm):
     class Meta:
          model = depot
          fields = ["name","first_name","telephone","email","probleme","ref_commande"]
-    nom= forms.CharField(max_length=50, widget=forms.TextInput (
+    name= forms.CharField(max_length=50, widget=forms.TextInput (
             attrs={'class':'nom'}))
             
     first_name= forms.CharField(max_length=50, widget=forms.TextInput (
