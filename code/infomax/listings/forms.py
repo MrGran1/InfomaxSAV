@@ -96,6 +96,10 @@ class client_form(forms.ModelForm):
             
     ref_commande= forms.CharField(max_length=50, widget=forms.TextInput (
             attrs={'class':'ref_commande'}))
+    
+    mdp_windows= forms.CharField(max_length=50, widget=forms.TextInput (
+        attrs={'class':'mdp'}),required=False)
+    
 
 class form_modif_tech(forms.ModelForm):  
     class Meta:

@@ -17,10 +17,32 @@
         {% include "vraitemplate/haut_de_page.html" %}
     </header>
     <main>
-        <h1>Consultation de dépôt</h1>
+        <h2>Consultation de dépôt</h2>
 
 <form class="grid-form" action ='' method="post" novalidate>
     {% csrf_token %}
+    <div class="informations-fixes">
+        <div>
+            <h3>Informations générales:</h3>
+            <div class=" carton">
+                <label for="{{ form.carton.id_for_label }}" id="carton">carton :</label>
+                {{ depot.carton }}
+            </div>
+            <div class="alimentation">
+                <label for="{{ form.alimentation.id_for_label }}" id="alimentation">câble d'alimentation :</label>
+               {{ depot.alimentation }}
+            </div>
+            <div class="reinitialisation">
+                <label for="{{ form.reinitialisation.id_for_label }}" id="reinitialisation">réinitialisation :</label>
+                {{ depot.reinitialisation}}
+            </div>
+            <div class="designation field-style">
+                <label for="{{ form.designation.id_for_label }}" id="designation">designation:</label><br>
+                    {{depot.designation}}
+            </div>
+        </div>   
+    </div>
+    
 
     <div class="nom field-style">
         <label for="{{ form.name.id_for_label }}" id="Nom">Nom:</label><br>
@@ -40,40 +62,15 @@
     </div>
     <div class="mdp field-style">
         <label for="{{ form.mdp_windows.id_for_label }}" id="mdp windows">mot de passe Windows:</label><br>
-        {{ depot.mdp_windows }}
+        {{ form.mdp_windows }}
     </div>
     <div class="probleme big-field-style">
         <label for="{{ form.probleme.id_for_label }}" id="description">description du problème:</label><br>
         {{ form.probleme }}
     </div>
-    
-        <div class=" carton">
-            <label for="{{ form.carton.id_for_label }}" id="carton">carton :</label>
-            {{ depot.carton }}
-        </div>
-        <div class="alimentation">
-            <label for="{{ form.alimentation.id_for_label }}" id="alimentation">câble d'alimentation :</label>
-           {{ depot.alimentation }}
-        </div>
-        <div class="reinitialisation">
-            <label for="{{ form.reinitialisation.id_for_label }}" id="reinitialisation">réinitialisation :</label>
-            {{ depot.reinitialisation}}
-        </div>
-    </div>
-    
     <div class="ref_commande field-style">
         <label for="{{ form.ref_commande.id_for_label }}" id="ref de commande">référence de commande:</label><br>
-        {{ depot.ref_commande }}
-    </div>
-   
-   
-    <div class="designation field-style">
-        <label for="{{ form.designation.id_for_label }}" id="designation">designation:</label><br>
-        {% for key, value in form.designation.field.choices %}
-            {% if key == form.designation.value %}
-                {{ value }}
-            {% endif %}
-        {% endfor %}
+        {{ form.ref_commande }}
     </div>
     
 

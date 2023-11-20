@@ -17,7 +17,7 @@ form{
     display: grid ;
     grid-template-columns: repeat(4,250px);
     grid-column-gap: 35px;
-    grid-template-rows: repeat(2 ,50px) repeat(3,10px) 150px ;
+    grid-template-rows: 80px repeat(2 ,50px) repeat(3,10px) 150px ;
     grid-row-gap: 45px;
     color: var(--text_dark);
 }
@@ -75,61 +75,61 @@ form{
 
 
 .nom {
-    grid-row: 1;
+    grid-row: 2;
     grid-column: 1;
 }
 
 .prenom{ 
-    grid-row: 1;
+    grid-row: 2;
     grid-column: 2;
     width: 200px;
 }
 
 .telephone{
-    grid-row: 1;
+    grid-row: 2;
     grid-column: 3;
     width: 200px;
 }
 
 .email{
-    grid-row: 1;
+    grid-row: 2;
     grid-column: 4;
     width: 200px;
 }
 
 .mdp{
-    grid-row: 2;
+    grid-row: 3;
     grid-column: 1;
     width: 200px;
 }
 
 .ref_commande{
-    grid-row: 2;
+    grid-row: 3;
     grid-column: 2;
     width: 200px;
 }
 
 .designation{
-    grid-row: 2;
+    grid-row: 1;
     grid-column: 3;
     width: 200px;
 }
 
 .mode_envoi{
-    grid-row: 2;
+    grid-row: 1;
     grid-column: 4;
     width: 200px;
 }
 
 .reinitialisation{
-    grid-row: 3;
+    grid-row: 1;
     grid-column: 1;
     display: flex;
     justify-content: space-between;
 }
 
 .alimentation{
-    grid-row: 4;
+    grid-row: 1;
     grid-column: 1;
     display: flex;
     justify-content: space-between;
@@ -142,6 +142,7 @@ form{
     display: flex;
     justify-content: space-between;
     vertical-align: middle;
+    width: 250px;
 }
 
 .probleme{
@@ -150,6 +151,13 @@ form{
     grid-column-end:4;
 }
 
+.informations-fixes{
+    grid-row: 1;
+    grid-column: 1/5;
+    border-bottom: 1px solid black;
+    display: flex;
+    
+}
 .valider{
     grid-row: 6;
     grid-column: 4;
