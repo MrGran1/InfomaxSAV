@@ -197,7 +197,7 @@ def modif_depot(request,id):
     else:
         form = client_form(instance=depot_var)
    
-    return render (request,'listings/modif_com.html',{'form':form, 'depot':depot_var})
+    return render (request,'listings/modif_depot.html',{'form':form, 'depot':depot_var})
 
 
 def depot_tech(request,id):
