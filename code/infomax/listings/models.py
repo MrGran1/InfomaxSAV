@@ -7,9 +7,12 @@ class depot(models.Model):
 
     statut_choix = [
         ('', '---------'),
-        ("RC", "Receptionné"),
-        ("TR", "En traitement"),
-        ("TM", "Terminé")
+        ('AT', "A traiter"),
+        ("RC", "Retour SAV constructeur"),
+        ("AR", "Attente retour client"),
+        ("AP", "Attente réapprovisionnement produits"),
+        ("Fait", "Fait"),
+        ("TM", "Recupéré par le client")
     ]
 
     envoi_choix = [
@@ -60,8 +63,8 @@ class depot(models.Model):
     total_a_payer = models.fields.IntegerField(validators = [MinValueValidator(0)],default = 0)
     numero_depot = models.fields.AutoField(primary_key=True)
     date = models.fields.DateField(default=2020)
-    statut = models.fields.CharField(choices = statut_choix ,max_length=100,null = False ,default = "RC")
-    mail_envoyee = models.fields.CharField(choices = statut_choix ,max_length=100,null = False ,default = "RC")
+    statut = models.fields.CharField(choices = statut_choix ,max_length=100,null = False ,default = "AT")
+    mail_envoyee = models.fields.CharField(choices = statut_choix ,max_length=100,null = False ,default = "AT")
     commentaire = models.fields.CharField(default = "",blank = True ,max_length=1000)
 
     designation = models.fields.CharField(choices = designation_choix ,max_length=100,null = False ,default = '')
@@ -84,8 +87,9 @@ class CustomUser(AbstractUser):
         ("TC" , 'Technicien'),
         ("CO" , 'Commerciale')
     ]
-
-    poste = models.fields.CharField(choices = type_vendeur ,max_length=100,null = False ,default = "CO")
+    first_name = models.fields.CharField(max_length=50,blank=False)
+    first_name = models.fields.CharField(max_length=50,blank=False)
+    poste = models.fields.CharField(choices=type_vendeur ,max_length=100,null = False ,default = "CO")
 
 
 

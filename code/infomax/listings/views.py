@@ -43,14 +43,13 @@ class PDF(LoginRequiredMixin, PDFView):
         return context
                     
 @login_required()
-def create_client(request):
+def create_depot(request):
     if request.method == 'POST':
         form = form_input(request.POST)
-        print(form.errors)
         if form.is_valid():
             client = depot(
-            mode_envoi=form.cleaned_data['mode_envoi'][0],
-            designation=form.cleaned_data['designation'][0],
+            mode_envoi=form.cleaned_data['mode_envoi'],
+            designation=form.cleaned_data['designation'],
             name=form.cleaned_data['nom'],
             first_name=form.cleaned_data['first_name'],
             telephone=form.cleaned_data['telephone'],
@@ -72,13 +71,14 @@ def create_client(request):
 
             client.save()
 
-            # Envoie d'un mail
-            objet_mail = "Pris en charge de votre ordinateur par nos équipe"
-            message_mail = "Votre PC à bien été pris en charge par nos équipes."
+        # ------------   Envoie d'un mail à la création du dépot  -------------------
+            objet_mail = config['mail']["objet_creation_depot"]
+            message_mail = config['mail']["message_creation_depot"]
 
             envoi_mail([client.email],objet_mail, message_mail )
-            print("num : ",client.numero_depot)
             return redirect(f'/pdf/{client.numero_depot}')
+        # ---------------------------------------------------------------------------
+
         else:
             print (form.errors)
     else :
