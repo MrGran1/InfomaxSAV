@@ -14,10 +14,12 @@ import io
 from django.http import FileResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django_renderpdf.views import PDFView
+import json
 #from .forms import form_input
 
 HOME = '/home'
-config = open("./listings/configuration.yaml","r")
+with open("./listings/configuration.yaml","r") as file:
+    config = json.load(file)
 
 def envoi_mail(liste_destinataire, subject, message):
     """ Envoie un mail à tout les destinataires avec l'objet et le message suivant """
@@ -26,21 +28,6 @@ def envoi_mail(liste_destinataire, subject, message):
     recipient_list = liste_destinataire
     send_mail(subject, message, from_email, recipient_list)
 
-class PDF(LoginRequiredMixin, PDFView):
-    """Generate labels for some Shipments.
-
-    A PDFView behaves pretty much like a TemplateView, so you can treat it as such.
-    """
-    template_name = 'listings/pdf.html'
-
-    def get_context_data(self, *args, **kwargs):
-        """Pass some extra context to the template."""
-        context = super().get_context_data(*args, **kwargs)
-        depot_var = depot.objects.get(numero_depot=kwargs['id'])
-        print(depot_var)
-        context['depot'] = depot_var
-
-        return context
                     
 @login_required()
 def create_depot(request):
@@ -229,3 +216,29 @@ def supprimer_user(request, username):
     return render(request,
                     'listings/delete_user.html',
                     {'user': user_to_del})
+
+class PDF_interne(LoginRequiredMixin, PDFView):
+    """Generate labels for some Shipments.
+
+    A PDFView behaves pretty much like a TemplateView, so you can treat it as such.
+    """
+    template_name = 'listings/pdf_interne.html'
+
+    def get_context_data(self, *args, **kwargs):
+        """Pass some extra context to the template."""
+        context = super().get_context_data(*args, **kwargs)
+        depot_var = depot.objects.get(numero_depot=kwargs['id'])
+        context['depot'] = depot_var
+
+        return context
+
+class PDF_client(LoginRequiredMixin, PDFView):
+    template_name = 'listings/pdf_client.html'
+
+    def get_context_data(self, *args, **kwargs):
+        """Pass some extra context to the template."""
+        context = super().get_context_data(*args, **kwargs)
+        depot_var = depot.objects.get(numero_depot=kwargs['id'])
+        context['depot'] = depot_var
+
+        return context
