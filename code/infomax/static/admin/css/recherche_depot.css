@@ -4,6 +4,7 @@
 
 form{
     margin: auto;
+    margin-bottom: 10px;
 }
 /* -----configurations des grid----- */
 
@@ -12,7 +13,7 @@ form{
     grid-template-columns: repeat(4, 250px);
     grid-column-gap: 35px;
     grid-row-gap: 45px;
-    grid-template-rows: repeat(2, 50px) 90px;
+    grid-template-rows: repeat(2, 50px);
 }
 /* -----contenu----- */
 
@@ -90,6 +91,7 @@ form{
 /* -----configuiration table----- */
 
 .table-container{
+    margin-top: 100px;
     overflow-y: auto;
     height: 350px;
     width: 1105px;

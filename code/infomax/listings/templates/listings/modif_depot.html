@@ -22,25 +22,34 @@
 <form class="grid-form" action ='' method="post" novalidate>
     {% csrf_token %}
     <div class="informations-fixes">
-        <div>
-            <h3>Informations générales:</h3>
-            <div class=" carton">
-                <label for="{{ form.carton.id_for_label }}" id="carton">carton :</label>
-                {{ depot.carton }}
-            </div>
-            <div class="alimentation">
-                <label for="{{ form.alimentation.id_for_label }}" id="alimentation">câble d'alimentation :</label>
-               {{ depot.alimentation }}
-            </div>
-            <div class="reinitialisation">
-                <label for="{{ form.reinitialisation.id_for_label }}" id="reinitialisation">réinitialisation :</label>
-                {{ depot.reinitialisation}}
-            </div>
-            <div class="designation field-style">
-                <label for="{{ form.designation.id_for_label }}" id="designation">designation:</label><br>
-                    {{depot.designation}}
-            </div>
-        </div>   
+            <table style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th colspan="5">Informations générales:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="height: 15px;"></tr>
+                    <tr>
+                        <td><label for="{{ form.carton.id_for_label }}" id="carton">carton :</label></td> 
+                        <td>{{ depot.carton }}</td>
+                        <td></td>
+                        <td><label for="{{ form.designation.id_for_label }}" id="designation">designation:</label></td>
+                        <td>{{depot.designation}}</td>
+                    </tr>
+                    <tr>
+                        <td><label for="{{ form.alimentation.id_for_label }}" id="alimentation">câble d'alimentation :</label></td> 
+                        <td>{{ depot.alimentation }}</td>
+                        <td></td>
+                        <td><label for="{{ form.mode_envoi.id_for_label }}" id="mode envoi">mode d'envoi:</label></td>
+                        <td>{{ depot.mode_envoi }}</td>
+                    </tr>
+                    <tr>
+                        <td><label for="{{ form.reinitialisation.id_for_label }}" id="reinitialisation">réinitialisation :</label></td> 
+                        <td>{{ get_depot.reinitialisation_display}}</td>
+                    </tr>
+                </tbody>
+            </table>  
     </div>
     
 
@@ -73,11 +82,6 @@
         {{ form.ref_commande }}
     </div>
     
-
-    <div class="mode_envoi field-style">
-        <label for="{{ form.mode_envoi.id_for_label }}" id="mode envoi">mode d'envoi:</label><br>
-        {{ depot.mode_envoi }}
-    </div>
 
     <input class="valider" type = "submit" value="éditer">
 
