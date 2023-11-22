@@ -24,7 +24,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('add/', views.create_client,name ='creation_bon_depot'),
+    path('add/', views.create_depot,name ='creation_bon_depot'),
     path('login/', login_view,name='login'),
     path('logout/' , views.logout_view,name = 'logout'),
     path('create_user/', views.create_user,name = "creation_user" ),
