@@ -1,5 +1,15 @@
-mail :
-  adresse_email : tigran.wattrelos@outlook.fr
-  message_prise_en_charge : "Votre colis à bien été pris en charge"
-  message_en_traitement : "Votre colis est en cours de traitement par nos techniciens"
-  message_recuperation : "Votre colis est prêt à être récupérer."
+{
+  "mail" : {
+    "adresse_email" : "tigran.wattrelos@outlook.fr",
+    "objet_creation_depot" : "Prise en charge",
+
+    "message_creation_depot" : "Prise en charge",
+    "objet_prise_en_charge" : "Prise en charge",
+
+    "message_prise_en_charge" : "Votre colis à bien été pris en charge",
+    "objet_en_traitement" : "En traitement",
+    
+    "message_en_traitement" : "Votre colis est en cours de traitement par nos techniciens",
+    "message_recuperation" : "Votre colis est prêt à être récupérer."
+  }
+} 
