@@ -18,7 +18,7 @@ import json
 #from .forms import form_input
 
 HOME = '/home'
-with open("./listings/configuration.yaml","r") as file:
+with open("./listings/configuration.json","r") as file:
     config = json.load(file)
 
 def envoi_mail(liste_destinataire, subject, message):
