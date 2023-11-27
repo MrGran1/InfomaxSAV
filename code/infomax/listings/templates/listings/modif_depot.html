@@ -25,7 +25,8 @@
             <table style="width: 100%;">
                 <thead>
                     <tr>
-                        <th colspan="5">Informations générales:</th>
+                        <th colspan="4">Informations générales:</th>
+                        <th style="text-align: center; padding-left: 0;">depot n°{{depot.numero_depot}} </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,18 +36,21 @@
                         <td>{{ depot.carton }}</td>
                         <td></td>
                         <td><label for="{{ form.designation.id_for_label }}" id="designation">designation:</label></td>
-                        <td>{{depot.designation}}</td>
+                        <td>{{ get_depot.designation_display }}</td>
                     </tr>
                     <tr>
                         <td><label for="{{ form.alimentation.id_for_label }}" id="alimentation">câble d'alimentation :</label></td> 
                         <td>{{ depot.alimentation }}</td>
                         <td></td>
                         <td><label for="{{ form.mode_envoi.id_for_label }}" id="mode envoi">mode d'envoi:</label></td>
-                        <td>{{ depot.mode_envoi }}</td>
+                        <td>{{ get_depot.mode_envoi.statut_display }}</td>
                     </tr>
                     <tr>
                         <td><label for="{{ form.reinitialisation.id_for_label }}" id="reinitialisation">réinitialisation :</label></td> 
-                        <td>{{ get_depot.reinitialisation_display}}</td>
+                        <td>{{ depot.reinitialisation}}</td>
+                        <td></td>
+                        <td><label for="{{form.satut.id_for_label}}" id ="statut">satut :</label></td>
+                        <td>{{ get_depot.statut_display}}</td>
                     </tr>
                 </tbody>
             </table>  

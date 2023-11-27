@@ -1,0 +1,12 @@
+main{
+    width: 1105px;
+    height:  auto;
+    padding: 30px;
+    margin: 150px auto 50px;
+    border-radius: 12px;
+    background-color: rgb(234, 241, 254);
+}
+
+table {
+    border: 1px solid black;
+}

@@ -125,7 +125,8 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join (BASE_DIR, 
                             'code/infomax/static/admin/css/style_bd.css'
                             'code/infomax/static/admin/css/haut_de_page.css'
-                            'code/infomax/static/admin/css/recherche_depot.css')
+                            'code/infomax/static/admin/css/recherche_depot.css'
+                            'code/infomax/static/admin/css/login.css')
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 # Default primary key field type
