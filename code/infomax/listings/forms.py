@@ -1,6 +1,13 @@
 from django import forms
 from listings.models import depot,CustomUser
 from .models import depot
+from django.contrib.auth.forms import AuthenticationForm
+
+
+class LoginForm(AuthenticationForm):
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'custom-class-username'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'custom-class-password'}))
+
 
 class form_input(forms.TextInput):
         def __init__(self, *args, **kwargs):

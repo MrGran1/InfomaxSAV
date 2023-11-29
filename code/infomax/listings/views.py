@@ -15,6 +15,9 @@ from django.http import FileResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django_renderpdf.views import PDFView
 import json
+from .forms import LoginForm
+from django.contrib.auth.views import LoginView
+
 #from .forms import form_input
 
 HOME = '/home'
@@ -242,3 +245,7 @@ class PDF_client(LoginRequiredMixin, PDFView):
         context['depot'] = depot_var
 
         return context
+    
+
+class CustomLoginView(LoginView):
+    form_class = LoginForm

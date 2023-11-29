@@ -85,7 +85,7 @@
                             <td><a href = "{% url 'depot_modif_com' client.numero_depot %}">{{client.ref_commande}}</a></td>
                             <td><a href = "{% url 'depot_modif_com' client.numero_depot %}">{{client.probleme}}</a></td>
                             <td><a href = "{% url 'depot_modif_com' client.numero_depot %}">{{client.mdp_windows}}</a></td>
-                            <td><a href = "{% url 'depot_modif_com' client.numero_depot %}">{{client.et}}</a></td>
+                            <td><a href = "{% url 'depot_modif_com' client.numero_depot %}">{{client.get_statut_display}}</a></td>
                         {% else %}
                         <a href ="{% url 'depot_modif_tec' client.numero_depot %}">{{client.name}} {{client.first_name}} {{ client.numero_depot}} {{ client.telephone}} {{ client.email}}</a></p>
                     {% endif %}

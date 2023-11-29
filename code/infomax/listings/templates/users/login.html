@@ -7,36 +7,38 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta name="description" content="Connexion"/>
         <link rel="stylesheet" href="{% static 'admin/css/login.css' %}">
+        <title>Connexion</title>
     </head>
 
     <body>
         <main>
-            <div>
+            <div class="table-container">
                 <table>
-                    <thead>
-                        <th>Connexion</th>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
+                    <form action ='' method="post" novalidate>
+                    {% csrf_token %}
+                        <thead>
+                            <tr>
+                                <th colspan="3">Connexion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="height: 10px;"></tr>
+                            <tr>
+                                <td class="td_label"><label for="{{ form.username.id_for_label }}">Nom d'utilisateur :</label></td>
+                                <td class="td_input">{{ form.username }}</td>
+                            </tr>
+                            <tr>
+                                <td class="td_label"><label for="{{ form.password.id_for_label }}">Mot de passe :</label></td>
+                                <td class="td_input">{{ form.password }}</td>
+                            </tr>
+                            <td colspan="3"><input class="button" type = "submit" value="Valider"></td>
+                            <tr style="height: 10px;"></tr>
+                        </tbody>
+                    </form>
                 </table>
+                
             </div>
-
-
-
-
-<form action ='' method="post" novalidate>
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type = "submit" value="Envoyer">
-
-</form>
         </main>
-
     </body>
 </html>
 
