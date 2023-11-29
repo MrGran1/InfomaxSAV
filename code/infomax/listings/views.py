@@ -122,12 +122,13 @@ def create_user(request):
             user.set_password(password)
             user.save()
 
-            return redirect('/home/', views.home)
+            return redirect('/add/', views.home)
         
     else :
         form = user_form()
 
-    return render(request,'listings/create_user.html',{'form' : form})
+    users = CustomUser.objects.all()
+    return render(request,'listings/create_user.html',{'form' : form,"users" : users})
 
 ### Vue pour chercher des clients######
 @login_required
@@ -204,7 +205,6 @@ def depot_tech(request,id):
 
 def afficher_user(request):
     users = CustomUser.objects.all()
-    print(users)
     return render(request,"listings/afficher_users.html",{"users" : users})
 
 def supprimer_user(request, username):
