@@ -66,7 +66,7 @@ def create_depot(request):
             message_mail = config['mail']["message_creation_depot"]
 
             envoi_mail([client.email],objet_mail, message_mail )
-            return redirect(f'/pdf/{client.numero_depot}')
+            return redirect(f'/pdf_interne/{client.numero_depot}')
         # ---------------------------------------------------------------------------
 
         else:
