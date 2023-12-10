@@ -245,7 +245,9 @@ class PDF_client(LoginRequiredMixin, PDFView):
         context['depot'] = depot_var
 
         return context
-    
+
+def pdf_interne(request):
+    return render(request,'pdf_interne.html')
 
 class CustomLoginView(LoginView):
     form_class = LoginForm
