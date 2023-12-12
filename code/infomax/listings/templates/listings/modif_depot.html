@@ -87,11 +87,8 @@
     </div>
     
 
-    <div >
-        <input class="valider" type = "submit" value="éditer">
-        <a href="{% url 'PDF_interne' id=depot.numero_depot %}" target="_blank"><input type="submit" value='afficher le dépot'></a>
-    </div>
-
+    <input class="valider" type = "submit" value="éditer">
+<a href = "/pdf_interne/{{depot.numero_depot}}" >pdf</a>
 </form>
     </main>
 </body>
