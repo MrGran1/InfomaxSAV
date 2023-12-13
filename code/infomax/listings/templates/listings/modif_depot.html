@@ -43,7 +43,7 @@
                         <td>{{ depot.alimentation }}</td>
                         <td></td>
                         <td><label for="{{ form.mode_envoi.id_for_label }}" id="mode envoi">mode d'envoi:</label></td>
-                        <td>{{ depot.get_mode_envoi.statut_display }}</td>
+                        <td>{{ depot.get_mode_envoi_display }}</td>
                     </tr>
                     <tr>
                         <td><label for="{{ form.reinitialisation.id_for_label }}" id="reinitialisation">réinitialisation :</label></td> 
@@ -88,8 +88,7 @@
     
 
     <input class="valider" type = "submit" value="éditer">
-<a href = "/pdf_interne/{{depot.numero_depot}}" >pdf</a>
-</form>
+    <a href = "/pdf_interne/{{depot.numero_depot}}" ><input type="button" value="afficher le dépôt"></form>
     </main>
 </body>
 

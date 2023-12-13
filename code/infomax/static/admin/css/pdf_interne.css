@@ -1,0 +1,44 @@
+body{
+    width: 100%;
+    position: relative;
+}
+
+header{
+    position: relative;
+    width: 100%;
+}
+
+.num_depot{
+    font-size: 18px;
+    padding-top: 12px;
+    padding-left: 80px;
+    position: absolute;
+}
+.logo{
+    width: 70px;
+    float: left;
+}
+.infos{
+    text-align: right;
+    float: right;
+    width: 200px;
+    padding-top: 0px;
+    margin-top: 0px;
+}
+
+.table_container{
+    margin-top: 200px;
+}
+
+table{
+    border: 1px solid black;
+    width: 100% ;
+    margin-bottom: 20px;
+    border-collapse: collapse;
+}
+
+table th {
+    border: 1px solid black;
+    text-align: center;
+    width: 100%;
+}

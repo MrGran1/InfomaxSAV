@@ -1,17 +1,71 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="PDF dépôt"/>
+        <title>Bon de dépôt </title>
+        <link rel="stylesheet" href="{% static 'admin/css/pdf_interne.css' %}">
+    </head>
+    <body>
+        <header>
+            <img class="logo" src="{%static 'admin/img/logosimple.png' %}">
+            <h1 class="num_depot"> Bon de Dépôt n°{{ depot.numero_depot}} </h1>
+            <div class="infos">
+                <p>24 rue Montgallet 75012 PARIS</p>
+                <p>Tél: 01 43 40 01 27</p>
+                <p>{{depot.date}}</p>
+            </div>
+        </header>
+    </body>
     
-</html>
-<h1> Bon de Dépot n°{{ depot.numero_depot}} </h1>
-<div>
+<div class="table_container">
     <table>
         <thead>
-
+            <th>INFORMATIONS CLIENT</th>
         </thead>
         <tbody>
-            
+            <tr>
+                <td class="nom">nom : {{ depot.name }}</td>
+                <td class="prenom">prénom : {{ depot.first_name }}</td>
+            </tr>
+            <tr>
+                <td class="telephone">téléphone: {{depot.telephone}}</td>
+                <td class="email">email: {{depot.email}}</td>
+            </tr>
         </tbody>
-    </table>    
+    </table>
+    
+    <table>
+        <thead>
+            <th>INFORMATIONS DU RETOUR</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="ref_commande">réf commande : {{ depot.ref_commande }}</td>
+                <td class="designation">désignation : {{ depot.designation }}</td>
+            </tr>
+            <tr>
+                <td class="carton">carton ? {{depot.carton}}</td>
+                <td class="alim">câble d'alim ? {{depot.alimentation}}</td>
+            </tr>
+            <tr>
+                <td class="reinitialisation">réinitialisation ? (si besoin): {{depot.reinitialisation}}</td>
+                <td class="livraison">mode de livraison : {{depot.mode_envoi}}</td>
+            </tr>
+            <tr>
+                <td class="probleme_label">description du problème : </td>
+            </tr>
+            <tr>
+                <td class="probleme">{{depot.probleme}}</td>
+            </tr>
+            <tr>
+                <td class="statut">Statut du dépôt: {{depot.statut}}</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 
-<p> nom : {{ depot.name }}</p>
+<p> </p>
+</html>
