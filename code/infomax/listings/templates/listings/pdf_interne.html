@@ -11,11 +11,11 @@
     <body>
         <header>
             <img class="logo" src="{%static 'admin/img/logosimple.png' %}">
-            <h1 class="num_depot"> Bon de Dépôt n°{{ depot.numero_depot}} </h1>
+            <h1 class="num_depot"> BON DE DEPOT n°{{ depot.numero_depot}} </h1>
             <div class="infos">
-                <p>24 rue Montgallet 75012 PARIS</p>
+                <p>24 rue Montgallet, 75012 PARIS</p>
                 <p>Tél: 01 43 40 01 27</p>
-                <p>{{depot.date}}</p>
+                <p style="font-weight: bold;">{{depot.date}}</p>
             </div>
         </header>
     </body>
@@ -23,49 +23,57 @@
 <div class="table_container">
     <table>
         <thead>
-            <th>INFORMATIONS CLIENT</th>
+            <th colspan="4">INFORMATIONS CLIENT</th>
         </thead>
         <tbody>
             <tr>
-                <td class="nom">nom : {{ depot.name }}</td>
-                <td class="prenom">prénom : {{ depot.first_name }}</td>
+                <td class="label_nom">NOM : </td><td> {{ depot.name }}</td>
+                <td class="label_prenom">PRENOM :</td><td> {{ depot.first_name }}</td>
             </tr>
             <tr>
-                <td class="telephone">téléphone: {{depot.telephone}}</td>
-                <td class="email">email: {{depot.email}}</td>
+                <td class="contact_label" colspan="2">CONTACT : </td><td class="contact" colspan="2">{{depot.telephone}} / {{depot.email}}</td>
             </tr>
         </tbody>
     </table>
     
     <table>
         <thead>
-            <th>INFORMATIONS DU RETOUR</th>
+            <th colspan="4">INFORMATIONS DU RETOUR</th>
         </thead>
         <tbody>
             <tr>
-                <td class="ref_commande">réf commande : {{ depot.ref_commande }}</td>
-                <td class="designation">désignation : {{ depot.designation }}</td>
+                <td class="ref_commande">N° COMMANDE :</td><td> {{ depot.ref_commande }}</td>
+                <td class="designation">DESIGNATION :</td><td> {{ depot.designation }}</td>
             </tr>
             <tr>
-                <td class="carton">carton ? {{depot.carton}}</td>
-                <td class="alim">câble d'alim ? {{depot.alimentation}}</td>
+                <td class="carton">CARTON ?</td><td> {{depot.carton}}</td>
+                <td class="alim">CABLE D'ALIMENTATION ?</td><td> {{depot.alimentation}}</td>
             </tr>
             <tr>
-                <td class="reinitialisation">réinitialisation ? (si besoin): {{depot.reinitialisation}}</td>
-                <td class="livraison">mode de livraison : {{depot.mode_envoi}}</td>
+                <td class="reinitialisation">REINITIALISATION ?(si besoin):</td><td>  {{depot.reinitialisation}}</td>
+                <td class="livraison">LIVRAISON :</td><td> {{depot.mode_envoi}}</td>
             </tr>
             <tr>
-                <td class="probleme_label">description du problème : </td>
+                <td class="probleme_label" colspan="4">DESCRIPTION DU PROBLEME : </td>
             </tr>
             <tr>
-                <td class="probleme">{{depot.probleme}}</td>
+                <td class="probleme" colspan="4">{{depot.probleme}}</td>
             </tr>
-            <tr>
-                <td class="statut">Statut du dépôt: {{depot.statut}}</td>
-            </tr>
+            
         </tbody>
     </table>
 </div>
 
-<p> </p>
+<div>
+    <p>
+        Ce document atteste le dépôt de votre machine chez INFOMAX, celui-ci est a fournir lors de la réception du dépôt ainsi qu'une pièce d'identité.
+    </p>
+    <p>
+        Durant la réparation de la machine, le disque de stockage peut être changé ou formaté, il est donc recommandé de prendre vos précautions en faisant une sauvegarde afin d'éviter toute perte de donnée importante.<br>
+        INFOMAX n'est en aucun cas respondable de potentiel perte de données qui surviendrai dans le cadre d'une réparation.
+    </p>
+    <p style="margin-top: 40px;">
+        Date et signature (lors de la réception): 
+    </p>
+</div>
 </html>

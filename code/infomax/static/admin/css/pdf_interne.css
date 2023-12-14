@@ -1,6 +1,7 @@
 body{
     width: 100%;
     position: relative;
+    font-family: Helvetica, sans-serif;
 }
 
 header{
@@ -9,8 +10,8 @@ header{
 }
 
 .num_depot{
-    font-size: 18px;
-    padding-top: 12px;
+    font-size: 32px;
+    padding-top: 5px;
     padding-left: 80px;
     position: absolute;
 }
@@ -32,8 +33,9 @@ header{
 
 table{
     border: 1px solid black;
+    table-layout: fixed;
     width: 100% ;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
     border-collapse: collapse;
 }
 
@@ -41,4 +43,51 @@ table th {
     border: 1px solid black;
     text-align: center;
     width: 100%;
+}
+
+table tr {
+    height: 40px;
+}
+
+td:nth-child(1), td:nth-child(3){
+    padding-left: 10px;
+
+}
+
+td:nth-child(2){
+    border-right: 1px solid grey;
+    text-align: center;
+    font-weight: bold;
+}
+
+td:nth-child(4){
+    text-align: center;
+    font-weight: bold;
+}
+
+.probleme_label{
+    text-align: center;
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
+}
+
+.probleme {
+    height: 150px;
+    text-align: center;
+}
+
+.statut{
+    border-right: 1px solid grey;
+}
+
+.contact{
+    margin: 0;
+    font-weight: bold;
+    text-align: left;
+    border-top: 1px solid grey;
+    border-right: 1px solid black;
+}
+.contact_label{
+    border-top: 1px solid grey;
+    text-align: center;
 }
