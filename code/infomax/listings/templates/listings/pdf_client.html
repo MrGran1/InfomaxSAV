@@ -1,3 +1,89 @@
-<h1> PDF </h1>
+{% load static %}
 
-<p> nom : {{ depot.name }}</p>
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="PDF dépôt"/>
+        <title>Bon de dépôt </title>
+        <link rel="stylesheet" href="{% static 'admin/css/pdf_client.css' %}">
+    </head>
+    <body>
+        <header>
+            <img class="logo" src="{%static 'admin/img/logosimple.png' %}">
+            <h1 class="num_depot"> RAPPORT DE DEPOT n°{{ depot.numero_depot}} </h1>
+            <div class="infos">
+                <p>24 rue Montgallet, 75012 PARIS</p>
+                <p>Tél: 01 43 40 01 27</p>
+                <p style="font-weight: bold;">{{depot.date}}</p>
+            </div>
+        </header>
+        <main>
+            <div class="intro">
+                <p>La prise en charge de votre dépôt par nos équipes touche à sa fin !</p>
+                <p>Vous trouverez ci-dessous le détail
+                de la maintenance incluant le détail des problèmes rencontrés ainsi que ce qui a été fait par nos techniciens
+                pour que vous puissiez utiliser de nouveau votre matériel l'esprit tranquil. </p>
+            </div>
+
+            <div class="table_container">
+                <table>
+                    <thead>
+                        <th colspan="4">INFORMATIONS CLIENT</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="label_nom">NOM : </td><td> {{ depot.name }}</td>
+                            <td class="label_prenom">PRENOM :</td><td> {{ depot.first_name }}</td>
+                        </tr>
+                        <tr>
+                            <td class="contact_label" colspan="2">CONTACT : </td><td class="contact" colspan="2">{{depot.telephone}} / {{depot.email}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table>
+                    <thead>
+                        <th colspan="4">RAPPORT DE DEPOT</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="ref_commande">N° COMMANDE :</td><td> {{ depot.ref_commande }}</td>
+                            <td class="designation">DESIGNATION :</td><td> {{ depot.get_designation_display }}</td>            
+                        </tr>
+                        <tr>
+                            <td class="probleme_label" colspan="4">DESCRIPTION DU PROBLEME</td>
+                        </tr>
+                        <tr>
+                            <td class="probleme" colspan="4">{{depot.probleme}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" class="maintenance">INFORMATIONS DE MAINTENANCE</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="maintenance_label">Cause du retour :</td> <td colspan="2">{{depot.get_raison_retour_display}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="maintenance_label">Travaux effectués :</td> <td colspan="2">{{depot.piece_a_modifier}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div>
+                    <p>
+                        En cas de changement de porduit sur la machine,la pièce de remplacement est le même modèle que celui initialement
+                        monté dans le PC (si référence précisé sur la facture).
+                    </p>
+                    <p>
+                        Chaque machine qui passe en maintenance est testée afin de vérifer l'intégritée de celle-ci avant d'être 
+                        restituée. Un retour de produit pour une maintenance ne change en rien la durée de garantie de la machine,
+                        y compris en cas de changement de produit.
+                    </p>
+                    <p>
+                        L'équipe INFOMAX vous remercie pour votre confiance.
+                    </p>
+                </div>
+        </main>
+        
+    </body>
+</html>

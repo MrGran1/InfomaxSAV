@@ -9,13 +9,18 @@ header{
     width: 100%;
 }
 
+main{
+    margin-top: 160px;
+}
 .num_depot{
     font-size: 32px;
-    padding-top: 5px;
+    padding-top: px;
     padding-left: 80px;
     position: absolute;
+    width: 250px;
 }
 .logo{
+    padding-top: 9px;
     width: 70px;
     float: left;
 }
@@ -27,11 +32,10 @@ header{
     margin-top: 0px;
 }
 
-.table_container{
-    margin-top: 160px;
-}
+
 
 table{
+    margin-top: 40px;
     border: 1px solid black;
     table-layout: fixed;
     width: 100% ;
@@ -68,21 +72,6 @@ td:nth-child(4){
     font-weight: bold;
 }
 
-.probleme_label{
-    text-align: center;
-    border-top: 1px solid grey;
-    border-bottom: 1px solid grey;
-}
-
-.probleme {
-    height: 120px;
-    text-align: center;
-}
-
-.statut{
-    border-right: 1px solid grey;
-}
-
 .contact{
     margin: 0;
     font-weight: bold;
@@ -95,10 +84,23 @@ td:nth-child(4){
     text-align: center;
 }
 
-.mdp_windows{
+.probleme_label{
+    text-align: center;
     border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
 }
 
-.mdp_windows_label{
+.probleme {
+    height: 120px;
+    text-align: center;
+    border-bottom: 1px solid grey;
+}
+
+.maintenance{
+    border-bottom: 1px solid grey;
+    text-align: center;
+}
+
+.maintenance_label {
     text-align: center;
 }

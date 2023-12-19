@@ -11,7 +11,7 @@
     <body>
         <header>
             <img class="logo" src="{%static 'admin/img/logosimple.png' %}">
-            <h1 class="num_depot"> BON DE DEPOT n°{{ depot.numero_depot}} </h1>
+            <h1 class="num_depot">DEPOT n°{{ depot.numero_depot}} </h1>
             <div class="infos">
                 <p>24 rue Montgallet, 75012 PARIS</p>
                 <p>Tél: 01 43 40 01 27</p>
@@ -43,7 +43,7 @@
         <tbody>
             <tr>
                 <td class="ref_commande">N° COMMANDE :</td><td> {{ depot.ref_commande }}</td>
-                <td class="designation">DESIGNATION :</td><td> {{ depot.designation }}</td>
+                <td class="designation">DESIGNATION :</td><td> {{ depot.get_designation_display }}</td>
             </tr>
             <tr>
                 <td class="carton">CARTON ?</td><td> {{depot.carton}}</td>
@@ -51,13 +51,16 @@
             </tr>
             <tr>
                 <td class="reinitialisation">REINITIALISATION ?(si besoin):</td><td>  {{depot.reinitialisation}}</td>
-                <td class="livraison">LIVRAISON :</td><td> {{depot.mode_envoi}}</td>
+                <td class="livraison">LIVRAISON :</td><td> {{depot.get_mode_envoi_display}}</td>
             </tr>
             <tr>
-                <td class="probleme_label" colspan="4">DESCRIPTION DU PROBLEME : </td>
+                <td class="probleme_label" colspan="4">DESCRIPTION DU PROBLEME</td>
             </tr>
             <tr>
                 <td class="probleme" colspan="4">{{depot.probleme}}</td>
+            </tr>
+            <tr class="mdp_windows">
+                <td colspan="2" class="mdp_windows_label">Mot de passe Windows : </td> <td colspan="2">{{depot.mdp_windows}}</td>
             </tr>
             
         </tbody>
@@ -73,7 +76,7 @@
         INFOMAX n'est en aucun cas respondable de potentiel perte de données qui surviendrai dans le cadre d'une réparation.
     </p>
     <p style="margin-top: 40px;">
-        Date et signature (lors de la réception): 
+        Date et signature attestant la récupération du dépôt (lors de la réception): 
     </p>
 </div>
 </html>
