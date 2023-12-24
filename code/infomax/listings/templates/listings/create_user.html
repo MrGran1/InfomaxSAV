@@ -16,6 +16,29 @@
 <header>
     {% include "vraitemplate/haut_de_page.html" %}
 </header>
+<main>
+    <h1> GESTION DES UTILISATEURS</h1>
 
+    <div>
+        <table>
+            <thead>
+                <th>Liste des utilisateurs</th>
+                <th>Statut</th>
+            </thead>
+            <tbody>
+                    {% for users in users %}
+                        <td>{{ user.username}}</td>
+                        <td>{{ user.poste }}</td>
+                    {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <form>
+            {{form.first_name}}
+            
+        </form>
+    </div>
+</main>
 
 </body>
