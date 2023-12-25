@@ -14,6 +14,7 @@ body{
     margin-top: 10px;
     border-radius: 5px;
     background-color: var(--secondary_background);
+    height: 350px;
 }
 
 th{
@@ -26,8 +27,48 @@ th{
     padding-left: 15px;
 }
 
+.users_list{
+    width: 100%;
+}
+
+table.users_list th:nth-child(1){
+    width: 70%;
+}
+table.users_list th:nth-child(2){
+    width: 15%;
+}
+table.users_list th:nth-child(3){
+    width: 15%;
+}
+
+table.users_list td:nth-child(1){
+    padding-left: 5px;
+    text-align: left;
+}
+table.users_list td:nth-child(2){
+    text-align: center;
+}
+table.users_list td:nth-child(3){
+    text-align: center;
+}
+
+table.users_list tr:nth-child(odd){
+    background-color: var(--input_field1);
+}
+table.users_list tr:nth-child(even){
+    background-color: var(--input_field2);
+}
+
+table.users_list tr:nth-child(odd):hover{
+    background-color: var(--select1);
+}
+table.users_list tr:nth-child(even):hover{
+    background-color: var(--select2);
+}
+
+
 tr{
-    height: 30px;
+    height: 40px;
 }
 
 .table_ajt{
@@ -42,6 +83,49 @@ tr{
 
 .tab_input{
     text-align: right;
-    padding-right: 10px;
+    padding-right: 50px;
+}
+
+.tab_input input{
+    background-color: var(--input_field1);
+    width: 220px;
+    height: 25px;
+    border-style: hidden;
+    border-radius: 7px;
+    box-shadow: inset 0 0 2px whitesmoke,
+    0 0 15px rgb(218, 214, 214);
+    padding-left: 5px;
+}
+
+.tab_input select{
+    background-color: var(--input_field1);
+    width: 225px;
+    height: 25px;
+    border-style: hidden;
+    border-radius: 7px;
+    box-shadow: inset 0 0 2px whitesmoke,
+    0 0 15px rgb(218, 214, 214);
+}
+
+.submit{
+    text-align: center;
+    height: 70px;
+}
+
+.submit_button{
+    width: 650px;
+    padding: 10px;
+    background-color: var(--button_before);
+    color: var(--text_dark);
+    transition: 0.3s;
+    border-style: hidden;
+    border-radius: 12px;
+    box-shadow: inset 0 0 2px whitesmoke,
+    0 0 15px rgb(218, 214, 214);
+}
+
+.submit_button:hover{
+    background-color: var(--button_after);
+    color: var(--text_light);
 }
 

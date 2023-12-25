@@ -4,6 +4,7 @@ body{
     background-color: var(--main_background);
     font-family: monospace;
     width: 100%;
+    color: var(--text_dark);
 }
 
 header {

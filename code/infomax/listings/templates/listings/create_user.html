@@ -20,15 +20,17 @@
     <h1> GESTION DES UTILISATEURS</h1>
 
     <div class="table_container">
-        <table>
+        <table class="users_list">
             <thead>
                 <th>Liste des utilisateurs</th>
                 <th>Poste</th>
+                <th>action</th>
             </thead>
             <tbody>
                     {% for users in users %}
                         <td>{{ user.username}}</td>
                         <td>{{ user.get_poste_display }}</td>
+                        <td>editer / supprimer</td>
                     {% endfor %}
             </tbody>
         </table>
@@ -44,15 +46,18 @@
                     <tbody>
                         <tr>
                             <td class="tab_label"><label for="{{form.first_name.id_for_label}}">prénom:</label></td>
-                            <td class="tab_input">{{form.first_name}}</td>
+                            <td class="tab_input"><div class="div_input"></div>{{form.first_name}}</td>
                             <td class="tab_label"><label for="{{form.last_name.id_for_label}}">nom:</label></td>
-                            <td class="tab_input">{{form.last_name}}</td>
+                            <td class="tab_input"><div class="div_input"></div>{{form.last_name}}</td>
                         </tr>
                         <tr>
-                            <td class="tab_label"><label for="{{form.poste.id_for_label}}">poste</label></td>
-                            <td class="tab_input">{{form.poste}}</td>
+                            <td class="tab_label"><label for="{{form.poste.id_for_label}}">poste:</label></td>
+                            <td class="tab_input"><div class="div_select"></div>{{form.poste}}</td>
                             <td class="tab_label"><label for="{{form.password.id_for_label}}">Mot de passe par défaut:</label></td>
-                            <td class="tab_input">{{form.password}}</td>
+                            <td class="tab_input"><div class="div_input"></div>{{form.password}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" class="submit"><input type="submit" value="créer un utilisateur" class="submit_button"></td>
                         </tr>
                     </tbody>
                     
@@ -60,7 +65,7 @@
                 
             </div>
 
-            <input type="submit" value="créer un utilisateur">
+            
             
         </form>
     </div>
