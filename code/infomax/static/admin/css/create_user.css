@@ -1,3 +1,47 @@
+@import 'variables.css';
+
 body{
     background-color: red;
 }
+
+.ajt_user{
+    background-color: var(--secondary_background);
+    border-radius: 5px;
+}
+
+.table_container{
+    margin-bottom: 30px;
+    margin-top: 10px;
+    border-radius: 5px;
+    background-color: var(--secondary_background);
+}
+
+th{
+    text-align: left;
+    height: 30px;
+    font-size: large;
+    width: 100%;
+    background-color: var(--entete);
+    color: var(--text_light);
+    padding-left: 15px;
+}
+
+tr{
+    height: 30px;
+}
+
+.table_ajt{
+    width: 100%;
+    table-layout: fixed;
+}
+
+.tab_label{
+    text-align: left;
+    padding-left: 10px;
+}
+
+.tab_input{
+    text-align: right;
+    padding-right: 10px;
+}
+

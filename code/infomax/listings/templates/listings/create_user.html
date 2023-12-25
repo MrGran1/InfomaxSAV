@@ -19,23 +19,48 @@
 <main>
     <h1> GESTION DES UTILISATEURS</h1>
 
-    <div>
+    <div class="table_container">
         <table>
             <thead>
                 <th>Liste des utilisateurs</th>
-                <th>Statut</th>
+                <th>Poste</th>
             </thead>
             <tbody>
                     {% for users in users %}
                         <td>{{ user.username}}</td>
-                        <td>{{ user.poste }}</td>
+                        <td>{{ user.get_poste_display }}</td>
                     {% endfor %}
             </tbody>
         </table>
     </div>
-    <div>
+    <div class="ajt_user">
         <form>
-            {{form.first_name}}
+            {% csrf_token %}
+            <div class="ajt_user_tab">
+                <table class="table_ajt">
+                    <thead>
+                        <th colspan="4">Ajouter un utilisateur</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="tab_label"><label for="{{form.first_name.id_for_label}}">prénom:</label></td>
+                            <td class="tab_input">{{form.first_name}}</td>
+                            <td class="tab_label"><label for="{{form.last_name.id_for_label}}">nom:</label></td>
+                            <td class="tab_input">{{form.last_name}}</td>
+                        </tr>
+                        <tr>
+                            <td class="tab_label"><label for="{{form.poste.id_for_label}}">poste</label></td>
+                            <td class="tab_input">{{form.poste}}</td>
+                            <td class="tab_label"><label for="{{form.password.id_for_label}}">Mot de passe par défaut:</label></td>
+                            <td class="tab_input">{{form.password}}</td>
+                        </tr>
+                    </tbody>
+                    
+                </table>
+                
+            </div>
+
+            <input type="submit" value="créer un utilisateur">
             
         </form>
     </div>
