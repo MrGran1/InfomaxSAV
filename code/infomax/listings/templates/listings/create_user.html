@@ -27,16 +27,18 @@
                 <th>action</th>
             </thead>
             <tbody>
-                    {% for users in users %}
-                        <td>{{ user.username}}</td>
-                        <td>{{ user.get_poste_display }}</td>
-                        <td>editer / supprimer</td>
+                    {% for user1 in users %}
+                    <tr>
+                        <td>{{ user1.username}}</td>
+                        <td>{{ user1.get_poste_display }}</td>
+                        <td>editer / <a href="{% url 'supprimer_user' user1.username %}">supprimer</a></td>
+                    </tr>
                     {% endfor %}
             </tbody>
         </table>
     </div>
     <div class="ajt_user">
-        <form>
+        <form class="grid-form"  method="post" novalidate>
             {% csrf_token %}
             <div class="ajt_user_tab">
                 <table class="table_ajt">

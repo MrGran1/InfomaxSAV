@@ -113,17 +113,13 @@ def create_user(request):
         form = user_form(request.POST)
         if form.is_valid():
             password = form.cleaned_data.get('password')
-            # is_super = form.cleaned_data.get('is_superuser')
-            # first_name = form.cleaned_data.get('first_name')
-            # last_name = form.cleaned_data.get('last_name')
-
-            user = form.save(commit = False)
-            user.username = user.first_name + "." + user.last_name
-            user.set_password(password)
-            user.save()
-
-            return redirect('/add/', views.home)
-        
+            user_to_create = form.save(commit = False)
+            user_to_create.username = user_to_create.first_name + "." + user_to_create.last_name
+            user_to_create.set_password(password)
+            if not CustomUser.objects.filter(username = user_to_create.username).exists():
+                user_to_create.save() 
+            else:
+                pass       
     else :
         form = user_form()
 
