@@ -151,7 +151,8 @@ def change_password(request):
     error_status
     402 = Wrong password
     403 = mauvaise correspondance des nouveaux password
-    400 = Tout est bon 
+    400 = Mot de passe bien changé
+    401 = au départ avant de changer le mdp
     """
     if request.method == 'POST':
         form = change_password_form(request.POST)
@@ -161,15 +162,17 @@ def change_password(request):
             double_check_password = form.cleaned_data.get('double_check_password')
             user = authenticate(username=request.user.username, password=old_password)
             if user is None:
-                return render(request,'listings/change_password',{"error_status = 402"})
+                return render(request,'listings/change_password.html',{'form' : form,"error_status" : 402})
 
             elif new_password != double_check_password:
-                return render(request,'listings/change_password',{"error_status = 403"})
+                return render(request,'listings/change_password.html',{'form' : form,"error_status" : 403})
             else:
                 request.user.set_password(new_password)
-                return render(request,'listings/change_password',{"error_status = 400"}) 
+                return render(request,'listings/change_password.html',{'form' : form, "error_status" : 400}) 
                 
-            
+    else :
+        form = change_password_form()
+        return render(request,'listings/change_password.html',{'form' : form, "error_status" : 401})
 ### Vue pour chercher des clients######
 @login_required
 def afficher_client(request):

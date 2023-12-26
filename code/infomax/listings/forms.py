@@ -138,9 +138,9 @@ class user_form(forms.ModelForm):
         }
 
 class change_password_form(forms.Form):
-     old_password = forms.PasswordInput(required=True)
-     new_password = forms.PasswordInput(required=True)
-     double_check_password = forms.PasswordInput(required=True)        
+     old_password = forms.PasswordInput()
+     new_password = forms.PasswordInput()
+     double_check_password = forms.PasswordInput()        
 
 class afficher_client_form(forms.Form):
     ref_commande = forms.CharField(max_length=100,required=False)

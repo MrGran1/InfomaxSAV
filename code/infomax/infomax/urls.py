@@ -27,8 +27,7 @@ urlpatterns = [
     path('add/', views.create_depot,name ='creation_bon_depot'),
     path('login/', login_view,name='login'),
     path('logout/' , views.logout_view,name = 'logout'),
-    path('create_user/', views.create_user,name = "creation_user" ),
-    path('create_user/<str:username>',views.edit_user, name="edit_user"),
+
     path('home/', views.home ),
     path('afficher_depot/', views.afficher_client, name = 'afficher'),
     path('depot_com/<int:id>', views.modif_depot, name = 'depot_modif_com'),
@@ -37,5 +36,8 @@ urlpatterns = [
     path('pdf_client/<int:id>', views.PDF_client.as_view()),
     
  #   path('afficher_users/', views.afficher_user),
-    path('supprimer_user/<str:username>', views.supprimer_user, name = 'supprimer_user')
+    path('supprimer_user/<str:username>', views.supprimer_user, name = 'supprimer_user'),
+    path('create_user/', views.create_user,name = "creation_user" ),
+    path('create_user/<str:username>',views.edit_user, name="edit_user"),
+    path('change_password',views.change_password, name ="change_password")
 ]
