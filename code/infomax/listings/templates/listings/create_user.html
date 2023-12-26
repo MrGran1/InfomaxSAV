@@ -59,7 +59,11 @@
                             <td class="tab_input"><div class="div_input"></div>{{form.password}}</td>
                         </tr>
                         <tr>
+                            {% if not edit %}
                             <td colspan="4" class="submit"><input type="submit" value="créer un utilisateur" class="submit_button"></td>
+                            {% else %}
+                            <td colspan="4" class="submit"><input type="submit" value="Modifier l'utilisateur" class="submit_button"></td>
+                            {% endif %}
                         </tr>
                     </tbody>
                     

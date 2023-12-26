@@ -137,6 +137,8 @@ class user_form(forms.ModelForm):
             'password': forms.PasswordInput() 
         }
 
+        
+
 class afficher_client_form(forms.Form):
     ref_commande = forms.CharField(max_length=100,required=False)
     name = forms.CharField(max_length=100,required=False)

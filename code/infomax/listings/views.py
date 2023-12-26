@@ -113,6 +113,7 @@ def create_user(request):
         form = user_form(request.POST)
         if form.is_valid():
             password = form.cleaned_data.get('password')
+            
             user_to_create = form.save(commit = False)
             user_to_create.username = user_to_create.first_name + "." + user_to_create.last_name
             user_to_create.set_password(password)
@@ -124,7 +125,26 @@ def create_user(request):
         form = user_form()
 
     users = CustomUser.objects.all()
-    return render(request,'listings/create_user.html',{'form' : form,"users" : users})
+    return render(request,'listings/create_user.html',{'form' : form,"users" : users,'edit':False})
+
+
+@login_required
+@user_passes_test(check_superuser)
+def edit_user(request,username):
+    if username is not None:
+        user_var = CustomUser.objects.get(username=username)
+        if request.method == 'POST':
+            form = user_form(request.POST,instance=user_var)
+            if form.is_valid():
+                form.save()
+        else:
+            form = user_form(instance=user_var)
+    else : 
+        form = user_form()
+    users =  CustomUser.objects.all()
+
+    return render (request,'listings/create_user.html',{'form' : form,"users" : users,'edit':True})
+
 
 ### Vue pour chercher des clients######
 @login_required

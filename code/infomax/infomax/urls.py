@@ -28,13 +28,14 @@ urlpatterns = [
     path('login/', login_view,name='login'),
     path('logout/' , views.logout_view,name = 'logout'),
     path('create_user/', views.create_user,name = "creation_user" ),
+    path('create_user/<str:username>',views.edit_user),
     path('home/', views.home ),
     path('afficher_depot/', views.afficher_client, name = 'afficher'),
     path('depot_com/<int:id>', views.modif_depot, name = 'depot_modif_com'),
     path('depot_tech/<int:id>', views.depot_tech, name = 'depot_modif_tec'),
     path('pdf_interne/<int:id>', views.PDF_interne.as_view(), name='PDF_interne'),
     path('pdf_client/<int:id>', views.PDF_client.as_view()),
-
+    
  #   path('afficher_users/', views.afficher_user),
     path('supprimer_user/<str:username>', views.supprimer_user, name = 'supprimer_user')
 ]
