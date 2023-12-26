@@ -31,7 +31,7 @@
                     <tr>
                         <td>{{ user1.username}}</td>
                         <td>{{ user1.get_poste_display }}</td>
-                        <td>editer / <a href="{% url 'supprimer_user' user1.username %}">supprimer</a></td>
+                        <td><a href="{% url 'edit_user' user1.username %}">editer</a> / <a href="{% url 'supprimer_user' user1.username %}">supprimer</a></td>
                     </tr>
                     {% endfor %}
             </tbody>
