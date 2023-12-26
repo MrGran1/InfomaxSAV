@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from listings.forms import client_form, user_form, afficher_client_form,form_modif_tech,form_input
+from listings.forms import client_form, user_form, afficher_client_form,form_modif_tech,form_input,change_password_form
 from listings.models import depot,CustomUser
 from listings import views
 from django.contrib.auth.decorators import login_required,user_passes_test
@@ -145,7 +145,31 @@ def edit_user(request,username):
 
     return render (request,'listings/create_user.html',{'form' : form,"users" : users,'edit':True})
 
+@login_required
+def change_password(request):
+    """Différentes erreurs : 
+    error_status
+    402 = Wrong password
+    403 = mauvaise correspondance des nouveaux password
+    400 = Tout est bon 
+    """
+    if request.method == 'POST':
+        form = change_password_form(request.POST)
+        if form.is_valid():
+            old_password = form.cleaned_data.get('password')
+            new_password = form.cleaned_data.get('old_password')
+            double_check_password = form.cleaned_data.get('double_check_password')
+            user = authenticate(username=request.user.username, password=old_password)
+            if user is None:
+                return render(request,'listings/change_password',{"error_status = 402"})
 
+            elif new_password != double_check_password:
+                return render(request,'listings/change_password',{"error_status = 403"})
+            else:
+                request.user.set_password(new_password)
+                return render(request,'listings/change_password',{"error_status = 400"}) 
+                
+            
 ### Vue pour chercher des clients######
 @login_required
 def afficher_client(request):
