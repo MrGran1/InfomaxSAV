@@ -173,6 +173,7 @@ def change_password(request):
     else :
         form = change_password_form()
         return render(request,'listings/change_password.html',{'form' : form, "error_status" : 401})
+    
 ### Vue pour chercher des clients######
 @login_required
 def afficher_client(request):
