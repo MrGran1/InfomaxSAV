@@ -1,15 +1,134 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta name="description" content="interface techniciens"/>
-        <link rel="stylesheet" type="text/css" href="{% static 'admin/css/style_bd.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'admin/css/modif_tech.css' %}">
         <title>interface technicien</title>
     </head>
     <body>
         <header>
             {% include "vraitemplate/haut_de_page.html" %}
         </header>
+        <main>
+            <h2>Consultation de dépôt n°{{depot.numero_depot}}</h2>
+            <table class="info_client">
+                <thead>
+                    <th colspan="4">Informations du client</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Nom :</td>
+                        <td>{{ depot.name }}</td>
+                        <td>Prénom :</td>
+                        <td>{{ depot.first_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Email :</td>
+                        <td>{{ depot.email }}</td>
+                        <td>Téléphone</td>
+                        <td>{{ depot.telephone }}</td>
+                    </tr>                   
+                </tbody>
+            </table>
+
+            <table class="info_depot">
+                <thead>
+                    <th colspan="6">Infomrations du dépot</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Référence de commande :</td>
+                        <td>{{ depot.ref_commande }}</td>
+                        <td>Désignation :</td>
+                        <td>{{ depot.get_designation_display }}</td>
+                        <td>Date de réception :</td>
+                        <td>{{ depot.date }}</td>
+                    </tr>
+                    <tr>
+                        <td>Mode d'envoi :</td>
+                        <td>{{ depot.mode_envoic}}</td>
+                        <td>Câble d'alimentation :</td>
+                        <td>{{ depot.alimentation }}</td>
+                        <td>Réinitialisation :</td>
+                        <td>{{ depot.reinitialisation }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="6">Description du problème</td>
+                    </tr>
+                    <tr>
+                        <td colspan="6">
+                            {{depot.probleme}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <form>
+                {% csrf_token %}
+                <table class="tab_form">
+                    <thead >
+                        <th colspan="4">changement apportés</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Raison du retour :</td>
+                            <td>{{form.raison_retour}}</td>
+                            <td>Statut :</td>
+                            <td>{{form.statut}}</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>changement(s) apporté(s):</label>
+                                <div>
+                                    <input type="checkbox" value="Carte graphique">
+                                    <label>Carte graphique</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" value="Carte mère">
+                                    <label>Carte mère</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" value="processeur">
+                                    <label>processeur</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" value="RAM">
+                                    <label>RAM</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" value="Cooling">
+                                    <label>Cooling</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" value="Disque de stockage">
+                                    <label>Disque de stockage</label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                <div>
+                                    <label for="form.commentaire.id_for_label">commentaire :</label>
+                                    {{form.commentaire}}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                <input type="submit" value="éditer"> 
+                            </td>
+                        </tr>
+                    </tbody>
+    
+                        
+                    </form>
+                </table>
+            </form>
+            
+            
+        </main>
     </body>
 </html>
