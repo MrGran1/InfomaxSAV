@@ -70,7 +70,7 @@ class depot(models.Model):
     date = models.fields.DateField(default=2020)
     statut = models.fields.CharField(choices = statut_choix ,max_length=100,null = False ,default = "AT")
     mail_envoyee = models.fields.CharField(choices = statut_choix ,max_length=100,null = False ,default = "")
-    commentaire = models.fields.CharField(default = "",blank = True ,max_length=1000)
+    commentaire = models.fields.TextField(max_length=1000 ,default = "",blank = True)
 
     designation = models.fields.CharField(choices = designation_choix ,max_length=100,null = False ,default = '')
     mode_envoi = models.fields.CharField(choices = envoi_choix ,max_length=100,null = False ,default = "")

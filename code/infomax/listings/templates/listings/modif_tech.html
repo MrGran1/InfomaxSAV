@@ -21,16 +21,16 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Nom :</td>
-                        <td>{{ depot.name }}</td>
-                        <td>Prénom :</td>
-                        <td>{{ depot.first_name }}</td>
+                        <td class="info_label">Nom :</td>
+                        <td class="info_result">{{ depot.name }}</td>
+                        <td class="info_label">Prénom :</td>
+                        <td class="info_result">{{ depot.first_name }}</td>
                     </tr>
                     <tr>
-                        <td>Email :</td>
-                        <td>{{ depot.email }}</td>
-                        <td>Téléphone</td>
-                        <td>{{ depot.telephone }}</td>
+                        <td class="info_label">Email :</td>
+                        <td class="info_result">{{ depot.email }}</td>
+                        <td class="info_label">Téléphone</td>
+                        <td class="info_result">{{ depot.telephone }}</td>
                     </tr>                   
                 </tbody>
             </table>
@@ -41,27 +41,27 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Référence de commande :</td>
-                        <td>{{ depot.ref_commande }}</td>
-                        <td>Désignation :</td>
-                        <td>{{ depot.get_designation_display }}</td>
-                        <td>Date de réception :</td>
-                        <td>{{ depot.date }}</td>
+                        <td class="info_label">Référence commande :</td>
+                        <td class="info_result">{{ depot.ref_commande }}</td>
+                        <td class="info_label">Désignation :</td>
+                        <td class="info_result">{{ depot.get_designation_display }}</td>
+                        <td class="info_label">Date de réception :</td>
+                        <td class="info_result">{{ depot.date }}</td>
                     </tr>
                     <tr>
-                        <td>Mode d'envoi :</td>
-                        <td>{{ depot.mode_envoic}}</td>
-                        <td>Câble d'alimentation :</td>
-                        <td>{{ depot.alimentation }}</td>
-                        <td>Réinitialisation :</td>
-                        <td>{{ depot.reinitialisation }}</td>
+                        <td class="info_label">Mode d'envoi :</td>
+                        <td class="info_result">{{ depot.mode_envoic}}</td>
+                        <td class="info_label">Câble d'alimentation :</td>
+                        <td class="info_result">{{ depot.alimentation }}</td>
+                        <td class="info_label">Réinitialisation :</td>
+                        <td class="info_result">{{ depot.reinitialisation }}</td>
                     </tr>
                     <tr>
-                        <td colspan="6">Description du problème</td>
+                        <td colspan="6" class="info_label probleme_label">Description du problème</td>
                     </tr>
                     <tr>
                         <td colspan="6">
-                            {{depot.probleme}}
+                            <div class="probleme">{{depot.probleme}}</div>
                         </td>
                     </tr>
                 </tbody>
@@ -74,14 +74,14 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Raison du retour :</td>
-                            <td>{{form.raison_retour}}</td>
-                            <td>Statut :</td>
-                            <td>{{form.statut}}</td>
+                            <td class="info_label">Raison du retour :</td>
+                            <td class="info_result select_input">{{form.raison_retour}}</td>
+                            <td class="info_label">Statut :</td>
+                            <td class="info_result select_input">{{form.statut}}</td>
                         </tr>
                         <tr>
                             <td>
-                                <label>changement(s) apporté(s):</label>
+                                <label class="info_label">changement(s) apporté(s):</label>
                                 <div>
                                     <input type="checkbox" value="Carte graphique">
                                     <label>Carte graphique</label>
@@ -110,15 +110,19 @@
                         </tr>
                         <tr>
                             <td colspan="4">
-                                <div>
-                                    <label for="form.commentaire.id_for_label">commentaire :</label>
+                                    <label for="form.commentaire.id_for_label" class="info_label">commentaire :</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" class="commentaire_field">
+                                <div class="edit_text">
                                     {{form.commentaire}}
                                 </div>
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4">
-                                <input type="submit" value="éditer"> 
+                            <td colspan="4" class="button_container" >
+                                <input type="submit" value="éditer" class="edit_button"> 
                             </td>
                         </tr>
                     </tbody>
