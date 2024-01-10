@@ -11,8 +11,7 @@ th{
 }
 
 tr{
-    height: 20px;
-    padding-top: 50px;
+    height: 30px;
 }
 
 td{
@@ -28,7 +27,10 @@ table{
     0 0 15px rgb(218, 214, 214);
     border-style: hidden;
     border-radius: 7px;
+    padding-bottom: 30px;
 }
+
+
 
 .info_client{
     table-layout: fixed;
@@ -36,7 +38,6 @@ table{
     margin-bottom: 40px;
     border-collapse: collapse;
 }
-
 .info_client td:nth-child(2){
     border-right: 1px dashed grey;
     padding-right: 5px;
@@ -56,7 +57,6 @@ table{
 }
 
 .probleme_label{
-    border-top: 1px dashed grey;
     padding-top: 20px;
     text-align: center;
     vertical-align: center;
@@ -70,7 +70,7 @@ table{
     box-shadow: inset 0 0 2px whitesmoke,
     0 0 15px rgb(218, 214, 214);
     border-style: hidden;
-    border-radius: 12px;
+    border-radius: 5px;
     padding: 5PX;
     margin-bottom: 10px;
     display: flex;
@@ -102,6 +102,7 @@ table{
     border-radius: 7px;
     margin-top: 20px;
     margin-bottom: 20px;
+    padding: 10px;
     
 }
 
@@ -134,7 +135,7 @@ table{
     font-weight: bold;
     width: 100%s;
 }
-.info_result{
+.info_result {
     text-align: center;
 
 }
@@ -142,14 +143,37 @@ table{
 .select_input{
     text-align: center;
     padding-top: 10px;
+    padding-right: 45px;
+}
+
+.select_label{
+    padding-left: 55px;
+
 }
 
 .select_input select{
-    width: 100%;
+    width: 85%;
     height: 25px;
     background-color: var(--input_field1);
     box-shadow: inset 0 0 2px whitesmoke,
     0 0 15px rgb(218, 214, 214);
     border-style: hidden;
     border-radius: 12px;
+    padding-left: 10px;
+    
+}
+
+.checklist{
+    padding-left: 55px;
+    padding-right: 55px;
+}
+
+.grid_checkbox{
+    display: grid;
+    width: 100%;
+    grid-gap: 15px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 3fr;
+    margin-top: 15px;
+    margin-bottom: 25px;
 }

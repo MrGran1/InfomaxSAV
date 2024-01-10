@@ -20,6 +20,7 @@
                     <th colspan="4">Informations du client</th>
                 </thead>
                 <tbody>
+                    <tr style="height: 10px"; ></tr>
                     <tr>
                         <td class="info_label">Nom :</td>
                         <td class="info_result">{{ depot.name }}</td>
@@ -31,7 +32,7 @@
                         <td class="info_result">{{ depot.email }}</td>
                         <td class="info_label">Téléphone</td>
                         <td class="info_result">{{ depot.telephone }}</td>
-                    </tr>                   
+                    </tr><tr style="height: 10px"; ></tr>                
                 </tbody>
             </table>
 
@@ -40,6 +41,7 @@
                     <th colspan="6">Infomrations du dépot</th>
                 </thead>
                 <tbody>
+                    <tr style="height: 10px"; ></tr>
                     <tr>
                         <td class="info_label">Référence commande :</td>
                         <td class="info_result">{{ depot.ref_commande }}</td>
@@ -63,7 +65,7 @@
                         <td colspan="6">
                             <div class="probleme">{{depot.probleme}}</div>
                         </td>
-                    </tr>
+                    </tr><tr style="height: 10px"; ></tr>
                 </tbody>
             </table>
             <form>
@@ -73,44 +75,67 @@
                         <th colspan="4">changement apportés</th>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="info_label">Raison du retour :</td>
+                        <tr style="height: 10px"; ></tr>
+                        <tr class="select">
+                            <td class="info_label select_label">Raison du retour :</td>
                             <td class="info_result select_input">{{form.raison_retour}}</td>
-                            <td class="info_label">Statut :</td>
+                            <td class="info_label select_label">Statut :</td>
                             <td class="info_result select_input">{{form.statut}}</td>
                         </tr>
                         <tr>
-                            <td>
-                                <label class="info_label">changement(s) apporté(s):</label>
-                                <div>
-                                    <input type="checkbox" value="Carte graphique">
-                                    <label>Carte graphique</label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" value="Carte mère">
-                                    <label>Carte mère</label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" value="processeur">
-                                    <label>processeur</label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" value="RAM">
-                                    <label>RAM</label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" value="Cooling">
-                                    <label>Cooling</label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" value="Disque de stockage">
-                                    <label>Disque de stockage</label>
-                                </div>
+                            <td colspan="4" class="checklist">
+                                        <label class="info_label">changement(s) apporté(s):</label>
+                                        <div class="grid_checkbox">
+                                        <div>
+                                            <input type="checkbox" value="Carte graphique">
+                                            <label>Carte graphique</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" value="Carte mère">
+                                            <label>Carte mère</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" value="Processeur">
+                                            <label>Processeur</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" value="RAM">
+                                            <label>RAM</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" value="Cooling">
+                                            <label>Cooling</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" value="Disque de stockage">
+                                            <label>Disque de stockage</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" value="Boîtier">
+                                            <label>Boîtier</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" value="MAJ Bios">
+                                            <label>MAJ Bios</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" value="Réinstallation OS">
+                                            <label>Réinstallation OS</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" value="MAJ drivers">
+                                            <label>MAJ drivers</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" value="Alimentation">
+                                            <label>Alimentation</label>
+                                        </div>
+                                        </div>     
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4">
-                                    <label for="form.commentaire.id_for_label" class="info_label">commentaire :</label>
+                            <td colspan="4" class="checklist">
+                                    <label for="form.commentaire.id_for_label" class="info_label ">commentaire :</label>
                             </td>
                         </tr>
                         <tr>
@@ -124,7 +149,7 @@
                             <td colspan="4" class="button_container" >
                                 <input type="submit" value="éditer" class="edit_button"> 
                             </td>
-                        </tr>
+                        </tr><tr style="height: 10px"; ></tr>
                     </tbody>
     
                         

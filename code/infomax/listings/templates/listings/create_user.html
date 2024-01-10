@@ -51,7 +51,7 @@
                         -->
 
                         <td>{{ user1.username}}</td>
-                        <td class="tab_label"><label for="{{form.poste.id_for_label}}">poste:</label></td>
+                        <td>{{form.poste }}</td>
                         <td><input type="submit" value="confirmer" class="confirm_edit">/ <a href="{% url 'supprimer_user' user1.username %}">supprimer</a></td>
                         {% endif%}
                     </tr>
