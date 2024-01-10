@@ -1,15 +1,138 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta name="description" content="interface techniciens"/>
-        <link rel="stylesheet" type="text/css" href="{% static 'admin/css/style_bd.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'admin/css/modif_tech.css' %}">
         <title>interface technicien</title>
     </head>
     <body>
         <header>
             {% include "vraitemplate/haut_de_page.html" %}
         </header>
+        <main>
+            <h2>Consultation de dépôt n°{{depot.numero_depot}}</h2>
+            <table class="info_client">
+                <thead>
+                    <th colspan="4">Informations du client</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="info_label">Nom :</td>
+                        <td class="info_result">{{ depot.name }}</td>
+                        <td class="info_label">Prénom :</td>
+                        <td class="info_result">{{ depot.first_name }}</td>
+                    </tr>
+                    <tr>
+                        <td class="info_label">Email :</td>
+                        <td class="info_result">{{ depot.email }}</td>
+                        <td class="info_label">Téléphone</td>
+                        <td class="info_result">{{ depot.telephone }}</td>
+                    </tr>                   
+                </tbody>
+            </table>
+
+            <table class="info_depot">
+                <thead>
+                    <th colspan="6">Infomrations du dépot</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="info_label">Référence commande :</td>
+                        <td class="info_result">{{ depot.ref_commande }}</td>
+                        <td class="info_label">Désignation :</td>
+                        <td class="info_result">{{ depot.get_designation_display }}</td>
+                        <td class="info_label">Date de réception :</td>
+                        <td class="info_result">{{ depot.date }}</td>
+                    </tr>
+                    <tr>
+                        <td class="info_label">Mode d'envoi :</td>
+                        <td class="info_result">{{ depot.mode_envoic}}</td>
+                        <td class="info_label">Câble d'alimentation :</td>
+                        <td class="info_result">{{ depot.alimentation }}</td>
+                        <td class="info_label">Réinitialisation :</td>
+                        <td class="info_result">{{ depot.reinitialisation }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="6" class="info_label probleme_label">Description du problème</td>
+                    </tr>
+                    <tr>
+                        <td colspan="6">
+                            <div class="probleme">{{depot.probleme}}</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <form>
+                {% csrf_token %}
+                <table class="tab_form">
+                    <thead >
+                        <th colspan="4">changement apportés</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="info_label">Raison du retour :</td>
+                            <td class="info_result select_input">{{form.raison_retour}}</td>
+                            <td class="info_label">Statut :</td>
+                            <td class="info_result select_input">{{form.statut}}</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="info_label">changement(s) apporté(s):</label>
+                                <div>
+                                    <input type="checkbox" value="Carte graphique">
+                                    <label>Carte graphique</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" value="Carte mère">
+                                    <label>Carte mère</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" value="processeur">
+                                    <label>processeur</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" value="RAM">
+                                    <label>RAM</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" value="Cooling">
+                                    <label>Cooling</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" value="Disque de stockage">
+                                    <label>Disque de stockage</label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                    <label for="form.commentaire.id_for_label" class="info_label">commentaire :</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" class="commentaire_field">
+                                <div class="edit_text">
+                                    {{form.commentaire}}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" class="button_container" >
+                                <input type="submit" value="éditer" class="edit_button"> 
+                            </td>
+                        </tr>
+                    </tbody>
+    
+                        
+                    </form>
+                </table>
+            </form>
+            
+            
+        </main>
     </body>
 </html>

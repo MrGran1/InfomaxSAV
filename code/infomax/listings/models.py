@@ -40,6 +40,11 @@ class depot(models.Model):
         ('PC', 'Probleme compatibilite')
     ]
 
+    piece_a_modifier_choix = [
+        ('1','carte graphique'),
+        ('2','RAM')
+    ]
+
     ### portable, article, config
     ### retrait expema
 #Relatif au client
@@ -64,8 +69,8 @@ class depot(models.Model):
     numero_depot = models.fields.AutoField(primary_key=True)
     date = models.fields.DateField(default=2020)
     statut = models.fields.CharField(choices = statut_choix ,max_length=100,null = False ,default = "AT")
-    mail_envoyee = models.fields.CharField(choices = statut_choix ,max_length=100,null = False ,default = "AT")
-    commentaire = models.fields.CharField(default = "",blank = True ,max_length=1000)
+    mail_envoyee = models.fields.CharField(choices = statut_choix ,max_length=100,null = False ,default = "")
+    commentaire = models.fields.TextField(max_length=1000 ,default = "",blank = True)
 
     designation = models.fields.CharField(choices = designation_choix ,max_length=100,null = False ,default = '')
     mode_envoi = models.fields.CharField(choices = envoi_choix ,max_length=100,null = False ,default = "")
