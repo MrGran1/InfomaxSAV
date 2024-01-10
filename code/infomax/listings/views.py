@@ -134,16 +134,19 @@ def edit_user(request,username):
     if username is not None:
         user_var = CustomUser.objects.get(username=username)
         if request.method == 'POST':
-            form = user_form(request.POST,instance=user_var)
-            if form.is_valid():
-                form.save()
+            form = user_form(request.POST) # Fromulaire pour le nouveau user
+            form_edition = user_form(request.POST,instance=user_var) # From pour l'édition du user
+            if form_edition.is_valid():
+                form_edition.save()
         else:
-            form = user_form(instance=user_var)
+            form = user_form()
+            form_edition = user_form(instance=user_var)
     else : 
         form = user_form()
+        form_edition = user_form()
     users =  CustomUser.objects.all()
 
-    return render (request,'listings/create_user.html',{'form' : form,"users" : users,'edit':True})
+    return render (request,'listings/create_user.html',{'form' : form,"form_edition": form_edition,"users" : users,'edit':True, 'username_edit' : username})
 
 @login_required
 def change_password(request):
@@ -257,7 +260,7 @@ def supprimer_user(request, username):
         # supprimer le user de la base de données
         user_to_del.delete()
         # rediriger vers le home
-        return redirect('/home')
+        return redirect('/add')
 
     # pas besoin de « else » ici. Si c'est une demande GET, continuez simplement
     return render(request,

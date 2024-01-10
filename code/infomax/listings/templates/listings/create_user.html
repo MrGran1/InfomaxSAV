@@ -11,7 +11,17 @@
 
 </html>
 <!-- Pour afficher les users, il faut utiliser la liste des users : exemple : {{users[0]} pour afficher le premier user.
-     Pour tous les afficher il faut faire une boucle for }-->
+     Pour tous les afficher il faut faire une boucle for }
+    le boolean 'edit' indique si on est en train de modifier un user
+    Paramètre dispo : 
+    form : formulaire pour la création de user
+    form_edition" : formulaire pour l'édition
+    users : liste de tout les users
+    edit: boolean indiquant si on est en train d'editer un user
+    username : username du user que l'on est en train d'éditer 
+
+    -->
+
 <body>
 <header>
     {% include "vraitemplate/haut_de_page.html" %}
@@ -29,9 +39,21 @@
             <tbody>
                     {% for user1 in users %}
                     <tr>
+                        
+                        {% if not edit or not user1.username == username_edit %}
                         <td>{{ user1.username}}</td>
                         <td>{{ user1.get_poste_display }}</td>
                         <td><a href="{% url 'edit_user' user1.username %}">editer</a> / <a href="{% url 'supprimer_user' user1.username %}">supprimer</a></td>
+                        
+                        {% else %}
+                        <!-- Modifier ici pour l'édition comme Théophile avait demandé 
+                        Les boutons ,styles etc.. sont à modifier j'ai mis des trucs par défaut 
+                        -->
+
+                        <td>{{ user1.username}}</td>
+                        <td class="tab_label"><label for="{{form.poste.id_for_label}}">poste:</label></td>
+                        <td><input type="submit" value="confirmer" class="confirm_edit">/ <a href="{% url 'supprimer_user' user1.username %}">supprimer</a></td>
+                        {% endif%}
                     </tr>
                     {% endfor %}
             </tbody>
@@ -59,11 +81,7 @@
                             <td class="tab_input"><div class="div_input"></div>{{form.password}}</td>
                         </tr>
                         <tr>
-                            {% if not edit %}
                             <td colspan="4" class="submit"><input type="submit" value="créer un utilisateur" class="submit_button"></td>
-                            {% else %}
-                            <td colspan="4" class="submit"><input type="submit" value="Modifier l'utilisateur" class="submit_button"></td>
-                            {% endif %}
                         </tr>
                     </tbody>
                     
