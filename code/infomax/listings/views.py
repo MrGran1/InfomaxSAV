@@ -135,9 +135,11 @@ def edit_user(request,username):
         user_var = CustomUser.objects.get(username=username)
         if request.method == 'POST':
             form = user_form(request.POST) # Fromulaire pour le nouveau user
-            form_edition = user_form(request.POST,instance=user_var) # From pour l'édition du user
+            form_edition = user_form(request.POST,instance=user_var) # Form pour l'édition du user
             if form_edition.is_valid():
                 form_edition.save()
+            if form.is_valid():
+                form.save()
         else:
             form = user_form()
             form_edition = user_form(instance=user_var)
