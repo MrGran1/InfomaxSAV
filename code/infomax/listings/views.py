@@ -11,7 +11,7 @@ from django_renderpdf.views import PDFView
 import json
 from .forms import LoginForm
 from django.contrib.auth.views import LoginView
-#import utils
+from .utils import generate_password
 
 #from .forms import form_input
 
@@ -175,15 +175,17 @@ def change_password(request):
         return render(request,'listings/change_password.html',{'form' : form, "error_status" : 401})
     
 def oubli_mdp(request):
-    """ Change le mdp du user par un random et envoi ce mdp à l'admin """
-    new_mdp = utils.generate_password(14)
+    """ Change le mdp du user par un random et envoi ce mdp à l'admin
+     !!! PAs fini !!!!!
+       """
+    new_mdp = generate_password(14)
     request.user.password = new_mdp
+    print("Nouveau mdp : ",new_mdp)
     send_mail(config['mail']['objet_mdp_oublie'],
               config['mail']['mail_mdp_oublie'],
               config['mail']['adresse_email'],
               config['mail']['mail_admin'])
     
-
 ### Vue pour chercher des clients######
 @login_required
 def afficher_client(request):
