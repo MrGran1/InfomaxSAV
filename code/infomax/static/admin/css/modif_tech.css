@@ -1,8 +1,18 @@
 @import 'variables.css';
 
-th{
+.th1{
     color: var(--text_light);
     background-color: var(--entete);
+    text-align: left;
+    padding-left: 5px;
+    height: 35px;
+    border-radius: 7px 7px 0px 0px;
+    font-size: large;
+}
+
+.th2 {
+    background-color: var(--entete2);
+    color: var(--text_light);
     text-align: left;
     padding-left: 5px;
     height: 35px;
