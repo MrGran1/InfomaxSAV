@@ -10,6 +10,11 @@
     "objet_en_traitement" : "En traitement",
     
     "message_en_traitement" : "Votre colis est en cours de traitement par nos techniciens",
-    "message_recuperation" : "Votre colis est prêt à être récupérer."
+    "message_recuperation" : "Votre colis est prêt à être récupérer.",
+
+    "mail_admin" : "admin@admin.fr" ,
+    "objet_mdp_oublie" : "Voici le mdp du user ",
+    "mail_mdp_oublie" : "Le mdp est ..."
   }
+  
 } 

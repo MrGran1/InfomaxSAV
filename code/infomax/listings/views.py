@@ -1,22 +1,17 @@
 from django.shortcuts import render,redirect
-from django.http import HttpResponse
 from listings.forms import client_form, user_form, afficher_client_form,form_modif_tech,form_input,change_password_form
 from listings.models import depot,CustomUser
-from listings import views
 from django.contrib.auth.decorators import login_required,user_passes_test
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm 
 from datetime import date
-from django.contrib.auth.models import AbstractUser
 from django.core.mail import send_mail
-from reportlab.pdfgen import canvas
-import io
-from django.http import FileResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django_renderpdf.views import PDFView
 import json
 from .forms import LoginForm
 from django.contrib.auth.views import LoginView
+#import utils
 
 #from .forms import form_input
 
@@ -179,6 +174,16 @@ def change_password(request):
         form = change_password_form()
         return render(request,'listings/change_password.html',{'form' : form, "error_status" : 401})
     
+def oubli_mdp(request):
+    """ Change le mdp du user par un random et envoi ce mdp à l'admin """
+    new_mdp = utils.generate_password(14)
+    request.user.password = new_mdp
+    send_mail(config['mail']['objet_mdp_oublie'],
+              config['mail']['mail_mdp_oublie'],
+              config['mail']['adresse_email'],
+              config['mail']['mail_admin'])
+    
+
 ### Vue pour chercher des clients######
 @login_required
 def afficher_client(request):
