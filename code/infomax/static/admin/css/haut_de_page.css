@@ -50,8 +50,9 @@ header {
 
 .menu li{
     margin: 20px;
-    display: inline;
+    display: flex;
     margin-bottom: 10px ;
+    text-align: center;
 }
 
 .menu li:last-child {
@@ -63,6 +64,8 @@ header {
     text-decoration: none;
     color: var(--text_light);
     font-weight:bold;
+    text-align: center;
+    transition: 0.3s;
 }
 
 .grid-container{
@@ -75,7 +78,7 @@ main{
     width: 1105px;
     height:  auto;
     padding: 30px;
-    margin: 150px auto 50px;
+    margin: 170px auto 50px;
     border-radius: 12px;
     background-color: rgb(234, 241, 254);
 }
@@ -87,15 +90,25 @@ main{
 
 #dropdown-btn {
     background-color: #d1d1f4;
-    color: #fff;
-    border: none;
+    color: var(--text_dark);
+    border: hidden;
     cursor: pointer;
-    margin: 20px;
-    display: inline;
-    margin-bottom: 13px ;
-    border-radius:3px;
-    padding: 10px;
+    height: 100%;
     padding: 11px 18px;
+    vertical-align: center;
+    margin-top: 9px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+button :hover{
+    transform:  scale(1.05, 1.2);
+}
+
+.menu li :hover{
+    color: var(--select1);
+    transform:  scale(1.05, 1.2);
+    
 }
 
 #dropdown-content {
