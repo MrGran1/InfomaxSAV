@@ -36,8 +36,6 @@
                     <li><a href="/change_password" class="dropdown_link">changer mdp</a></li>
                 </ul>
             </div>
-            {%if clients|length != 0 %}
-                {% for client in clients %}
                     {% if user.poste == 'CO'%}
             <ul class="menu">
                 
@@ -53,8 +51,7 @@
             </ul>
                         {% endif %}
                     {% endif %}
-                {% endfor %}
-            {%endif%}
+                
         </nav>
     </div>
 </html>

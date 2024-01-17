@@ -43,7 +43,7 @@
                             {% if not edit or not user1.username == username_edit %}
                             <td>{{ user1.username}}</td>
                             <td>{{ user1.get_poste_display }}</td>
-                            <td><a href="{% url 'edit_user' user1.username %}">editer</a> / <a href="{% url 'supprimer_user' user1.username %}">supprimer</a></td>
+                            <td><a href="{% url 'edit_user' user1.username %}" class="edit_suppr">Editer</a> / <a href="{% url 'supprimer_user' user1.username %}" class="edit_suppr">Supprimer</a></td>
                             
                             {% else %}
                             <!-- Modifier ici pour l'édition comme Théophile avait demandé 
@@ -51,8 +51,8 @@
                             -->
     
                             <td>{{ user1.username}}</td>
-                            <td>{{form.poste }}</td>
-                            <td><input type="submit" value="confirmer" class="confirm_edit">/ <a href="{% url 'supprimer_user' user1.username %}">supprimer</a></td>
+                            <td class="edit_poste">{{form.poste }}</td>
+                            <td><a href="{% url 'edit_user' user1.username %}" class="edit_suppr">Confirmer</a> / <a href="{% url 'supprimer_user' user1.username %}" class="edit_suppr">Supprimer</a></td>
                             {% endif%}
                         </tr>
                         {% endfor %}
