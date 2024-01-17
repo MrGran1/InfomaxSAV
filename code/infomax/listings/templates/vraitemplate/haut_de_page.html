@@ -32,18 +32,29 @@
             <div class="dropdown-menu">
                 <button id="dropdown-btn">Plus</button>
                 <ul id="dropdown-content">
-                    <li><a href="/logout" id="deconnexion">deconnexion</a></li>
-                    <li><a href="/change_password">changer mdp</a></li>
+                    <li><a href="/logout" class="dropdown_link">deconnexion</a></li>
+                    <li><a href="/change_password" class="dropdown_link">changer mdp</a></li>
                 </ul>
             </div>
+            {%if clients|length != 0 %}
+                {% for client in clients %}
+                    {% if user.poste == 'CO'%}
             <ul class="menu">
+                
                 <li><a href="/home" id="home">Home</a></li>
                 <li><a href="/add" id="creation_BD">création dépôt</a></li>
-                <li><a href="/afficher_depot" id="interface_tech">rechercher un bon de dépôt</a></li>
-
+                <li><a href="/afficher_depot" id="interface_tech">rechercher un bon de dépôt</a></li>                
                 
             </ul>
-            
+                    {% else %}
+                        {% if user.poste == 'TC'%}
+            <ul class="menu">
+                <li><a href="/afficher_depot" id="interface_tech">rechercher un bon de dépôt</a></li>
+            </ul>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            {%endif%}
         </nav>
     </div>
 </html>
