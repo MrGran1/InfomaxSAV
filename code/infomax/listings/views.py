@@ -157,8 +157,8 @@ def change_password(request):
     if request.method == 'POST':
         form = change_password_form(request.POST)
         if form.is_valid():
-            old_password = form.cleaned_data.get('password')
-            new_password = form.cleaned_data.get('old_password')
+            old_password = form.cleaned_data.get('old_password')
+            new_password = form.cleaned_data.get('new_password')
             double_check_password = form.cleaned_data.get('double_check_password')
             user = authenticate(username=request.user.username, password=old_password)
             if user is None:
@@ -166,8 +166,10 @@ def change_password(request):
 
             elif new_password != double_check_password:
                 return render(request,'listings/change_password.html',{'form' : form,"error_status" : 403})
+            
             else:
                 request.user.set_password(new_password)
+                request.user.save()
                 return render(request,'listings/change_password.html',{'form' : form, "error_status" : 400}) 
                 
     else :
