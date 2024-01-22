@@ -43,7 +43,7 @@
                             {% if not edit or not user1.username == username_edit %}
                             <td>{{ user1.username}}</td>
                             <td>{{ user1.get_poste_display }}</td>
-                            <td><button type="button" class="edit_suppr" href="{% url 'edit_user' user1.username %}">Editer</button> / <button type="button" class="edit_suppr " onclick="openPopup()">Supprimer</a></td>
+                            <td><button type="button" class="edit_suppr">Editer</button> / <button type="button" class="edit_suppr " onclick="openPopup()">Supprimer</a></td>
 
                             
                             {% else %}
@@ -53,7 +53,7 @@
     
                             <td>{{ user1.username}}</td>
                             <td class="edit_poste">{{form.poste }}</td>
-                            <td><button type="button" href="{% url 'edit_user' user1.username %}" class="edit_suppr">Confirmer</button> / <a href="{% url 'supprimer_user' user1.username %}" class="edit_suppr" onclick="openPopup()">Supprimer</a></td>
+                            <td><button type="submit" class="edit_suppr">Confirmer</button> / <a href="{% url 'supprimer_user' user1.username %}" class="edit_suppr" onclick="openPopup()">Supprimer</a></td>
                             {% endif%}
                         </tr>
                         {% endfor %}
@@ -85,8 +85,8 @@
                             <tr>
                                 <td class="tab_label"><label for="{{form.poste.id_for_label}}">poste:</label></td>
                                 <td class="tab_input"><div class="div_select"></div>{{form.poste}}</td>
-                                <td class="tab_label"><label for="{{form.password.id_for_label}}">Mot de passe par défaut:</label></td>
-                                <td class="tab_input"><div class="div_input"></div>{{form.password}}</td>
+                                <td class="tab_label"><label for="{{form.password.id_for_label}}">Email:</label></td>
+                                <td class="tab_input"><div class="div_input"></div>{{form.email}}</td>
                             </tr>
                             <tr>
                                 <td colspan="4" class="submit"><input type="submit" value="créer un utilisateur" class="submit_button"></td>

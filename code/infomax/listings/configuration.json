@@ -14,7 +14,11 @@
 
     "mail_admin" : "admin@admin.fr" ,
     "objet_mdp_oublie" : "Voici le mdp du user ",
-    "mail_mdp_oublie" : "Le mdp est ..."
+    "mail_mdp_oublie" : "Le mdp est ...",
+
+    "objet_creation_compte" : "Votre compte à été créé",
+    "message_creation_compte" : "Votre nouveau compte à été créé, votre nouveau mot de passe est : "
+
   }
   
 } 

@@ -101,21 +101,27 @@ def logout_view(request):
 def check_superuser(user):
     return user.is_superuser
 
+def create_user_withform(request,form):
+    """Crée un user grâce au formulaire"""
+    email = form.cleaned_data.get('email')
+    user_to_create = form.save(commit = False)
+    user_to_create.username = user_to_create.first_name + "." + user_to_create.last_name
+    user_to_create.email = email
+    random_password = generate_password(14)
+    user_to_create.set_password(random_password)
+
+    send_mail(config['mail']['objet_creation_compte'], config['mail']["message_creation_compte"] + random_password,config['mail']['adresse_email'],[user_to_create.email])
+    if not CustomUser.objects.filter(username = user_to_create.username).exists():
+        user_to_create.save() 
+
+
 @login_required
 @user_passes_test(check_superuser)
 def create_user(request):
     if request.method == 'POST':
         form = user_form(request.POST)
         if form.is_valid():
-            password = form.cleaned_data.get('password')
-            
-            user_to_create = form.save(commit = False)
-            user_to_create.username = user_to_create.first_name + "." + user_to_create.last_name
-            user_to_create.set_password(password)
-            if not CustomUser.objects.filter(username = user_to_create.username).exists():
-                user_to_create.save() 
-            else:
-                pass       
+            create_user_withform(request,form)     
     else :
         form = user_form()
 
@@ -134,7 +140,7 @@ def edit_user(request,username):
             if form_edition.is_valid():
                 form_edition.save()
             if form.is_valid():
-                form.save()
+                create_user_withform(request,form)
         else:
             form = user_form()
             form_edition = user_form(instance=user_var)
@@ -181,7 +187,8 @@ def oubli_mdp(request):
      !!! PAs fini !!!!!
        """
     new_mdp = generate_password(14)
-    request.user.password = new_mdp
+    request.user.set_password(new_mdp)
+    request.user.save()
     print("Nouveau mdp : ",new_mdp)
     send_mail(config['mail']['objet_mdp_oublie'],
               config['mail']['mail_mdp_oublie'],
