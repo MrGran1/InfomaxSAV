@@ -235,3 +235,15 @@ tr{
 .open_popup{
     visibility: visible;
 }
+
+
+.selectPoste{
+    visibility: hidden;
+    position: absolute;
+}
+
+.stringPoste{
+    visibility: hidden;
+    position: absolute;
+}
+

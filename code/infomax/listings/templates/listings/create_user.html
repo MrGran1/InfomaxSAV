@@ -15,10 +15,8 @@
         le boolean 'edit' indique si on est en train de modifier un user
         Paramètre dispo : 
         form : formulaire pour la création de user
-        form_edition" : formulaire pour l'édition
+        form_edition : formulaire pour l'édition
         users : liste de tout les users
-        edit: boolean indiquant si on est en train d'editer un user
-        username : username du user que l'on est en train d'éditer 
     
         -->
     
@@ -27,7 +25,9 @@
         {% include "vraitemplate/haut_de_page.html" %}
     </header>
     <main>
-        <h1> GESTION DES UTILISATEURS</h1>
+        <form method="post" action="{% url 'gestion_user' %}">
+            {% csrf_token %}
+            <h1> GESTION DES UTILISATEURS</h1>
     
         <div class="table_container">
             <table class="users_list">
@@ -42,8 +42,8 @@
                             
                             {% if not edit or not user1.username == username_edit %}
                             <td>{{ user1.username}}</td>
-                            <td>{{ user1.get_poste_display }}</td>
-                            <td><button type="button" class="edit_suppr">Editer</button> / <button type="button" class="edit_suppr " onclick="openPopup()">Supprimer</a></td>
+                            <td><div id="stringPoste">{{ user1.get_poste_display }}</div><div class="selectPoste" id="selectPoste">{{ form_edition.poste }}</div></td>
+                            <td><input type="hidden" name="username_to_edit" value="{{ user.username }}"><button type="button" class="edit_suppr" id="edit" onclick="editButton()">Editer</button> / <button type="button" class="edit_suppr " id="suppr" onclick="openPopup()">Supprimer</a></td>
 
                             
                             {% else %}
@@ -52,7 +52,7 @@
                             -->
     
                             <td>{{ user1.username}}</td>
-                            <td class="edit_poste">{{form.poste }}</td>
+                            <td class="edit_poste">{{form_edition.poste }}</td>
                             <td><button type="submit" class="edit_suppr">Confirmer</button> / <a href="{% url 'supprimer_user' user1.username %}" class="edit_suppr" onclick="openPopup()">Supprimer</a></td>
                             {% endif%}
                         </tr>
@@ -67,6 +67,7 @@
             </div>
 
         </div>
+        </form>
         <div class="ajt_user">
             <form class="grid-form"  method="post" novalidate>
                 {% csrf_token %}
@@ -101,9 +102,15 @@
                 
             </form>
         </div>
+    
+        
     </main>
     <script>
         let popup = document.getElementById("popup");
+        var etat = ["Editer","Confirmer"];
+        var changeEtat = 0;
+        let selectPoste = document.getElementById("selectPoste");
+        let stringPoste = document.getElementById("stringPoste");        
 
         function openPopup(){
             popup.classList.add("open_popup")
@@ -112,6 +119,31 @@
         function closePopup(){
             popup.classList.remove("open_popup")
         }
+
+        
+        function editButton(){
+            var edit = document.getElementById("edit");
+            
+            if (changeEtat % 2 === 0){
+                edit.textContent = etat[1];
+                selectPoste.classList.remove("selectPoste");
+                stringPoste.classList.add("stringPoste");
+                changeEtat = changeEtat + 1;
+                edit.type = "button";
+
+            } else {
+                changeEtat = changeEtat + 1;
+                edit.textContent = etat[0];
+                selectPoste.classList.add("selectPoste");
+                stringPoste.classList.remove("stringPoste");
+                edit.type ="submit";
+            }            
+            
+        }
+        
+
+        
+
     </script>
     </body>
 </html>

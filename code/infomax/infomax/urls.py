@@ -35,6 +35,6 @@ urlpatterns = [
     path('pdf_interne/<int:id>', views.PDF_interne.as_view(), name='PDF_interne'),
     path('pdf_client/<int:id>', views.PDF_client.as_view()),
     
-    path('gestion_user/', views.edit_user,name = "gerer_user" ),
+    path('gestion_user/', views.edit_user,name = "gestion_user" ),
     path('change_password/',views.change_password, name ="change_password")
 ]

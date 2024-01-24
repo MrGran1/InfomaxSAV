@@ -123,6 +123,7 @@ def edit_user(request):
     # !! Fonction jamais testé !! # 
     # View pour gérer les utilisateurs (suppression, edition, création)
     if request.method == 'POST':
+        print("yes")
         form = user_form(request.POST) # Fromulaire pour le nouveau user
 
         if request.POST.get("username_to_suppr"):
