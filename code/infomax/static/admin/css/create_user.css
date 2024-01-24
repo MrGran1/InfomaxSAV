@@ -20,9 +20,9 @@ body{
     0 0 15px rgb(218, 214, 214);
     border-style: hidden;
     border-radius: 7px;
+    overflow-y: auto;
     
 }
-
 
 th{
     text-align: left;
@@ -33,6 +33,9 @@ th{
     color: var(--text_light);
     padding-left: 15px;
     border-right: 2px solid var(--main_background2);
+    position: sticky;
+    z-index: 2;
+    top: 0;
 }
 
 .ajt_user th{
@@ -45,6 +48,7 @@ th{
 .users_list th:last-child{
     border-radius: 0px 7px 0px 0px;
     border-right: hidden;
+
 }
 
 .users_list{
@@ -55,12 +59,13 @@ th{
 
 table.users_list th:nth-child(1){
     width: 67%;
+
 }
 table.users_list th:nth-child(2){
     width: 15%;
 }
 table.users_list th:nth-child(3){
-    width: 18%;
+    width: 18%;   
 }
 
 table.users_list td:nth-child(1){
