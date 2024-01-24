@@ -101,7 +101,7 @@ def logout_view(request):
 def check_superuser(user):
     return user.is_superuser
 
-def create_user_withform(request,form):
+def create_user_withform(form):
     """Crée un user grâce au formulaire"""
     email = form.cleaned_data.get('email')
     user_to_create = form.save(commit = False)
@@ -110,23 +110,12 @@ def create_user_withform(request,form):
     random_password = generate_password(14)
     user_to_create.set_password(random_password)
 
-    send_mail(config['mail']['objet_creation_compte'], config['mail']["message_creation_compte"] + random_password,config['mail']['adresse_email'],[user_to_create.email])
+    send_mail(config['mail']['objet_creation_compte'], 
+              config['mail']["message_creation_compte"] + random_password,config['mail']['adresse_email'],
+              [user_to_create.email])
+    
     if not CustomUser.objects.filter(username = user_to_create.username).exists():
         user_to_create.save() 
-
-
-@login_required
-@user_passes_test(check_superuser)
-def create_user(request):
-    if request.method == 'POST':
-        form = user_form(request.POST)
-        if form.is_valid():
-            create_user_withform(request,form)     
-    else :
-        form = user_form()
-
-    users = CustomUser.objects.all()
-    return render(request,'listings/create_user.html',{'form' : form,"users" : users,'edit':False})
 
 @login_required
 @user_passes_test(check_superuser)
@@ -152,7 +141,7 @@ def edit_user(request):
 
         if form.is_valid():
                 # Création d'un user si le formulaire de création est valide
-                create_user_withform(request,form)
+                create_user_withform(form)
 
     # On retourne les formulaires vide pour les utiliser dans le html
     form = user_form()
@@ -192,7 +181,7 @@ def change_password(request):
         return render(request,'listings/change_password.html',{'form' : form, "error_status" : 401})
     
 def oubli_mdp(request):
-    """ Change le mdp du user par un random et envoi ce mdp à l'admin
+    """ Change le mdp du user par un random et envoi ce mdp à l'admin, ne retourne rien.
      !!! PAs fini !!!!!
        """
     new_mdp = generate_password(14)
@@ -202,7 +191,7 @@ def oubli_mdp(request):
     send_mail(config['mail']['objet_mdp_oublie'],
               config['mail']['mail_mdp_oublie'],
               config['mail']['adresse_email'],
-              config['mail']['mail_admin'])
+              [config['mail']['mail_admin']])
     
 ### Vue pour chercher des clients######
 @login_required
