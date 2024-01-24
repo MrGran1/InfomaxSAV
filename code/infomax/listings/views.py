@@ -128,28 +128,37 @@ def create_user(request):
     users = CustomUser.objects.all()
     return render(request,'listings/create_user.html',{'form' : form,"users" : users,'edit':False})
 
-
 @login_required
 @user_passes_test(check_superuser)
-def edit_user(request,username):
-    if username is not None:
-        user_var = CustomUser.objects.get(username=username)
-        if request.method == 'POST':
-            form = user_form(request.POST) # Fromulaire pour le nouveau user
-            form_edition = user_form(request.POST,instance=user_var) # Form pour l'édition du user
+def edit_user(request):
+    # !! Fonction jamais testé !! # 
+    # View pour gérer les utilisateurs (suppression, edition, création)
+    if request.method == 'POST':
+        form = user_form(request.POST) # Fromulaire pour le nouveau user
+
+        if request.POST.get("username_to_suppr"):
+            # Si l'on veut supprimer un user alors :
+            username_to_suppr = request.POST.get("username_to_suppr")
+            user_to_del = CustomUser.objects.get(username = username_to_suppr)
+            user_to_del.delete()
+        
+        if request.POST.get("username_to_edit"):
+            ## Si un user doit être modifié
+            username_to_edit = request.POST.get("username_to_edit")
+            user_to_edit = CustomUser.objects.get(username=username_to_edit)
+            form_edition = user_form(request.POST,instance=user_to_edit)
             if form_edition.is_valid():
                 form_edition.save()
-            if form.is_valid():
-                create_user_withform(request,form)
-        else:
-            form = user_form()
-            form_edition = user_form(instance=user_var)
-    else : 
-        form = user_form()
-        form_edition = user_form()
-    users =  CustomUser.objects.all()
 
-    return render (request,'listings/create_user.html',{'form' : form,"form_edition": form_edition,"users" : users,'edit':True, 'username_edit' : username})
+        if form.is_valid():
+                # Création d'un user si le formulaire de création est valide
+                create_user_withform(request,form)
+
+    # On retourne les formulaires vide pour les utiliser dans le html
+    form = user_form()
+    form_edition = user_form()
+    users =  CustomUser.objects.all()
+    return render (request,'listings/create_user.html',{'form' : form,"form_edition": form_edition,"users" : users})
 
 @login_required
 def change_password(request):
@@ -271,19 +280,6 @@ def depot_tech(request,id):
 def afficher_user(request):
     users = CustomUser.objects.all()
     return render(request,"listings/afficher_users.html",{"users" : users})
-
-def supprimer_user(request, username):
-    user_to_del = CustomUser.objects.get(username = username)
-    if request.method == 'POST':
-        # supprimer le user de la base de données
-        user_to_del.delete()
-        # rediriger vers le home
-        return redirect('/add')
-
-    # pas besoin de « else » ici. Si c'est une demande GET, continuez simplement
-    return render(request,
-                    'listings/delete_user.html',
-                    {'user': user_to_del})
 
 class PDF_interne(LoginRequiredMixin, PDFView):
     """Generate labels for some Shipments.
