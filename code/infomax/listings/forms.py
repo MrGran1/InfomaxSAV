@@ -143,6 +143,11 @@ class user_form(forms.ModelForm):
         model = CustomUser
         fields = ['first_name','last_name','email','poste']
 
+class user_edition_form(forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = ['poste']
+
 class change_password_form(forms.Form):
      old_password = forms.CharField(widget=forms.PasswordInput)
      new_password = forms.CharField(widget=forms.PasswordInput)

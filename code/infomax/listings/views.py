@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from listings.forms import client_form, user_form, afficher_client_form,form_modif_tech,form_input,change_password_form
+from listings.forms import client_form, user_form, afficher_client_form,form_modif_tech,form_input,change_password_form, user_edition_form
 from listings.models import depot,CustomUser
 from django.contrib.auth.decorators import login_required,user_passes_test
 from django.contrib.auth import authenticate, login, logout
@@ -123,7 +123,6 @@ def edit_user(request):
     # !! Fonction jamais testé !! # 
     # View pour gérer les utilisateurs (suppression, edition, création)
     if request.method == 'POST':
-        print("yes")
         form = user_form(request.POST) # Fromulaire pour le nouveau user
 
         if request.POST.get("username_to_suppr"):
@@ -132,21 +131,26 @@ def edit_user(request):
             user_to_del = CustomUser.objects.get(username = username_to_suppr)
             user_to_del.delete()
         
-        if request.POST.get("username_to_edit"):
+        if request.POST.get("username_to_edit"):    
             ## Si un user doit être modifié
             username_to_edit = request.POST.get("username_to_edit")
+            #poste = request.POST.get("ete")
+            #print(poste)
             user_to_edit = CustomUser.objects.get(username=username_to_edit)
-            form_edition = user_form(request.POST,instance=user_to_edit)
+            form_edition = user_edition_form(request.POST,instance=user_to_edit)
             if form_edition.is_valid():
-                form_edition.save()
-
+                poste = form_edition.cleaned_data.get('poste')
+                print(poste)
+                user_to_edit.poste = poste
+                user_to_edit.save()
+                
         if form.is_valid():
                 # Création d'un user si le formulaire de création est valide
                 create_user_withform(form)
 
     # On retourne les formulaires vide pour les utiliser dans le html
     form = user_form()
-    form_edition = user_form()
+    form_edition = user_edition_form()
     users =  CustomUser.objects.all()
     return render (request,'listings/create_user.html',{'form' : form,"form_edition": form_edition,"users" : users})
 
@@ -266,10 +270,6 @@ def depot_tech(request,id):
 
     return render (request,'listings/modif_tech.html',{'form':form, 'depot':depot_var})
 
-
-def afficher_user(request):
-    users = CustomUser.objects.all()
-    return render(request,"listings/afficher_users.html",{"users" : users})
 
 class PDF_interne(LoginRequiredMixin, PDFView):
     """Generate labels for some Shipments.
