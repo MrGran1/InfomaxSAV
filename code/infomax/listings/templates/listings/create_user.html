@@ -40,21 +40,18 @@
                         {% for user1 in users %}
                         <tr>
                             
-                            {% if not edit or not user1.username == username_edit %}
+                            
                             <td>{{ user1.username}}</td>
                             <td><div id="stringPoste">{{ user1.get_poste_display }}</div><div class="selectPoste" id="selectPoste">{{ form_edition.poste }}</div></td>
-                            <td><input type="hidden" name="username_to_edit" value="{{ user.username }}"><button type="button" class="edit_suppr" id="edit" onclick="editButton()">Editer</button> / <button type="button" class="edit_suppr " id="suppr" onclick="openPopup()">Supprimer</a></td>
+                            <td><input type="hidden" name="username" value="{{ user.username }}"><button type="button" class="edit_suppr" id="edit" onclick="editButton()">Editer</button> / <button type="button" class="edit_suppr " id="suppr" onclick="openPopup()">Supprimer</a></td>
 
                             
-                            {% else %}
+                            
                             <!-- Modifier ici pour l'édition comme Théophile avait demandé 
                             Les boutons ,styles etc.. sont à modifier j'ai mis des trucs par défaut 
                             -->
     
-                            <td>{{ user1.username}}</td>
-                            <td class="edit_poste">{{form_edition.poste }}</td>
-                            <td><button type="submit" class="edit_suppr">Confirmer</button> / <a href="{% url 'supprimer_user' user1.username %}" class="edit_suppr" onclick="openPopup()">Supprimer</a></td>
-                            {% endif%}
+                            
                         </tr>
                         {% endfor %}
                 </tbody>

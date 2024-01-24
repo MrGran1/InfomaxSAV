@@ -198,11 +198,15 @@ tr{
     text-align: center;
     box-shadow: inset 0 0 2px whitesmoke,
     0 0 15px rgb(218, 214, 214);
-    width: 400px;
+    width: auto;
     border-radius: 12px;
     border: 5px solid var(--entete);
     visibility: hidden;
-
+    z-index: 2;
+    position: absolute;
+    top: 40%;
+    left: 35%;
+    right: 35%;
 }
 
 .suppr{
