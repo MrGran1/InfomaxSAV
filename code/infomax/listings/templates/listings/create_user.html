@@ -39,11 +39,12 @@
                 <tbody>
                         {% for user1 in users %}
                         <tr>
-                            
-                            
                             <td>{{ user1.username}}</td>
-                            <td><div id="stringPoste">{{ user1.get_poste_display }}</div><div class="selectPoste" id="selectPoste">{{ form_edition.poste }}</div></td>
-                            <td><input type="hidden" name="username" value="{{ user.username_to_edit }}"><button type="button" class="edit_suppr" id="edit" onclick="editButton()">Editer</button> / <button type="button" class="edit_suppr " id="suppr" onclick="openPopup()">Supprimer</a></td>
+                            <td><div id="stringPoste{{ user1.id }}">{{ user1.get_poste_display }}</div>
+                                <div class="selectPoste" id="selectPoste{{ user1.id }}">{{ form_edition.poste }}</div></td>
+                            <td><input type="hidden" name="username" value="{{ user.username_to_edit }}">
+                                <button type="button" class="edit_suppr" id="edit{{ user1.id }}" onclick="editButton('{{ user1.id }}')">Editer</button> / 
+                                <button type="button" class="edit_suppr " id="suppr" onclick="openPopup()">Supprimer</a></td>
 
                             
                             
@@ -99,16 +100,11 @@
                 
             </form>
         </div>
-    
         
     </main>
     <script>
-        let popup = document.getElementById("popup");
-        var etat = ["Editer","Confirmer"];
-        var changeEtat = 0;
-        let selectPoste = document.getElementById("selectPoste");
-        let stringPoste = document.getElementById("stringPoste");        
-
+        let popup = document.getElementById("popup");     
+        
         function openPopup(){
             popup.classList.add("open_popup")
         }
@@ -117,30 +113,29 @@
             popup.classList.remove("open_popup")
         }
 
-        
-        function editButton(){
-            var edit = document.getElementById("edit");
+        function editButton(userId){
+            var edit = document.getElementById("edit" + userId);
+            var etat = ["Editer","Confirmer"];
+            var changeEtat = 1;
+            var selectPoste = document.getElementById("selectPoste" + userId);
+            var stringPoste = document.getElementById("stringPoste" + userId);        
+                
+            selectPoste.classList.toggle("selectPoste");
+            stringPoste.classList.toggle("stringPoste");
+            changeEtat = changeEtat + 1;
+            edit.textContent = etat[1];
             
-            if (changeEtat % 2 === 0){
-                edit.textContent = etat[1];
-                selectPoste.classList.remove("selectPoste");
-                stringPoste.classList.add("stringPoste");
-                changeEtat = changeEtat + 1;
-                edit.type = "button";
-
-            } else {
-                changeEtat = changeEtat + 1;
+            function confirmButton(userID){
+                edit.type= "submit";
                 edit.textContent = etat[0];
-                selectPoste.classList.add("selectPoste");
-                stringPoste.classList.remove("stringPoste");
-                edit.type ="submit";
-            }            
-            
+            }
+
+            if(changeEtat % 2===0 ){
+                edit.onclick = function() {
+                    confirmButton();
+                }
+            }
         }
-        
-
-        
-
     </script>
     </body>
 </html>
